@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#120d1a" />
+    <title>Afterlight Fair</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <section class="intro" id="intro" aria-labelledby="title">
+        <div class="intro__panel">
+          <p class="eyebrow">One night only</p>
+          <h1 id="title">Afterlight Fair</h1>
+          <p>The gates remember every visitor.</p>
+          <label class="motion-choice">
+            <input id="reduce-motion" type="checkbox" />
+            <span>Reduce motion</span>
+          </label>
+          <button class="enter-button" id="enter" type="button">Enter the fair</button>
+          <p class="sound-note" id="audio-message" role="status">Sound begins when you enter.</p>
+          <details class="sound-credits">
+            <summary>Sound credits</summary>
+            <p>CC0 recordings from Freesound:</p>
+            <ul>
+              <li><a href="https://freesound.org/people/florianreichelt/sounds/459977/" target="_blank" rel="noopener">Soft Wind — florianreichelt</a></li>
+              <li><a href="https://freesound.org/people/kyles/sounds/454363/" target="_blank" rel="noopener">Corn stalk rustling — kyles</a></li>
+              <li><a href="https://freesound.org/people/Glitchedtones/sounds/322411/" target="_blank" rel="noopener">Twig Snap 04 — Glitchedtones</a></li>
+              <li><a href="https://freesound.org/people/seth-m/sounds/458015/" target="_blank" rel="noopener">Big thunder clap — seth-m</a></li>
+              <li><a href="https://freesound.org/people/SilentStrikeZ/sounds/389645/" target="_blank" rel="noopener">Wood Creak — SilentStrikeZ</a></li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section class="scene" id="scene" aria-label="A dark path between cornfields and wooden fences" aria-hidden="true">
+        <div class="sky" aria-hidden="true">
+          <span class="cloud cloud--one"></span>
+          <span class="cloud cloud--two"></span>
+        </div>
+
+        <svg class="art-layers" viewBox="0 0 941 1672" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <image id="opening-source" width="941" height="1672" href="Assets/opening-scene/corn-path.png" />
+            <image id="fairground-source" width="941" height="1672" href="Assets/halloween_ferris_wheel_animation_pack/halloween_fairground_layered_assets/composite_reference.png" />
+            <image id="opening-repair" width="941" height="1672" href="Assets/opening-scene/corn-repair.png" />
+            <image id="fairground-repair" width="941" height="1672" href="Assets/corn-rig/background-repair-flex.png" />
+            <use id="original-art" href="#opening-source" />
+            <!-- Traced original leaf blades, excluding stems, posts and rails.
+                 Coordinates use the source artwork rather than viewport pixels. -->
+            <path id="left-leaf" transform="translate(0 900) scale(.5)" d="M 230 345 C 236 302 263 264 286 239 L 304 215 L 296 209 L 301 199 L 312 193 L 327 195 L 337 201 C 355 197 369 225 373 253 C 377 293 367 334 365 356 L 359 339 C 357 306 353 277 345 252 L 331 226 L 315 216 C 298 239 276 256 257 291 Z" />
+            <path id="right-leaf" transform="translate(700 850) scale(.5)" d="M 277 454 C 264 429 249 404 239 384 L 222 366 L 207 363 C 184 382 167 406 151 429 L 133 461 L 117 490 L 112 495 L 113 466 C 116 428 123 399 140 375 C 151 358 173 350 193 347 L 208 346 L 226 351 C 249 358 267 402 277 436 Z" />
+            <g id="left-stalk">
+              <use href="#left-leaf" />
+              <path id="left-stem" d="M114 1130 C112 1106 114 1088 116 1072 C120 1036 122 1012 123 983 C123 948 124 918 129 898 L132 899 C126 931 127 963 127 984 C126 1013 124 1041 120 1074 C117 1099 117 1113 118 1130 Z" />
+              <path id="left-upper-leaf" d="M123 992 C132 968 148 957 163 951 C176 946 186 949 195 959 C205 970 208 982 209 991 C202 974 195 966 184 960 C173 955 165 959 157 967 C144 977 133 987 123 1005 Z" />
+              <path id="left-side-leaf" d="M121 1024 C116 1004 111 985 104 973 C96 959 88 959 83 959 C91 968 98 981 104 994 C111 1007 116 1020 119 1040 Z" />
+            </g>
+            <g id="right-stalk">
+              <use href="#right-leaf" />
+              <path id="right-stem" d="M838 1130 C837 1108 837 1089 838 1076 C840 1046 838 1017 837 990 C835 970 830 950 825 937 L828 935 C835 952 839 973 840 990 C842 1016 843 1048 842 1076 C841 1097 841 1114 842 1130 Z" />
+              <path id="right-upper-leaf" d="M836 1013 C831 996 820 985 809 978 C798 971 788 974 781 980 C774 987 772 1000 776 1009 C777 997 782 989 790 986 C803 982 818 997 829 1013 L837 1028 Z" />
+            </g>
+            <clipPath id="left-leaf-cutout"><use href="#left-leaf" /><use href="#left-stem" /><use href="#left-upper-leaf" /><use href="#left-side-leaf" /></clipPath>
+            <clipPath id="right-leaf-cutout"><use href="#right-leaf" /><use href="#right-stem" /><use href="#right-upper-leaf" /></clipPath>
+            <clipPath id="repair-openings"><use href="#left-leaf" /><use href="#left-stem" /><use href="#left-upper-leaf" /><use href="#left-side-leaf" /><use href="#right-leaf" /><use href="#right-stem" /><use href="#right-upper-leaf" /></clipPath>
+            <clipPath id="fence-foreground"><rect y="1130" width="941" height="542" /></clipPath>
+            <mask id="stationary-art" maskUnits="userSpaceOnUse" x="0" y="0" width="941" height="1672">
+              <rect width="941" height="1672" fill="white" />
+              <use href="#left-stalk" fill="black" /><use href="#right-stalk" fill="black" />
+              <rect y="1130" width="941" height="542" fill="black" />
+            </mask>
+          </defs>
+          <use id="active-corn-repair" href="#opening-repair" clip-path="url(#repair-openings)" />
+          <use href="#original-art" mask="url(#stationary-art)" />
+          <g class="rustle-stalks rustle-stalks--one is-active" data-top="890" data-base="1130" data-cutout="left-leaf-cutout"><use href="#original-art" clip-path="url(#left-leaf-cutout)" /></g>
+          <g class="rustle-stalks rustle-stalks--two" data-top="935" data-base="1130" data-cutout="right-leaf-cutout"><use href="#original-art" clip-path="url(#right-leaf-cutout)" /></g>
+          <!-- Original fence, ground and nearby foliage stay fixed above the rig. -->
+          <use href="#original-art" clip-path="url(#fence-foreground)" />
+        </svg>
+
+
+        <div class="fireflies" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+
+        <div class="story-layer" id="story-layer" aria-hidden="true">
+          <div class="lightning"></div>
+          <div class="scarecrow-character">
+            <div class="contact-shadow"></div>
+            <svg class="scarecrow-art" viewBox="0 0 1024 1536" aria-hidden="true">
+              <defs>
+                <image id="scarecrow-source" width="1024" height="1536" href="Assets/story-welcome/scarecrow-welcome-v3-dull-eyes.png" />
+                <!-- Keep the holding hand fixed above the independently moving
+                     prop. All three layers use the same original canvas. -->
+                <path id="sign-silhouette" d="M419 445 L778 412 L820 294 L905 305 L974 352 L1018 426 L1024 661 L1006 806 L997 987 L944 979 L916 910 L855 805 L807 754 L740 747 L686 791 L625 755 L573 745 L457 763 L413 715 L408 620 L410 534 Z" />
+                <path id="holding-hand-silhouette" d="M798 286 L817 273 L841 280 L858 295 L886 303 L911 325 L927 340 L948 338 L972 350 L985 365 L978 382 L990 388 L1002 399 L1000 410 L988 423 L970 428 L961 419 L951 425 L941 412 L932 425 L923 421 L929 397 L920 382 L913 393 L912 411 L906 430 L893 434 L884 422 L890 403 L897 392 L886 368 L858 347 L843 336 L827 314 L807 308 Z" />
+                <clipPath id="holding-hand-cutout"><use href="#holding-hand-silhouette" /></clipPath>
+                <mask id="sign-without-hand" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1536">
+                  <rect width="1024" height="1536" fill="black" />
+                  <use href="#sign-silhouette" fill="white" />
+                  <use href="#holding-hand-silhouette" fill="black" />
+                </mask>
+                <mask id="body-without-sign" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1536">
+                  <rect width="1024" height="1536" fill="white" />
+                  <use href="#sign-silhouette" fill="black" />
+                </mask>
+              </defs>
+              <g class="scarecrow"><use href="#scarecrow-source" mask="url(#body-without-sign)" /></g>
+              <g class="welcome-sign"><use href="#scarecrow-source" mask="url(#sign-without-hand)" /></g>
+              <g class="scarecrow-hand"><use href="#scarecrow-source" clip-path="url(#holding-hand-cutout)" /></g>
+            </svg>
+            <div class="eyes"><i></i><i></i></div>
+            <button class="eye-trigger" id="eye-trigger" type="button" aria-label="Investigate the scarecrow's glowing eyes" hidden></button>
+          </div>
+        </div>
+
+        <button class="rustle rustle--one" id="rustle" type="button" aria-label="Rustling corn near the path">
+          <span class="sr-only">Investigate the rustling corn</span>
+        </button>
+
+        <p class="hint" id="hint" aria-live="polite"></p>
+        <p class="status" id="status" aria-live="assertive"></p>
+
+        <button class="pause" id="pause" type="button" aria-pressed="false">
+          <span aria-hidden="true" id="pause-icon">Ⅱ</span>
+          <span class="sr-only" id="pause-label">Pause experience</span>
+        </button>
+      </section>
+    </main>
+    <script src="corn-rig.js"></script>
+    <script src="audio.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

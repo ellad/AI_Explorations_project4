@@ -20,9 +20,71 @@ Create your own checklist for the next few results, using the workflow in `brief
 
 Test each result before continuing, including related behavior that already works. Update priorities as evidence emerges and preserve meaningful working checkpoints in git. Before delivery, verify the deployed app against the brief and specification.
 
+### Next checkpoints
+
+- [x] Choose the first story's concept and narrative arc: the cornfield **“Welcome?”** scarecrow reveal documented in `spec.md`.
+- [x] Approve the discovery trigger and interaction feedback: two corn rustles followed by the scarecrow's eyes, with progress preserved. The scarecrow style is approved as lanky and eerie.
+- [x] Prepare the minimum visual and audio assets needed for the story. Local audio has verified CC0 sources and creator credits; mix approval remains pending.
+- [x] Build and verify the mobile scene foundation and silent story prototype. Developer preview revisions addressed corn motion, eye alignment, character persistence and separate sign/hand layers.
+- [ ] Add and coordinate sound, progressive hints, and interaction feedback. Verify with touch, keyboard, reduced motion, and a narrow mobile viewport.
+
+Sound implementation and browser checks are complete; the final checkpoint still needs Developer listening and physical-phone interaction review.
+
+Developer verification remains incomplete until the story is run and tested directly.
+
 ## Evidence and revisions
 
 Record non-identifying playtest observations, separating what Users did or said from your interpretation. Use the findings to choose revision priorities and record what changed and how you verified the improvement.
+
+### Developer preview review
+
+- Concealed fairground checkpoint approved by Developer: begin with only corn, fences and path; reveal the remaining fairground with the scarecrow during the first lightning flash, then keep it visible through replays.
+- Implementation: generated clean opening and repair artwork, changed the intro background, and switched the shared scene/mesh/foreground source aliases at 3.84 seconds using the pause-aware story timer. Existing corn rig, sound, sign and hand behavior are retained.
+- Evidence: Chrome HTTP preview at 390 × 844 passed for opening concealment, pause before reveal, joint reveal, post-story persistence, replay persistence and repair/source switching. Opening and sign-reveal screenshots inspected. Developer visual review remains pending. See `Assets/opening-scene/README.md` for provenance and prompts.
+
+- Continuous corn sound: Developer requested rustling throughout corn movement. The flexible rig now reports its active/settling stalk to a separate crossfaded audio loop. Enter starts left rustling, the first tap pans the same voice right, and removing the active cue lets sound continue until the springs settle. Pause freezes the loop's shared clock. Reduced-motion mode retains short tap feedback. Removed the unrelated scheduled story rustle; thunder and sign cues remain.
+
+- Thunder tail approved: play the selected clap excerpt through the end of the recording instead of limiting it to 2.5 seconds. Ending the visual story no longer stops active audio effects. Pause still suspends the shared audio clock; beginning a replay clears the previous tail before scheduling new sounds.
+
+- Thunder character revision: Developer wanted a loud classic thunderclap. Added the verified CC0 `thunder-clap.mp3` recording by seth-m, switched the active cue and start-screen credit, and selected the transient onset rather than a sustained-rumble window. Preserved the previous file. Flash timing, pause behavior and replay remain unchanged.
+
+- Thunder mix revision: Developer found the reveal sound too faint or absent. Removed the forced zero offset so the cue uses the loader's strongest short excerpt; increased playback gain from .42 to .72 and duration from 2.1 to 2.5 seconds. Flash alignment remains 3.84 seconds. Phone listening review remains pending.
+
+- Audio-loading diagnosis: Developer opens `index.html` directly (`file://`), which blocks the audio loader's fetch requests. Previous file-based automated tests used a relaxed local-file flag and therefore missed the real preview restriction. Added an explicit direct-file notice and local-server instructions in `README.md`; started an HTTP preview on 127.0.0.1:4173.
+- Verification: Chrome HTTP preview tested with normal file-security/autoplay rules and a trusted Enter click. All five sounds decoded, context was running, wind looped, three story cues were scheduled, and pause/resume froze/restarted the audio clock. Browser returned PASS.
+
+- Audio checkpoint: added local CC0 wind, corn rustle, twig snap, thunder and wood creak, start-screen credits, Enter-based audio unlocking, crossfaded ambience, distinct tap feedback, synchronized story cues and global pause/resume. Lower wind during the story and restore it afterward. Tab hiding pauses the experience. Missing sound leaves the visual scene usable with a notice.
+- Evidence: real-time Chrome checks passed for all five MP3 decodes, initial silent state, Enter unlock, ambient loop, tap effects, scheduled story effects, frozen audio clock during pause, resume, persistent character and clean replay. Eight-second offline story render peak = 0.300 and RMS = 0.041: non-silent and below clipping. Syntax/whitespace checks passed. Subjective listening, native phone audio unlocking and touch testing remain pending.
+
+- Sign correction: Developer observed that the holding hand spun with the sign. Extracted the hand into a stationary original-pixel foreground layer and excluded it from the transforming sign mask. Checked the mid-reveal frame at 4.95 seconds; the hand stays attached to the arm while the prop opens.
+
+- Sign presentation checkpoint: split the approved dull-eye image into original-pixel body and prop layers using SVG masks. Keep the sign concealed during the character reveal, present it at 4.8 seconds, and settle it with a brief wobble. Body and sign remain visible after the story; direct eye replay is preserved.
+- Verification: Chrome screenshots at 4.4 and 5.9 seconds confirm character-only and sign-present stages. Browser checks passed for delayed sign reveal, reduced motion, pause/resume, persistent body/sign and replay. Developer timing review remains pending. Next checkpoint is sourced/credited audio and synchronized feedback; the prototype is still silent.
+- Corn motion tuning approved after two reductions: current drive amplitude is 16.15 source pixels. Preserve this setting during unrelated story work.
+
+- Flexible rig checkpoint: expanded the original cutouts to include visible stems and attached leaves, then replaced rigid rotation with a continuous 20-band bending mesh. Fixed base, increasing upper displacement, damped stem spring and delayed leaf spring; inactive stalks settle. Generated a targeted background repair for the larger openings. Character persistence is preserved.
+- Verification: inspected native-resolution resting/bent close-ups. Both bends change only their plant regions; fence and ground comparisons show no differences. Browser checks passed for bend distribution, planted root, pause freeze, corn progression, persistent character and eye-tap replay. Physical-phone motion/feel remains for Developer review.
+
+- Developer requested stronger rustles and a character that stays after appearing. Increased the leaf rotation from ±1° to ±6° with quicker timing. Removed the disappearance keyframes; retain the body, eyes and contact shadow after the 8-second story, and enable direct eye-tap replay. Corn settles during story playback.
+
+- Original-art rig completed: replace the generated overlays with two traced leaf blades sampled directly from the original composite. Separate the stationary scene, hidden background repair, moving cutouts and original lower foreground in one SVG coordinate system. Keep all scene pixels outside the two cutouts unchanged.
+- Verification: native-resolution Chrome comparisons and close-up inspection; fence/ground pixel comparison returned no differences during movement. Browser checks passed for two corn activations, eye activation, interaction lock, pause/resume, reset and replay. Source-color matching is now inherited from the original pixels rather than generated approximations. Developer review of the modest leaf movement remains pending. See `Assets/corn-rig/README.md` for layer construction and repair provenance.
+
+- Developer close-up rejected the feathered overlays: they appear as ghost plants over the fence. Removed both generated corn instances from the scene, restoring the original static corn. Previous full-viewport checks missed this close-up defect. Corn motion is incomplete; stop iterating opacity/masks on these overlays. A future implementation needs separated original plant silhouettes, clean pixels behind them, and a foreground fence layer before animating. Generated assets are preserved but unused.
+
+- Corn blending revision: feather the added clusters with an elliptical alpha mask, dissolving their bases before the fence rails and their outer leaves into the existing plants. Lower opacity and slightly soften the detail. Chrome mobile render confirms the added stalk bases no longer appear planted on the rails; the original corn and fence remain visible through the transition. Both clusters still persist after clicks.
+
+- Further observation: a moving single corn instance disappeared after clicks, its color/style stood apart, and the character appeared to float with off-center eye highlights.
+- Revision: two persistent clusters, a new scene-reference corn asset, smaller placement among existing rows with subdued color, character moved inward and down onto the path, contact shadow beneath the boots, fixed eye centers at source-image socket coordinates. Removed full-body rotation so boots stay planted.
+- Verification: Chrome mobile renders at 390 × 844 checked both the first-click exploration state and the 4.8-second reveal. Both corn clusters remain visible, the next cluster shakes, eye highlights are inside the sockets, and boots/shadow meet the path. Developer motion review remains pending.
+
+- Follow-up observation: region-based corn patches moved fence/entrance pixels and cut stalks at their boundaries; the ground layer also cut a rectangle through the scarecrow. The final trigger was expected to be the character's eyes.
+- Revision: use separate generated full stalks pivoting at their bases, stop moving the combined corn/fence layer, use two corn taps followed by the eyes, and render the complete character above the background. Eyes and body share a container; the tilt moves both together. Removed the abrupt downward jump.
+- Verification: Chrome rendered the story at a 390 × 844 viewport after two corn taps, an eye tap, and pause. At 4.8 seconds the character is complete and the eye highlights sit within the carved sockets. JavaScript syntax and whitespace checks passed. Manual pacing review remains pending. The sign presentation still needs separate artwork or rigging; the current image reveals the sign together with the body.
+
+- Observed: the trigger displayed a shaking text-like marker rather than moving corn, the glow did not align with the scarecrow's eye sockets, and the scarecrow faded and zoomed during its reveal.
+- Revision: animate a localized patch of the existing corn artwork, position the eye effect relative to the scarecrow asset, and replace the fade/zoom with a hard lightning reveal, one stiff tilt, and a retreat behind the corn.
+- Developer re-verification is still required in the browser preview.
 
 Keep implementation progress and verification here. Update `research.md` when evidence changes a decision and `spec.md` when intended behavior changes; link to those updates rather than duplicating them. Record consequential changes, not every small adjustment.
 
