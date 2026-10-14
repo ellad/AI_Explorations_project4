@@ -24,7 +24,32 @@ Record only what informs the next build decisions:
 
 Investigate unfamiliar techniques or asset sources as needed. Verify usage terms and keep source links and required credits here. Distinguish evidence from assumptions; the Agent's recommendation alone is not evidence.
 
+### Current creative direction
+
+Approved environment progression: start with corn, path and fences in darkness; reveal the fairground together with the scarecrow's lightning reveal. This makes “WELCOME?” introduce a newly visible destination. The revealed fairground persists during later exploration/replays. Clean opening artwork and the corresponding hidden corn repair are documented in `Assets/opening-scene/README.md`.
+
+- The first story will begin in the cornfield at the fairground entrance. Its mood draws on the unease of an unseen presence among the stalks, but resolves playfully and remains appropriate for Users age 10 and older.
+- Use one pumpkin-headed scarecrow as the story's focal figure rather than a group. A single pair of glowing eyes creates the initial reveal and keeps the short sequence visually clear.
+- The scarecrow reveals a crooked, dilapidated sign reading **“WELCOME?”** The question mark is the central joke: the figure itself seems uncertain whether the visitor should enter.
+- Keep the Ferris wheel still during the initial scene and this story. Its movement may be reserved for a later event or reward.
+
+The scarecrow's approved visual direction is lanky and eerie. Its awkward presentation of the sign—not a cute character design—provides the playful resolution.
+
+The approved trigger is a moving rustle that the User follows through three locations in the corn. Each successful interaction advances rather than resetting on mistakes. The generated scarecrow/sign asset is documented in `Assets/story-welcome/README.md`.
+
+Corn asset revision: the active rig uses two original leaf cutouts and a stationary foreground, with generated artwork confined to the hidden background repair. Generated standalone corn clusters failed Developer close-up review and are no longer used. Layer construction, source and usage notes are recorded in `Assets/corn-rig/README.md`; verification is in `plan.md`. The current trigger is two leaf rustles followed by tapping the character's eyes, as specified in `spec.md`.
+
+Still to explore: sound sources and whether a head tilt, shrug, or other small reaction best ends the joke.
+
 ## Revisions
+
+### First audio checkpoint
+
+Thunder revision: Developer requested a sharp classic clap. Replaced the active rumble with [big thunder clap by seth-m](https://freesound.org/people/seth-m/sounds/458015/), verified CC0 on October 14, 2026. The recording is described by its creator as a dry clap without rain. Playback starts before the detected transient and stays aligned with the flash. Original rumble is preserved as an unused asset. Listening approval remains pending.
+
+Verified CC0 source pages on October 14, 2026: [Soft Wind](https://freesound.org/people/florianreichelt/sounds/459977/), [corn stalk rustling](https://freesound.org/people/kyles/sounds/454363/), [Twig Snap 04](https://freesound.org/people/Glitchedtones/sounds/322411/), [Short Thunder Deep](https://freesound.org/people/SholeColtis/sounds/683420/), and [Wood Creak](https://freesound.org/people/SilentStrikeZ/sounds/389645/). Downloaded public MP3 previews for local playback; full creator credits, source URLs and processing notes are in `Assets/audio/README.md`.
+
+Provisional mix: quiet looping wind, rustle then snap for the two corn interactions, ambience lowered during the story, restrained thunder on the flash and a wooden creak during the sign reveal. Browser tests confirm decoding and control behavior; Developer listening review on a phone is still needed before treating the sound selection/volume as approved.
 
 Update decisions when new evidence changes the direction, linking to playtest observations in `plan.md` rather than copying them. Keep chosen behavior and asset requirements in `spec.md`. The Developer confirms when the inquiry is sufficient to continue building; exhaustive research is not a prerequisite.
 
