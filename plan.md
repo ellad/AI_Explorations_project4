@@ -38,6 +38,8 @@ Record non-identifying playtest observations, separating what Users did or said 
 
 ### Developer preview review
 
+- Mobile performance and hand-layer revision: phone review found that corn motion was not perceptible, the scarecrow reveal lagged, and the holding hand still transformed with the sign. Reduced the flexible corn rig from twenty to five connected bands per stalk, preloaded the three reveal rasters, removed full-character brightness filters, and replaced referenced sign/hand mask paths with direct geometry for Safari. A 390 × 844 HTTP browser run loaded all five sounds, rendered ten corn bands, completed the fairground reveal, and showed the sign and fixed hand at the mid-reveal frame without script errors. Developer phone re-verification remains pending.
+
 - Mobile Safari compatibility revision: the first GitHub Pages phone review showed only CSS fog/fireflies, with the SVG scene artwork missing, and reported that sounds could not load. Replaced nested mutable SVG `use` aliases with direct raster source elements while preserving the stationary mask and moving corn cutouts. Replaced `AbortSignal.timeout()` with an `AbortController` timer fallback for older/in-app iPhone browsers. Syntax, whitespace and HTTP asset checks passed; Developer phone re-verification remains pending.
 
 - Concealed fairground checkpoint approved by Developer: begin with only corn, fences and path; reveal the remaining fairground with the scarecrow during the first lightning flash, then keep it visible through replays.

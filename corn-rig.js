@@ -15,7 +15,9 @@ class CornRig {
     const defs = svg.querySelector("defs");
     const top = Number(element.dataset.top);
     const base = Number(element.dataset.base);
-    const count = 20;
+    // Five connected bands preserve the planted bend without asking mobile
+    // Safari to composite forty copies of the full scene every frame.
+    const count = 5;
     const height = (base - top) / count;
     const bands = [];
     const create = (name, attributes = {}) => {

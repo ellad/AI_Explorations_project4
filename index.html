@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#120d1a" />
     <title>Afterlight Fair</title>
+    <link rel="preload" as="image" href="Assets/halloween_ferris_wheel_animation_pack/halloween_fairground_layered_assets/composite_reference.png" />
+    <link rel="preload" as="image" href="Assets/corn-rig/background-repair-flex.png" />
+    <link rel="preload" as="image" href="Assets/story-welcome/scarecrow-welcome-v3-dull-eyes.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -92,17 +95,17 @@
                 <image id="scarecrow-source" width="1024" height="1536" href="Assets/story-welcome/scarecrow-welcome-v3-dull-eyes.png" />
                 <!-- Keep the holding hand fixed above the independently moving
                      prop. All three layers use the same original canvas. -->
-                <path id="sign-silhouette" d="M419 445 L778 412 L820 294 L905 305 L974 352 L1018 426 L1024 661 L1006 806 L997 987 L944 979 L916 910 L855 805 L807 754 L740 747 L686 791 L625 755 L573 745 L457 763 L413 715 L408 620 L410 534 Z" />
-                <path id="holding-hand-silhouette" d="M798 286 L817 273 L841 280 L858 295 L886 303 L911 325 L927 340 L948 338 L972 350 L985 365 L978 382 L990 388 L1002 399 L1000 410 L988 423 L970 428 L961 419 L951 425 L941 412 L932 425 L923 421 L929 397 L920 382 L913 393 L912 411 L906 430 L893 434 L884 422 L890 403 L897 392 L886 368 L858 347 L843 336 L827 314 L807 308 Z" />
-                <clipPath id="holding-hand-cutout"><use href="#holding-hand-silhouette" /></clipPath>
+                <!-- Paths are repeated directly inside masks for mobile Safari;
+                     referencing a path with use can be dropped during animation. -->
+                <clipPath id="holding-hand-cutout"><path d="M798 286 L817 273 L841 280 L858 295 L886 303 L911 325 L927 340 L948 338 L972 350 L985 365 L978 382 L990 388 L1002 399 L1000 410 L988 423 L970 428 L961 419 L951 425 L941 412 L932 425 L923 421 L929 397 L920 382 L913 393 L912 411 L906 430 L893 434 L884 422 L890 403 L897 392 L886 368 L858 347 L843 336 L827 314 L807 308 Z" /></clipPath>
                 <mask id="sign-without-hand" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1536">
                   <rect width="1024" height="1536" fill="black" />
-                  <use href="#sign-silhouette" fill="white" />
-                  <use href="#holding-hand-silhouette" fill="black" />
+                  <path fill="white" d="M419 445 L778 412 L820 294 L905 305 L974 352 L1018 426 L1024 661 L1006 806 L997 987 L944 979 L916 910 L855 805 L807 754 L740 747 L686 791 L625 755 L573 745 L457 763 L413 715 L408 620 L410 534 Z" />
+                  <path fill="black" d="M798 286 L817 273 L841 280 L858 295 L886 303 L911 325 L927 340 L948 338 L972 350 L985 365 L978 382 L990 388 L1002 399 L1000 410 L988 423 L970 428 L961 419 L951 425 L941 412 L932 425 L923 421 L929 397 L920 382 L913 393 L912 411 L906 430 L893 434 L884 422 L890 403 L897 392 L886 368 L858 347 L843 336 L827 314 L807 308 Z" />
                 </mask>
                 <mask id="body-without-sign" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1536">
                   <rect width="1024" height="1536" fill="white" />
-                  <use href="#sign-silhouette" fill="black" />
+                  <path fill="black" d="M419 445 L778 412 L820 294 L905 305 L974 352 L1018 426 L1024 661 L1006 806 L997 987 L944 979 L916 910 L855 805 L807 754 L740 747 L686 791 L625 755 L573 745 L457 763 L413 715 L408 620 L410 534 Z" />
                 </mask>
               </defs>
               <g class="scarecrow"><use href="#scarecrow-source" mask="url(#body-without-sign)" /></g>
