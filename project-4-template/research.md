@@ -35,21 +35,21 @@ Approved environment progression: start with corn, path and fences in darkness; 
 
 The scarecrow's approved visual direction is lanky and eerie. Its awkward presentation of the sign—not a cute character design—provides the playful resolution.
 
-The approved trigger is a moving rustle that the User follows through three locations in the corn. Each successful interaction advances rather than resetting on mistakes. The generated scarecrow/sign asset is documented in `Assets/story-welcome/README.md`.
+The approved trigger is a moving rustle that the User follows through two locations in the corn, followed by the glowing eyes. Each successful interaction advances rather than resetting on mistakes. The generated scarecrow/sign asset is documented in `Assets/story-welcome/README.md`.
 
 Corn asset revision: the active rig uses two original leaf cutouts and a stationary foreground, with generated artwork confined to the hidden background repair. Generated standalone corn clusters failed Developer close-up review and are no longer used. Layer construction, source and usage notes are recorded in `Assets/corn-rig/README.md`; verification is in `plan.md`. The current trigger is two leaf rustles followed by tapping the character's eyes, as specified in `spec.md`.
 
-Still to explore: sound sources and whether a head tilt, shrug, or other small reaction best ends the joke.
+The approved ending holds the lanky scarecrow and faded-in sign in place, allowing the eyes to replay the story. Additional character reactions are deferred beyond this checkpoint.
 
 ## Revisions
 
 ### First audio checkpoint
 
-Thunder revision: Developer requested a sharp classic clap. Replaced the active rumble with [big thunder clap by seth-m](https://freesound.org/people/seth-m/sounds/458015/), verified CC0 on October 14, 2026. The recording is described by its creator as a dry clap without rain. Playback starts before the detected transient and stays aligned with the flash. Original rumble is preserved as an unused asset. Listening approval remains pending.
+Thunder revision: Developer requested a sharp classic clap. Replaced the active rumble with [big thunder clap by seth-m](https://freesound.org/people/seth-m/sounds/458015/), verified CC0 on October 14, 2026. The recording is described by its creator as a dry clap without rain. Playback starts before the detected transient and stays aligned with the flash. Original rumble is preserved as an unused asset. The Developer approved the result during physical-phone review.
 
 Verified CC0 source pages on October 14, 2026: [Soft Wind](https://freesound.org/people/florianreichelt/sounds/459977/), [corn stalk rustling](https://freesound.org/people/kyles/sounds/454363/), [Twig Snap 04](https://freesound.org/people/Glitchedtones/sounds/322411/), [Short Thunder Deep](https://freesound.org/people/SholeColtis/sounds/683420/), and [Wood Creak](https://freesound.org/people/SilentStrikeZ/sounds/389645/). Downloaded public MP3 previews for local playback; full creator credits, source URLs and processing notes are in `Assets/audio/README.md`.
 
-Provisional mix: quiet looping wind, rustle then snap for the two corn interactions, ambience lowered during the story, restrained thunder on the flash and a wooden creak during the sign reveal. Browser tests confirm decoding and control behavior; Developer listening review on a phone is still needed before treating the sound selection/volume as approved.
+Approved mix: quiet looping wind, continuous rustling around the two corn interactions, a snap on the second interaction, ambience lowered during the story, a classic thunderclap on the flash and a wooden creak during the sign reveal. After an iPhone decode failure, the active corn sound was changed to a five-second 44.1 kHz mono WAV excerpt derived from the same verified CC0 source. Browser checks and Developer listening on a physical phone confirmed the final selection and balance.
 
 Update decisions when new evidence changes the direction, linking to playtest observations in `plan.md` rather than copying them. Keep chosen behavior and asset requirements in `spec.md`. The Developer confirms when the inquiry is sufficient to continue building; exhaustive research is not a prerequisite.
 

@@ -24,19 +24,21 @@ Test each result before continuing, including related behavior that already work
 
 - [x] Choose the first story's concept and narrative arc: the cornfield **“Welcome?”** scarecrow reveal documented in `spec.md`.
 - [x] Approve the discovery trigger and interaction feedback: two corn rustles followed by the scarecrow's eyes, with progress preserved. The scarecrow style is approved as lanky and eerie.
-- [x] Prepare the minimum visual and audio assets needed for the story. Local audio has verified CC0 sources and creator credits; mix approval remains pending.
+- [x] Prepare the minimum visual and audio assets needed for the story. Local audio has verified CC0 sources and creator credits; the mix is approved on a physical phone.
 - [x] Build and verify the mobile scene foundation and silent story prototype. Developer preview revisions addressed corn motion, eye alignment, character persistence and separate sign/hand layers.
-- [ ] Add and coordinate sound, progressive hints, and interaction feedback. Verify with touch, keyboard, reduced motion, and a narrow mobile viewport.
+- [x] Add and coordinate sound, progressive hints, and interaction feedback. Browser checks covered keyboard, reduced motion and a narrow mobile viewport; the Developer verified touch, visuals and sound on a physical smartphone.
 
-Sound implementation and browser checks are complete; the final checkpoint still needs Developer listening and physical-phone interaction review.
-
-Developer verification remains incomplete until the story is run and tested directly.
+Phase 1 prototype verification is complete. The Developer tested the deployed HTTPS build on a physical smartphone, directed revisions to Safari rendering, corn motion and audio, eye and sign transitions, fairground reveal performance, and hand/sign separation, then approved the final result on October 15, 2026.
 
 ## Evidence and revisions
 
 Record non-identifying playtest observations, separating what Users did or said from your interpretation. Use the findings to choose revision priorities and record what changed and how you verified the improvement.
 
 ### Developer preview review
+
+The entries below preserve the state observed at each revision. Earlier “pending” notes are superseded by the final Phase 1 phone review.
+
+- Final Phase 1 phone review: after the iPhone-compatible corn-audio revision was deployed, the Developer confirmed that the result looks good. This completes physical-phone visual, touch and listening verification for the current one-story prototype. Public build: `https://ellad.github.io/AI_Explorations_project4/`.
 
 - iPhone corn-audio revision: Developer reported missing corn rustle together with the partial-audio warning. The deployed files were reachable, but the failed asset was a 69-second, 48 kHz stereo MP3 while the working effects were 44.1 kHz. Replaced runtime use of that file with a five-second, 44.1 kHz mono PCM WAV excerpt from the same credited recording, reducing the decoded source to the portion the loop uses. The original MP3 remains archived. Audio failure messages now name failed sounds for future diagnosis. Developer phone re-verification remains pending.
 

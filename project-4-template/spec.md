@@ -34,7 +34,7 @@ Initial scene: show only corn, the dirt path, low wooden fences and a dark misty
 1. The ambient corn becomes still and one pair of dull eyes awakens to an uneven orange glow between the stalks. The glow is an animated effect separate from the unlit base artwork.
 2. The eyes rise, suggesting the outline of one pumpkin-headed scarecrow.
 3. At 3.84 seconds, a flash reveals the complete figure and the full fairground together. This is a sharp reveal rather than a fade. The Ferris wheel remains still.
-4. At approximately 4.8 seconds, after the character's lightning reveal, it presents a crooked wooden sign reading **“WELCOME?”** The sign snaps open over roughly 0.4 seconds and briefly wobbles before settling. Reduced motion preserves the separate reveal beat without flipping or wobbling. The loose-plank detail and its sound remain pending.
+4. At approximately 4.8 seconds, after the character's lightning reveal, it presents a crooked wooden sign reading **“WELCOME?”** The sign fades in over approximately 0.56 seconds while the holding hand remains stationary. Reduced motion preserves the separate reveal beat with an immediate appearance. A wood creak accompanies the presentation.
 5. The scarecrow remains standing with the sign after the reveal.
 6. At 8 seconds, exploration resumes while the scarecrow remains visible. Its eyes can be tapped directly to replay the story without reloading.
 
@@ -44,13 +44,13 @@ The scarecrow has a lanky, eerie silhouette. Its uncertain behavior when present
 
 The User follows two rustles in visible stalk sections separated from the original corn artwork, then taps the scarecrow's visible glowing eyes to start the story. The stems bend from a fixed lower attachment, with stronger motion toward the top and a delayed response in the attached leaves. Original pixels preserve the scene's color and texture. A hidden repair layer fills movement gaps and the original fence/ground foreground stays stationary. Reduced motion uses a static highlight instead of bending. The eyes are positioned relative to the same character container as the body, so their alignment survives responsive sizing and character motion. Incorrect interactions do not erase progress. Progressive hints move from noticing the corn to noticing the watching eyes.
 
-Provisional details requiring Developer approval after testing: exact timing, sound design, and final reaction.
+The Developer approved the story's timing, motion, sound mix and final reaction after testing the deployed build on a physical smartphone.
 
 ### Audio foundation
 
-Use locally stored CC0 recordings credited in `Assets/audio/README.md`. Enter unlocks and loads sound before the scene starts. Quiet crossfaded wind loops during exploration. Rustling loops for the entire time the corn rig is moving, including its settling movement. It follows the active stalk from left to right without restarting. The second corn activation adds a twig snap. Reduced-motion mode uses short tap feedback instead of a continuous movement loop. The eye trigger starts thunder aligned with the flash at 3.84 seconds and a creak aligned with the sign at 4.8 seconds. The thunder tail plays to its natural end, including after the eight-second visual story. Wind lowers during the story and returns afterward.
+Use locally stored CC0 recordings credited in `Assets/audio/README.md`. Enter unlocks and loads sound before the scene starts. Quiet crossfaded wind loops during exploration. The active corn sound is a compact WAV excerpt derived from the credited source for reliable iPhone decoding. Rustling loops for the entire time the corn rig is moving, including its settling movement. It follows the active stalk from left to right without restarting. The second corn activation adds a twig snap. Reduced-motion mode uses short tap feedback instead of a continuous movement loop. The eye trigger starts thunder aligned with the flash at 3.84 seconds and a creak aligned with the sign at 4.8 seconds. The thunder tail plays to its natural end, including after the eight-second visual story. Wind lowers during the story and returns afterward.
 
-Global pause freezes current and scheduled sound alongside animation and timers. Replay clears previous effects before rescheduling. Hiding the tab pauses the experience. Audio load failure preserves the usable visual scene and reports missing sound. Sound selection and mix levels remain provisional until Developer listening review.
+Global pause freezes current and scheduled sound alongside animation and timers. Replay clears previous effects before rescheduling. Hiding the tab pauses the experience. Audio load failure preserves the usable visual scene and names the missing sound. The Developer approved the sound selection and mix on a physical smartphone.
 
 ## Scope and revisions
 

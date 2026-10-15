@@ -1,5 +1,9 @@
 # Afterlight Fair — local preview
 
+Published prototype: **https://ellad.github.io/AI_Explorations_project4/**
+
+The Phase 1 build was verified on a physical smartphone on October 15, 2026.
+
 Serve this folder through a local web server. Opening `index.html` directly uses `file://`, which browsers block for the audio loader's `fetch` requests.
 
 From a terminal in this folder:
