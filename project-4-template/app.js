@@ -160,8 +160,8 @@ function playStory() {
 function revealFairground() {
   if (state.fairgroundRevealed) return;
   state.fairgroundRevealed = true;
-  originalArt.setAttribute("href", "#fairground-source");
-  activeCornRepair.setAttribute("href", "#fairground-repair");
+  originalArt.setAttribute("href", "Assets/halloween_ferris_wheel_animation_pack/halloween_fairground_layered_assets/composite_reference.png");
+  activeCornRepair.setAttribute("href", "Assets/corn-rig/background-repair-flex.png");
   scene.classList.add("has-fairground");
   scene.setAttribute("aria-label", "A revealed Halloween fairground with a pumpkin scarecrow at the entrance");
 }

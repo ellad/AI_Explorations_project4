@@ -38,6 +38,8 @@ Record non-identifying playtest observations, separating what Users did or said 
 
 ### Developer preview review
 
+- Mobile Safari compatibility revision: the first GitHub Pages phone review showed only CSS fog/fireflies, with the SVG scene artwork missing, and reported that sounds could not load. Replaced nested mutable SVG `use` aliases with direct raster source elements while preserving the stationary mask and moving corn cutouts. Replaced `AbortSignal.timeout()` with an `AbortController` timer fallback for older/in-app iPhone browsers. Syntax, whitespace and HTTP asset checks passed; Developer phone re-verification remains pending.
+
 - Concealed fairground checkpoint approved by Developer: begin with only corn, fences and path; reveal the remaining fairground with the scarecrow during the first lightning flash, then keep it visible through replays.
 - Implementation: generated clean opening and repair artwork, changed the intro background, and switched the shared scene/mesh/foreground source aliases at 3.84 seconds using the pause-aware story timer. Existing corn rig, sound, sign and hand behavior are retained.
 - Evidence: Chrome HTTP preview at 390 × 844 passed for opening concealment, pause before reveal, joint reveal, post-story persistence, replay persistence and repair/source switching. Opening and sign-reveal screenshots inspected. Developer visual review remains pending. See `Assets/opening-scene/README.md` for provenance and prompts.
