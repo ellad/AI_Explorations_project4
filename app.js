@@ -95,9 +95,10 @@ async function enterExperience() {
   rustle.focus();
   startHints();
   if (!allSoundsReady) {
+    const failed = audio.failedSounds.length ? ` (${audio.failedSounds.join(", ")})` : "";
     const message = location.protocol === "file:"
       ? "Sound needs a local web preview; this file was opened directly."
-      : "Some sounds couldn’t load. You can still explore.";
+      : `Some sounds couldn’t load${failed}. You can still explore.`;
     audioMessage.textContent = message;
     status.textContent = message;
   }

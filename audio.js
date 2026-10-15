@@ -4,6 +4,7 @@ class SceneAudio {
     this.buffers = new Map();
     this.effects = new Set();
     this.excerpts = new Map();
+    this.failedSounds = [];
     this.rustleVoice = null;
     this.rustleIndex = -1;
     // Fetch before Enter, but do not create a playing audio context yet.
@@ -11,7 +12,7 @@ class SceneAudio {
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timeout = controller ? window.setTimeout(() => controller.abort(), 12000) : 0;
       try {
-        const file = name === "thunder" ? "thunder-clap.mp3" : `${name}.mp3`;
+        const file = name === "thunder" ? "thunder-clap.mp3" : name === "corn" ? "corn.wav" : `${name}.mp3`;
         const response = await fetch(`Assets/audio/${file}`, controller ? { signal: controller.signal } : {});
         if (!response.ok) throw new Error(`Audio HTTP ${response.status}`);
         return { name, bytes: await response.arrayBuffer() };
@@ -43,7 +44,10 @@ class SceneAudio {
       await unlocked;
       const files = await Promise.all(this.files);
       await Promise.all(files.map(async ({ name, bytes }) => {
-        if (!bytes) return;
+        if (!bytes) {
+          this.failedSounds.push(name);
+          return;
+        }
         try {
           const buffer = await this.context.decodeAudioData(bytes);
           this.normalize(buffer, name === "wind" ? .45 : .65);
@@ -53,9 +57,10 @@ class SceneAudio {
             : this.loudestWindow(buffer, name === "corn" ? .8 : 1.5));
         } catch {
           // Missing or corrupt sound never blocks the scene itself.
+          this.failedSounds.push(name);
         }
       }));
-      return this.buffers.size === files.length;
+      return this.failedSounds.length === 0;
     } catch {
       return false;
     }
