@@ -8,13 +8,17 @@ class SceneAudio {
     this.rustleIndex = -1;
     // Fetch before Enter, but do not create a playing audio context yet.
     this.files = ["wind", "corn", "snap", "thunder", "creak"].map(async (name) => {
+      const controller = typeof AbortController === "function" ? new AbortController() : null;
+      const timeout = controller ? window.setTimeout(() => controller.abort(), 12000) : 0;
       try {
         const file = name === "thunder" ? "thunder-clap.mp3" : `${name}.mp3`;
-        const response = await fetch(`Assets/audio/${file}`, { signal: AbortSignal.timeout(12000) });
+        const response = await fetch(`Assets/audio/${file}`, controller ? { signal: controller.signal } : {});
         if (!response.ok) throw new Error(`Audio HTTP ${response.status}`);
         return { name, bytes: await response.arrayBuffer() };
       } catch {
         return { name, bytes: null };
+      } finally {
+        if (timeout) window.clearTimeout(timeout);
       }
     });
   }
