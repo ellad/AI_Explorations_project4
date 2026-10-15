@@ -238,7 +238,8 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 @keyframes sign-presentation {
   0%, 59.9% { opacity: 0; }
-  60%, 100% { opacity: 1; }
+  60% { opacity: 0; }
+  67%, 100% { opacity: 1; }
 }
 @keyframes sign-presentation-reduced {
   0%, 59.9% { opacity: 0; }
