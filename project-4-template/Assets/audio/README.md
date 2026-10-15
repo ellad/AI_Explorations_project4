@@ -7,7 +7,8 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 | Local file | Recording and creator | Source |
 | --- | --- | --- |
 | `wind.mp3` | Soft Wind — florianreichelt | https://freesound.org/people/florianreichelt/sounds/459977/ |
-| `corn.mp3` | wind medium brisk breeze through stiff dry corn stalks or grass gusty rustling.flac — kyles | https://freesound.org/people/kyles/sounds/454363/ |
+| `corn.wav` | Active five-second mono PCM excerpt from corn stalk rustling — kyles | https://freesound.org/people/kyles/sounds/454363/ |
+| `corn.mp3` | Archived full MP3 preview used to derive `corn.wav` — kyles | https://freesound.org/people/kyles/sounds/454363/ |
 | `snap.mp3` | Twig Snap 04.wav — Glitchedtones | https://freesound.org/people/Glitchedtones/sounds/322411/ |
 | `thunder.mp3` | Short_Thunder_Deep.wav — SholeColtis | https://freesound.org/people/SholeColtis/sounds/683420/ |
 | `thunder-clap.mp3` | big thunder clap — seth-m | https://freesound.org/people/seth-m/sounds/458015/ |
@@ -24,7 +25,7 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 
 ## Playback adaptations
 
-Corn rustling now uses a separate three-second excerpt loop with a 0.18-second boundary crossfade. The corn rig controls its lifetime, including the springs' settling motion. Moving to the second stalk pans the same loop from left to right. Pause freezes playback without restarting it, and scene reset starts a new loop when corn movement returns. This loop is independent of the scheduled thunder/creak effects. Reduced-motion mode retains one-shot corn feedback.
+Corn rustling uses `corn.wav`, a five-second, 44.1 kHz mono PCM excerpt beginning 32.3 seconds into the credited source. The smaller uncompressed asset avoids an iPhone decode failure observed with the 69-second, 48 kHz stereo MP3. Playback creates a three-second loop with a 0.18-second boundary crossfade. The corn rig controls its lifetime, including the springs' settling motion. Moving to the second stalk pans the same loop from left to right. Pause freezes playback without restarting it, and scene reset starts a new loop when corn movement returns. This loop is independent of the scheduled thunder/creak effects. Reduced-motion mode retains one-shot corn feedback.
 
 `../../audio.js` normalizes decoded buffers and uses reduced playback gains and a compressor. The wind uses a 20-second excerpt with a 0.8-second loop crossfade. Corn and creak snippets use the highest-energy short window to avoid starting on silence; excerpts are faded in/out and softly positioned in stereo. The first corn tap uses rustling, the second a twig snap, and the eye trigger begins a quieter rustle, a 3.84-second thunder cue and a 4.8-second sign creak. The full story stays eight seconds.
 
