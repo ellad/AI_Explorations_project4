@@ -117,13 +117,14 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .contact-shadow { position: absolute; left: 9%; bottom: 1.4%; width: 68%; height: 3.5%; border-radius: 50%; background: #160d09; filter: blur(4px); opacity: 0; }
 .scarecrow-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .scarecrow, .scarecrow-hand { opacity: 0; }
-.welcome-sign { opacity: 0; transform-box: view-box; transform-origin: 86% 28%; }
+.welcome-sign { opacity: 0; }
 .eyes {
   position: absolute;
   z-index: 2;
   inset: 0;
   opacity: 0;
   filter: brightness(.25);
+  transition: opacity 800ms ease, filter 800ms ease;
 }
 .eyes i {
   position: absolute;
@@ -212,8 +213,9 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 @keyframes drift { to { transform: translateX(275%); } }
 @keyframes float { to { transform: translate(12px, -22px); opacity: .35; } }
 @keyframes eyes-awaken {
-  0%, 7% { opacity: .75; filter: brightness(.7); }
-  17% { opacity: .42; filter: brightness(.45); }
+  0% { opacity: .2; filter: brightness(.25); }
+  7% { opacity: .5; filter: brightness(.5); }
+  17% { opacity: .65; filter: brightness(.6); }
   28% { opacity: 1; filter: brightness(1); }
   47% { opacity: .72; filter: brightness(.72); }
   53%, 80% { opacity: 1; filter: brightness(1.15); }
@@ -235,15 +237,12 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   48%, 100% { opacity: .6; }
 }
 @keyframes sign-presentation {
-  0%, 59.9% { opacity: 0; transform: scaleX(.06) rotate(-12deg); }
-  60% { opacity: 1; transform: scaleX(.06) rotate(-12deg); }
-  65% { opacity: 1; transform: scaleX(1) rotate(3deg); }
-  69% { opacity: 1; transform: scaleX(1) rotate(-1.5deg); }
-  74%, 100% { opacity: 1; transform: scaleX(1) rotate(0); }
+  0%, 59.9% { opacity: 0; }
+  60%, 100% { opacity: 1; }
 }
 @keyframes sign-presentation-reduced {
-  0%, 59.9% { opacity: 0; transform: none; }
-  60%, 100% { opacity: 1; transform: none; }
+  0%, 59.9% { opacity: 0; }
+  60%, 100% { opacity: 1; }
 }
 
 @media (min-aspect-ratio: 3/4) {

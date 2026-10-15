@@ -14,7 +14,6 @@ const hint = document.querySelector("#hint");
 const status = document.querySelector("#status");
 const audioMessage = document.querySelector("#audio-message");
 const audio = new SceneAudio();
-const originalArt = document.querySelector("#original-art");
 const activeCornRepair = document.querySelector("#active-corn-repair");
 
 const state = {
@@ -160,7 +159,12 @@ function playStory() {
 function revealFairground() {
   if (state.fairgroundRevealed) return;
   state.fairgroundRevealed = true;
-  originalArt.setAttribute("href", "Assets/halloween_ferris_wheel_animation_pack/halloween_fairground_layered_assets/composite_reference.png");
+  // Safari does not reliably repaint clones when an image source changes.
+  // Point each rendered clone at the already-decoded fairground source instead.
+  document.querySelectorAll('use[href="#original-art"]').forEach((layer) => {
+    layer.setAttribute("href", "#fairground-art");
+    layer.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#fairground-art");
+  });
   activeCornRepair.setAttribute("href", "Assets/corn-rig/background-repair-flex.png");
   scene.classList.add("has-fairground");
   scene.setAttribute("aria-label", "A revealed Halloween fairground with a pumpkin scarecrow at the entrance");

@@ -75,12 +75,12 @@ class CornRig {
     rig.phase += dt;
     const active = rig.element.classList.contains("is-active");
     // Uneven gusts, rather than constant metronomic rotation.
-    const gust = Math.sin(rig.phase * 8.5) + .3 * Math.sin(rig.phase * 14.3);
+    const gust = Math.sin(rig.phase * 12.5) + .3 * Math.sin(rig.phase * 20.5);
     const target = active ? gust * 16.15 : 0;
-    rig.stemVelocity += ((target - rig.stem) * 125 - rig.stemVelocity * 15) * dt;
+    rig.stemVelocity += ((target - rig.stem) * 180 - rig.stemVelocity * 18) * dt;
     rig.stem += rig.stemVelocity * dt;
     // Softer secondary spring follows the stem with visible delay.
-    rig.leafVelocity += ((rig.stem - rig.leaf) * 65 - rig.leafVelocity * 10) * dt;
+    rig.leafVelocity += ((rig.stem - rig.leaf) * 90 - rig.leafVelocity * 12) * dt;
     rig.leaf += rig.leafVelocity * dt;
 
     const offset = (y) => {
