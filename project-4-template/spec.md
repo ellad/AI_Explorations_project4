@@ -33,7 +33,7 @@ Initial scene: show only corn, the dirt path, low wooden fences and a dark misty
 
 1. The ambient corn becomes still and one pair of dull eyes awakens to an uneven orange glow between the stalks. The glow is an animated effect separate from the unlit base artwork.
 2. The eyes rise, suggesting the outline of one pumpkin-headed scarecrow.
-3. At 3.84 seconds, a flash reveals the complete figure and the full fairground together. This is a sharp reveal rather than a fade. The Ferris wheel remains still.
+3. At 3.84 seconds, a flash reveals the complete figure and the full fairground together. This is a sharp reveal rather than a fade. A dense cloud of Perlin-noise-distorted fog blooms with the flash, briefly obscures the new fairground and scarecrow, then separates and clears before the sign presentation. A lighter noise-shaped ground haze drifts through the scene during exploration. Reduced motion preserves the fog beat with opacity only. The Ferris wheel remains still.
 4. At approximately 4.8 seconds, after the character's lightning reveal, it presents a crooked wooden sign reading **“WELCOME?”** The sign fades in over approximately 0.56 seconds while the holding hand remains stationary. Reduced motion preserves the separate reveal beat with an immediate appearance. A wood creak accompanies the presentation.
 5. The scarecrow remains standing with the sign after the reveal.
 6. At 8 seconds, exploration resumes while the scarecrow remains visible. Its eyes can be tapped directly to replay the story without reloading.

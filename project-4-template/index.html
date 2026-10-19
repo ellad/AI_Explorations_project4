@@ -38,6 +38,20 @@
       </section>
 
       <section class="scene" id="scene" aria-label="A dark path between cornfields and wooden fences" aria-hidden="true">
+        <svg class="fog-filters" aria-hidden="true">
+          <defs>
+            <filter id="ambient-fog-noise" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency=".009 .026" numOctaves="3" seed="14" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="54" xChannelSelector="R" yChannelSelector="G" result="distorted" />
+              <feGaussianBlur in="distorted" stdDeviation="5" />
+            </filter>
+            <filter id="reveal-fog-noise" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency=".012 .035" numOctaves="4" seed="31" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="72" xChannelSelector="R" yChannelSelector="B" result="distorted" />
+              <feGaussianBlur in="distorted" stdDeviation="6" />
+            </filter>
+          </defs>
+        </svg>
         <div class="sky" aria-hidden="true">
           <span class="cloud cloud--one"></span>
           <span class="cloud cloud--two"></span>
@@ -83,12 +97,19 @@
         </svg>
 
 
+        <div class="ground-fog" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </div>
+
         <div class="fireflies" aria-hidden="true">
           <i></i><i></i><i></i><i></i><i></i><i></i>
         </div>
 
         <div class="story-layer" id="story-layer" aria-hidden="true">
           <div class="lightning"></div>
+          <div class="reveal-fog" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </div>
           <div class="scarecrow-character">
             <div class="contact-shadow"></div>
             <svg class="scarecrow-art" viewBox="0 0 1024 1536" aria-hidden="true">
