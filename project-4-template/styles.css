@@ -253,6 +253,12 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .is-reduced .story-layer.is-playing .welcome-sign { animation-name: sign-presentation-reduced; animation-timing-function: steps(1, end); }
 .is-reduced .story-layer.is-playing .reveal-fog i { animation-name: reveal-fog-reduced; }
 
+/* WebKit can drop HTML layers that use an inline SVG displacement filter.
+   Preserve the complete moving fog treatment there without the distortion. */
+@supports (-webkit-touch-callout: none) {
+  .ground-fog, .reveal-fog { filter: none; }
+}
+
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 @keyframes drift { to { transform: translateX(275%); } }
