@@ -90,8 +90,22 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 
 .fog-filters { position: absolute; width: 0; height: 0; }
-.sky, .art-layers, .story-layer, .ground-fog, .fireflies { position: absolute; inset: 0; }
+.sky, .art-layers, .story-layer, .midway-layer, .ground-fog, .fireflies { position: absolute; inset: 0; }
 .art-layers { z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+
+.scene.is-camera-moving .sky,
+.scene.is-camera-moving .art-layers,
+.scene.is-camera-moving .ground-fog,
+.scene.is-camera-moving .fireflies {
+  animation: camera-push 2s cubic-bezier(.3, .68, .25, 1) both;
+}
+.scene.is-midway-zoomed .sky,
+.scene.is-midway-zoomed .art-layers,
+.scene.is-midway-zoomed .ground-fog,
+.scene.is-midway-zoomed .fireflies {
+  transform: scale(1.72);
+  transform-origin: 50% 61%;
+}
 
 .sky { z-index: 2; overflow: hidden; pointer-events: none; }
 .cloud { position: absolute; width: 60%; height: 9%; border-radius: 50%; filter: blur(16px); background: #89708b24; animation: drift 22s linear infinite; }
@@ -138,7 +152,16 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .fireflies i:nth-child(6) { left: 91%; top: 46%; animation-delay: -2.5s; }
 
 .story-layer { z-index: 10; pointer-events: none; }
-.scarecrow-character { position: absolute; width: 61%; left: 19%; bottom: 10%; aspect-ratio: 2 / 3; }
+.scarecrow-character {
+  position: absolute;
+  width: 61%;
+  left: 19%;
+  bottom: 10%;
+  aspect-ratio: 2 / 3;
+  transform-origin: 18% 100%;
+}
+.scene.is-ushered .scarecrow-character { transform: translate(-25%, 8%) scale(.58); }
+.scene.is-usher-transition .scarecrow-character { animation: scarecrow-to-usher 2.4s cubic-bezier(.2, .72, .25, 1) both; }
 .contact-shadow { position: absolute; left: 9%; bottom: 1.4%; width: 68%; height: 3.5%; border-radius: 50%; background: #160d09; filter: blur(4px); opacity: 0; }
 .scarecrow-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .scarecrow, .scarecrow-hand { opacity: 0; }
@@ -202,6 +225,87 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-layer.is-revealed .eyes { opacity: .8; filter: brightness(.8); }
 .eye-trigger { position: absolute; left: 35%; top: 9%; width: 23%; height: 17%; min-width: 48px; min-height: 48px; border: 0; background: transparent; pointer-events: auto; cursor: pointer; }
 
+.midway-layer { z-index: 12; pointer-events: none; }
+.usher-fog {
+  position: absolute;
+  left: -16%;
+  bottom: 5%;
+  width: 82%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #d8d1daaa 0 22%, #9b929f78 48%, transparent 74%);
+  filter: blur(13px);
+  opacity: 0;
+  transform: translateX(-35%);
+}
+.scene.is-usher-transition .usher-fog { animation: usher-fog-pass 2.4s ease-in-out both; }
+.tent-pennant-visuals { opacity: 0; transition: opacity 500ms ease; pointer-events: none; }
+.scene.is-midway-ready .tent-pennant-visuals { opacity: 1; }
+.tent-pennant-mark {
+  fill: #f4cf8c;
+  stroke: #321d31;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 7px #f0a83dcc);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tent-pennant-mark circle { fill: #4b2745; stroke: none; }
+.tent-pennant-mark--rabbit { stroke-width: 2.5; }
+.scene.is-pennant-intro .tent-pennant-mark { animation: pennant-mark-settle 980ms cubic-bezier(.22, .72, .3, 1) both; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(2) .tent-pennant-mark { animation-delay: 90ms; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(3) .tent-pennant-mark { animation-delay: 180ms; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(4) .tent-pennant-mark { animation-delay: 270ms; }
+.tent-pennant-visuals > g.is-cued .tent-pennant-mark { animation: pennant-cue 580ms ease-out both; }
+.scene.is-midway-mistake .tent-pennant-mark { opacity: .38; transform: translateY(5px) rotate(5deg); }
+.pennants { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.scene.is-midway-ready .pennants { opacity: 1; }
+.scene.is-midway-input .pennants { pointer-events: auto; }
+.pennant {
+  position: absolute;
+  width: 48px;
+  height: 52px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  opacity: 1;
+}
+.pennant:disabled { opacity: 1; }
+.pennant--eye { left: 19%; top: 53%; }
+.pennant--star { left: 36%; top: 55%; }
+.pennant--moon { right: 36%; top: 55%; }
+.pennant--rabbit { right: 19%; top: 53%; }
+.tent-progress {
+  position: absolute;
+  left: 50%;
+  top: 63%;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 400ms ease;
+}
+.scene.is-midway-ready .tent-progress { opacity: 1; }
+.tent-progress i {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #d39a58;
+  border-radius: 50%;
+  background: #392329;
+  box-shadow: 0 1px 3px #000;
+  transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.tent-progress i.is-lit {
+  background: #ffd17b;
+  box-shadow: 0 0 5px 2px #f1a342, 0 0 12px 4px #d86f2c99;
+  transform: scale(1.2);
+}
+.scene.is-midway-solved .tent-progress i { animation: progress-celebrate 700ms ease-out both; }
+
 .rustle {
   position: absolute;
   z-index: 10;
@@ -245,13 +349,22 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 
 .is-paused * { animation-play-state: paused !important; }
-.is-paused .rustle, .is-paused .eye-trigger { pointer-events: none; }
+.is-paused .rustle, .is-paused .eye-trigger, .is-paused .pennant { pointer-events: none; }
 .is-reduced .cloud, .is-reduced .ground-fog i, .is-reduced .fireflies i, .is-reduced .eyes i { animation: none; }
 .is-reduced .ground-fog::after { animation: none; }
 .is-reduced .rustle-stalks { animation: none; }
 .is-reduced .rustle-stalks.is-active { filter: brightness(1.15); }
 .is-reduced .story-layer.is-playing .welcome-sign { animation-name: sign-presentation-reduced; animation-timing-function: steps(1, end); }
 .is-reduced .story-layer.is-playing .reveal-fog i { animation-name: reveal-fog-reduced; }
+.is-reduced .scene.is-usher-transition .scarecrow-character { animation: none; transform: translate(-25%, 8%) scale(.58); }
+.is-reduced .scene.is-usher-transition .usher-fog { animation-name: usher-fog-reduced; }
+.is-reduced .scene.is-camera-moving .sky,
+.is-reduced .scene.is-camera-moving .art-layers,
+.is-reduced .scene.is-camera-moving .ground-fog,
+.is-reduced .scene.is-camera-moving .fireflies { animation: none; transform: scale(1.72); transform-origin: 50% 61%; }
+.is-reduced .scene.is-pennant-intro .tent-pennant-mark { animation: none; }
+.is-reduced .tent-pennant-visuals > g.is-cued .tent-pennant-mark { animation: pennant-cue-reduced 500ms steps(1, end); }
+.is-reduced .scene.is-midway-solved .tent-progress i { animation: none; }
 
 /* WebKit can drop HTML layers that use an inline SVG displacement filter.
    Preserve the complete moving fog treatment there without the distortion. */
@@ -301,6 +414,47 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   0%, 47% { opacity: 0; }
   48% { opacity: 1; }
   69%, 100% { opacity: 1; }
+}
+
+@keyframes usher-fog-pass {
+  0% { opacity: 0; transform: translateX(-35%) scale(.8); }
+  28% { opacity: .78; }
+  62% { opacity: .68; }
+  100% { opacity: 0; transform: translateX(55%) scale(1.12); }
+}
+@keyframes scarecrow-to-usher {
+  0%, 25% { transform: none; }
+  82%, 100% { transform: translate(-25%, 8%) scale(.58); }
+}
+@keyframes usher-fog-reduced {
+  0% { opacity: 0; }
+  28%, 62% { opacity: .68; }
+  100% { opacity: 0; }
+}
+@keyframes camera-push {
+  from { transform: scale(1); transform-origin: 50% 61%; }
+  to { transform: scale(1.72); transform-origin: 50% 61%; }
+}
+@keyframes pennant-mark-settle {
+  0% { opacity: 0; transform: translateY(-8px) rotate(-8deg); }
+  45% { opacity: 1; transform: translateY(2px) rotate(4deg); }
+  72% { transform: translateY(-1px) rotate(-2deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes pennant-cue {
+  0% { filter: drop-shadow(0 0 7px #f0a83dcc); transform: rotate(0) scale(1); }
+  35% { filter: drop-shadow(0 0 15px #ffd77d); transform: rotate(-10deg) scale(1.28); }
+  68% { transform: rotate(7deg) scale(1.12); }
+  100% { filter: drop-shadow(0 0 7px #f0a83dcc); transform: rotate(0) scale(1); }
+}
+@keyframes pennant-cue-reduced {
+  0% { filter: drop-shadow(0 0 7px #f0a83dcc); }
+  1%, 70% { filter: drop-shadow(0 0 18px #ffd77d); }
+  71%, 100% { filter: drop-shadow(0 0 7px #f0a83dcc); }
+}
+@keyframes progress-celebrate {
+  0%, 100% { transform: scale(1.2); }
+  45% { transform: scale(1.65); }
 }
 @keyframes shadow-story {
   0%, 47% { opacity: 0; }

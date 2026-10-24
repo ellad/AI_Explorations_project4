@@ -30,9 +30,23 @@ Test each result before continuing, including related behavior that already work
 
 Phase 1 prototype verification is complete. The Developer tested the deployed HTTPS build on a physical smartphone, directed revisions to Safari rendering, corn motion and audio, eye and sign transitions, fairground reveal performance, and hand/sign separation, then approved the final result on October 15, 2026.
 
+### Next checkpoints: second story
+
+Main risk: the existing flattened fairground does not contain hidden pixels behind the tent curtains, and the foreground scarecrow obscures the central tent. Establish clean layers and readable mobile-scale targets before investing in character animation.
+
+- [x] Prototype the post-story transition with temporary shapes: move the persistent scarecrow over approximately 2.4 seconds to its lower-left usher position under a fog cover, then push the camera past the entrance toward the tent over approximately two seconds. Preserve eye replay and verify that the central tent and four smaller tent-aligned pennant targets remain readable at a narrow phone viewport. The Developer approved the corrected tent-anchored symbol layout after rejecting two oversized overlay treatments.
+- [x] Establish explicit experience phases for entrance discovery, Story 1, midway transition, demonstration, input, mistake and completion. Only the current discovery controls are enabled; Story 1 eye replay preserves the midway attempt, and shared timers pause the new sequence.
+- [x] Prototype the four-pennant memory puzzle with scene-anchored symbols and synthesized note placeholders. A 390 × 844 browser run verified the twice-demonstrated **eye → moon → star** sequence, distinct motion/glow/note feedback, three-step tent-light progress, 48-pixel touch targets, native keyboard buttons, rabbit mistake/reset behavior and completion. A separate timed run confirmed that pause held the demonstration state and all five pending tasks unchanged, then resumed into enabled input.
+- [ ] Prepare and review the minimum layered artwork: repaired tent interior, separate curtains, four readable pennants, shadow magician with separable arm/hat, spectral bunny and pawprint trail. Record generation or source provenance before integration.
+- [ ] Build the silent eight-second “Midnight Magician” sequence and tune its readability and pacing on a phone-sized viewport. Include the persistent lit-tent ending, replay entrance and bunny-to-Ferris-wheel handoff; preserve reduced-motion behavior.
+- [ ] Source or create appropriately licensed fabric, stage-note, hat-flourish, applause and bunny feedback, then coordinate the mix with existing wind and story audio. Verify failure behavior and physical-phone playback.
+- [ ] Conduct an unprompted phone playtest focused on whether Users notice, remember and reproduce the pennant sequence and understand that the bunny points toward the Ferris wheel. Record observations before choosing revisions or specifying Story 3.
+
 ## Evidence and revisions
 
 Record non-identifying playtest observations, separating what Users did or said from your interpretation. Use the findings to choose revision priorities and record what changed and how you verified the improvement.
+
+- Second-story discovery prototype: initial viewport-overlay pennants remained oversized, overlapped and floated in front of the tent despite spacing revisions. The Developer rejected both treatments. Replaced the governing layout model: visible symbols now use the tent artwork's SVG coordinates and inherit the camera transform, while separate invisible HTML buttons provide accessible interaction targets. The Developer approved the corrected placement. Added a pause-aware fixed-sequence puzzle, retry response, progress lights, progressive hints and synthesized placeholder notes; automated narrow-viewport interaction checks passed. Developer pacing and listening review remains pending.
 
 ### Developer preview review
 

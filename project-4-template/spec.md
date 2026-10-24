@@ -52,11 +52,28 @@ Use locally stored CC0 recordings credited in `Assets/audio/README.md`. Enter un
 
 Global pause freezes current and scheduled sound alongside animation and timers. Replay clears previous effects before rescheduling. Hiding the tab pauses the experience. Audio load failure preserves the usable visual scene and names the missing sound. The Developer approved the sound selection and mix on a physical smartphone.
 
+### Second story: “The Midnight Magician”
+
+This story becomes available only after “Welcome?” completes. The transition preserves the first story's ending while opening the central composition: after a brief hold, low fog crosses the scarecrow's feet and the scarecrow moves over approximately 2.4 seconds to a smaller persistent position beside the lower-left fence. The camera then pushes past the entrance over approximately two seconds so the central tent fills the visual focus. The scarecrow keeps its sign, faintly glowing eyes and replay target. Reduced motion uses an opacity-only fog cover with immediate scarecrow and camera position changes. Replaying the first story returns the camera and scarecrow to their entrance positions, then restores the usher position and tent view afterward without erasing second-story progress.
+
+Four accessible pennant targets display a crescent moon, star, eye and rabbit. An unnatural gust demonstrates the fixed sequence **eye → moon → star** twice using a distinct flutter, glow and note for each pennant. The User repeats the sequence. Each correct input repeats its audiovisual response and lights one tent bulb to show progress. An incorrect input produces a gentle comic response, clears only this puzzle attempt, and demonstrates the sequence again. The rabbit pennant is not used in the solution. Progressive hints move from noticing the unnatural gust, to recognizing that three flags took turns, to suggesting that the User repeat the wind's trick. The solution never depends on color or sound alone.
+
+Completing the sequence begins an approximately eight-second story:
+
+1. The tent bulbs finish illuminating and the curtains tremble.
+2. The curtains snap open to reveal a tall magician as a backlit shadow.
+3. The figure removes its top hat and spins it around one hand.
+4. The magician bows deeply with the hat near the ground.
+5. A pale spectral bunny hops from the hat. Faint ghostly applause accompanies the reveal, and the magician reacts with surprise.
+6. The magician and curtains retreat while the bunny bounds toward the right fence, disappears into the corn and leaves glowing pawprints leading visually toward the Ferris wheel.
+
+The tent lights remain illuminated afterward. The illuminated tent entrance provides replay access. The bunny and pawprint ending becomes the discovery bridge to the third story; the Ferris wheel itself remains inactive during this story. All shared story rules from the brief still apply, including interaction locking, global pause, replay without reload and reduced-motion treatment.
+
 ## Scope and revisions
 
 Record excluded ideas, the next behavior that must work, and consequential requirement changes with their evidence.
 
-Current scope is one complete cornfield story. Multiple figures and immediate Ferris-wheel movement are excluded from this checkpoint.
+Current implemented scope is one complete cornfield story. The next approved design checkpoint is the second-story transition, pennant puzzle and “Midnight Magician” sequence. Ferris-wheel movement remains reserved for the third story.
 
 ## Saving the transcript
 

@@ -41,6 +41,14 @@ Corn asset revision: the active rig uses two original leaf cutouts and a station
 
 The approved ending holds the lanky scarecrow and faded-in sign in place, allowing the eyes to replay the story. Additional character reactions are deferred beyond this checkpoint.
 
+### Second story direction
+
+The second story moves attention from the entrance to the central tent while reserving the Ferris wheel as the final and strongest visual event. After the first story, the scarecrow remains present but becomes a smaller “usher” beside the lower-left fence, clearing the central sightline without undoing its persistent ending. A brief low-fog cover supports the repositioning; reduced motion uses an opacity-only cover and an immediate position change.
+
+The approved discovery interaction is an observation-and-memory puzzle rather than a simple spatial sequence. Four symbol-marked pennants—a crescent moon, star, eye and rabbit—provide large, distinguishable targets. An unnatural gust demonstrates a fixed three-pennant sequence, **eye → moon → star**, twice. The User repeats it. Correct selections reproduce that pennant's movement, glow and musical note while illuminating one tent bulb per step. A mistake gives a gentle comic response and demonstrates the sequence again. Symbols and distinct motion accompany color and sound so the clue does not depend on either alone. The unused rabbit pennant foreshadows the story's ending.
+
+The story, provisionally titled **“The Midnight Magician,”** opens the central tent curtains onto a backlit shadow magician. The figure spins a top hat, bows, and accidentally releases a pale spectral bunny. The surprised magician retreats while the bunny crosses toward the right fence and disappears into the corn, leaving glowing pawprints that direct attention toward the Ferris wheel and the final story. The bunny should not climb toward the elevated wheel literally; the pawprint trail carries the visual direction. The tent lights remain illuminated after completion.
+
 ## Revisions
 
 ### First audio checkpoint
