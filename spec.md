@@ -67,13 +67,15 @@ Completing the sequence begins an approximately eight-second story:
 5. A pale spectral bunny hops from the hat. Faint ghostly applause accompanies the reveal, and the magician reacts with surprise.
 6. The magician and curtains retreat while the bunny bounds toward the right fence, disappears into the corn and leaves glowing pawprints leading visually toward the Ferris wheel.
 
+An original synthesized calliope phrase accompanies the full sequence. It begins quietly with sparse minor intervals as the magician appears, becomes increasingly detuned during the hat flourish, drops into a lower uneasy phrase for the bow and ends with a crooked sting during the rabbit escape. It remains subordinate to the action, lowers the wind while playing, and uses the shared audio clock so pause, resume, replay and tab hiding preserve its timing.
+
 The tent lights remain illuminated afterward. The illuminated tent entrance provides replay access. The bunny and pawprint ending becomes the discovery bridge to the third story; the Ferris wheel itself remains inactive during this story. All shared story rules from the brief still apply, including interaction locking, global pause, replay without reload and reduced-motion treatment.
 
 ## Scope and revisions
 
 Record excluded ideas, the next behavior that must work, and consequential requirement changes with their evidence.
 
-Current implemented scope is one complete cornfield story. The next approved design checkpoint is the second-story transition, pennant puzzle and “Midnight Magician” sequence. Ferris-wheel movement remains reserved for the third story.
+The first story is complete. The second-story transition, puzzle and visual sequence are implemented and approved on a physical phone; its original calliope cue is implemented pending listening review. Additional Story 2 effects and an unprompted discovery playtest remain before Story 3 is specified. Ferris-wheel movement remains reserved for the third story.
 
 ## Saving the transcript
 
