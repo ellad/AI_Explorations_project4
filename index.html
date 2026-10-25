@@ -8,7 +8,12 @@
     <link rel="preload" as="image" href="Assets/halloween_ferris_wheel_animation_pack/halloween_fairground_layered_assets/composite_reference.png" />
     <link rel="preload" as="image" href="Assets/corn-rig/background-repair-flex.png" />
     <link rel="preload" as="image" href="Assets/story-welcome/scarecrow-welcome-v3-dull-eyes.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" as="image" href="Assets/story-magician/magician-entrance-v4.png" />
+    <link rel="preload" as="image" href="Assets/story-magician/magician-flourish-v4.png" />
+    <link rel="preload" as="image" href="Assets/story-magician/magician-bow-v4.png" />
+    <link rel="preload" as="image" href="Assets/story-magician/spectral-bunny-v2.png" />
+    <link rel="preload" as="image" href="Assets/story-magician/bunny-pawprints-v2.png" />
+    <link rel="stylesheet" href="styles.css?v=20261025-13" />
   </head>
   <body>
     <main class="app" id="app">
@@ -38,6 +43,20 @@
       </section>
 
       <section class="scene" id="scene" aria-label="A dark path between cornfields and wooden fences" aria-hidden="true">
+        <svg class="fog-filters" aria-hidden="true">
+          <defs>
+            <filter id="ambient-fog-noise" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency=".009 .026" numOctaves="3" seed="14" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="54" xChannelSelector="R" yChannelSelector="G" result="distorted" />
+              <feGaussianBlur in="distorted" stdDeviation="5" />
+            </filter>
+            <filter id="reveal-fog-noise" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency=".012 .035" numOctaves="4" seed="31" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="72" xChannelSelector="R" yChannelSelector="B" result="distorted" />
+              <feGaussianBlur in="distorted" stdDeviation="6" />
+            </filter>
+          </defs>
+        </svg>
         <div class="sky" aria-hidden="true">
           <span class="cloud cloud--one"></span>
           <span class="cloud cloud--two"></span>
@@ -80,8 +99,21 @@
           <g class="rustle-stalks rustle-stalks--two" data-top="935" data-base="1130" data-cutout="right-leaf-cutout"><use href="#original-art" clip-path="url(#right-leaf-cutout)" /></g>
           <!-- Original fence, ground and nearby foliage stay fixed above the rig. -->
           <use href="#original-art" clip-path="url(#fence-foreground)" />
+          <!-- These marks sit on the tent's existing bunting in source-art
+               coordinates. Separate transparent HTML buttons provide the
+               larger touch targets without enlarging the artwork. -->
+          <g class="tent-pennant-visuals">
+            <g data-symbol="eye" transform="translate(335 970)"><g class="tent-pennant-mark"><ellipse cx="18" cy="18" rx="14" ry="9" /><circle cx="18" cy="18" r="4" /></g></g>
+            <g data-symbol="moon" transform="translate(425 988)"><g class="tent-pennant-mark"><path d="M27 5A14 14 0 1 0 30 28 12 12 0 0 1 27 5z" /></g></g>
+            <g data-symbol="star" transform="translate(515 988)"><g class="tent-pennant-mark"><path d="M18 3l4.4 9 9.9 1.4-7.2 7 1.7 9.8-8.8-4.6-8.8 4.6 1.7-9.8-7.2-7 9.9-1.4z" /></g></g>
+            <g data-symbol="rabbit" transform="translate(605 970)"><g class="tent-pennant-mark tent-pennant-mark--rabbit"><path d="M8 23c0-7 5-12 12-12 1-6 5-11 8-12 2 5 1 10-2 14 5 2 8 6 8 11 0 5-4 8-9 8H14c-6 0-10-4-10-8 0-3 1-5 4-6m18-1c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2M9 28l-6 5h11" /></g></g>
+          </g>
         </svg>
 
+
+        <div class="ground-fog" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </div>
 
         <div class="fireflies" aria-hidden="true">
           <i></i><i></i><i></i><i></i><i></i><i></i>
@@ -89,6 +121,9 @@
 
         <div class="story-layer" id="story-layer" aria-hidden="true">
           <div class="lightning"></div>
+          <div class="reveal-fog" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </div>
           <div class="scarecrow-character">
             <div class="contact-shadow"></div>
             <svg class="scarecrow-art" viewBox="0 0 1024 1536" aria-hidden="true">
@@ -118,6 +153,36 @@
           </div>
         </div>
 
+        <div class="midway-layer" id="midway-layer" aria-hidden="true">
+          <div class="usher-fog" aria-hidden="true"></div>
+          <div class="story-focus-fog" aria-hidden="true"></div>
+          <div class="magician-story" id="magician-story" aria-hidden="true">
+            <div class="tent-stage">
+              <div class="stage-interior" aria-hidden="true"></div>
+              <div class="magician" aria-hidden="true">
+                <img class="magician-pose magician-pose--entrance" src="Assets/story-magician/magician-entrance-v4.png" alt="" />
+                <img class="magician-pose magician-pose--flourish" src="Assets/story-magician/magician-flourish-v4.png" alt="" />
+                <img class="magician-pose magician-pose--bow" src="Assets/story-magician/magician-bow-v4.png" alt="" />
+              </div>
+              <div class="magician-particles" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <img class="spectral-bunny" src="Assets/story-magician/spectral-bunny-v2.png" alt="" aria-hidden="true" />
+            <div class="rabbit-particles" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <img class="bunny-pawprints" src="Assets/story-magician/bunny-pawprints-v2.png" alt="" aria-hidden="true" />
+            <button class="magician-replay" id="magician-replay" type="button" aria-label="Replay the midnight magician story" hidden></button>
+          </div>
+          <div class="pennants" aria-label="Four symbol-marked fairground pennants">
+            <button class="pennant pennant--eye" data-symbol="eye" type="button" aria-label="Eye pennant" disabled></button>
+            <button class="pennant pennant--moon" data-symbol="moon" type="button" aria-label="Crescent moon pennant" disabled></button>
+            <button class="pennant pennant--star" data-symbol="star" type="button" aria-label="Star pennant" disabled></button>
+            <button class="pennant pennant--rabbit" data-symbol="rabbit" type="button" aria-label="Rabbit pennant" disabled></button>
+          </div>
+        </div>
+
         <button class="rustle rustle--one" id="rustle" type="button" aria-label="Rustling corn near the path">
           <span class="sr-only">Investigate the rustling corn</span>
         </button>
@@ -131,8 +196,8 @@
         </button>
       </section>
     </main>
-    <script src="corn-rig.js"></script>
-    <script src="audio.js"></script>
-    <script src="app.js"></script>
+    <script src="corn-rig.js?v=20261025-13"></script>
+    <script src="audio.js?v=20261025-13"></script>
+    <script src="app.js?v=20261025-13"></script>
   </body>
 </html>

@@ -9,4 +9,4 @@ In `../../index.html`, `#original-art` is a shared source alias used by the stat
 
 The start screen also uses the concealed artwork to preserve the surprise. The revealed state persists during exploration and replay until the page is reloaded.
 
-Verification: normal-security Chrome HTTP preview at 390 × 844. Checked concealed opening, pause before the reveal, fairground/character reveal, sign presentation, persistence after the story and persistence during replay. Screenshots inspected. Developer preview approval remains pending.
+Verification: normal-security Chrome HTTP preview at 390 × 844. Checked concealed opening, pause before the reveal, fairground/character reveal, sign presentation, persistence after the story and persistence during replay. Screenshots were inspected, and the Developer approved the deployed result on a physical smartphone on October 15, 2026.

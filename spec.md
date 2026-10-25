@@ -33,8 +33,8 @@ Initial scene: show only corn, the dirt path, low wooden fences and a dark misty
 
 1. The ambient corn becomes still and one pair of dull eyes awakens to an uneven orange glow between the stalks. The glow is an animated effect separate from the unlit base artwork.
 2. The eyes rise, suggesting the outline of one pumpkin-headed scarecrow.
-3. At 3.84 seconds, a flash reveals the complete figure and the full fairground together. This is a sharp reveal rather than a fade. The Ferris wheel remains still.
-4. At approximately 4.8 seconds, after the character's lightning reveal, it presents a crooked wooden sign reading **“WELCOME?”** The sign snaps open over roughly 0.4 seconds and briefly wobbles before settling. Reduced motion preserves the separate reveal beat without flipping or wobbling. The loose-plank detail and its sound remain pending.
+3. At 3.84 seconds, a flash reveals the complete figure and the full fairground together. This is a sharp reveal rather than a fade. A dense cloud of Perlin-noise-distorted fog blooms with the flash, briefly obscures the new fairground and scarecrow, then separates and clears before the sign presentation. A lighter noise-shaped ground haze drifts through the scene during exploration. WebKit retains the complete moving fog treatment without SVG displacement because its reference-filter path can drop the rendered layers. Reduced motion preserves the fog beat with opacity only. The Ferris wheel remains still.
+4. At approximately 4.8 seconds, after the character's lightning reveal, it presents a crooked wooden sign reading **“WELCOME?”** The sign fades in over approximately 0.56 seconds while the holding hand remains stationary. Reduced motion preserves the separate reveal beat with an immediate appearance. A wood creak accompanies the presentation.
 5. The scarecrow remains standing with the sign after the reveal.
 6. At 8 seconds, exploration resumes while the scarecrow remains visible. Its eyes can be tapped directly to replay the story without reloading.
 
@@ -44,19 +44,36 @@ The scarecrow has a lanky, eerie silhouette. Its uncertain behavior when present
 
 The User follows two rustles in visible stalk sections separated from the original corn artwork, then taps the scarecrow's visible glowing eyes to start the story. The stems bend from a fixed lower attachment, with stronger motion toward the top and a delayed response in the attached leaves. Original pixels preserve the scene's color and texture. A hidden repair layer fills movement gaps and the original fence/ground foreground stays stationary. Reduced motion uses a static highlight instead of bending. The eyes are positioned relative to the same character container as the body, so their alignment survives responsive sizing and character motion. Incorrect interactions do not erase progress. Progressive hints move from noticing the corn to noticing the watching eyes.
 
-Provisional details requiring Developer approval after testing: exact timing, sound design, and final reaction.
+The Developer approved the story's timing, motion, sound mix and final reaction after testing the deployed build on a physical smartphone.
 
 ### Audio foundation
 
-Use locally stored CC0 recordings credited in `Assets/audio/README.md`. Enter unlocks and loads sound before the scene starts. Quiet crossfaded wind loops during exploration. Rustling loops for the entire time the corn rig is moving, including its settling movement. It follows the active stalk from left to right without restarting. The second corn activation adds a twig snap. Reduced-motion mode uses short tap feedback instead of a continuous movement loop. The eye trigger starts thunder aligned with the flash at 3.84 seconds and a creak aligned with the sign at 4.8 seconds. The thunder tail plays to its natural end, including after the eight-second visual story. Wind lowers during the story and returns afterward.
+Use locally stored CC0 recordings credited in `Assets/audio/README.md`. Enter unlocks and loads sound before the scene starts. Quiet crossfaded wind loops during exploration. The active corn sound is a compact WAV excerpt derived from the credited source for reliable iPhone decoding. Rustling loops for the entire time the corn rig is moving, including its settling movement. It follows the active stalk from left to right without restarting. The second corn activation adds a twig snap. Reduced-motion mode uses short tap feedback instead of a continuous movement loop. The eye trigger starts thunder aligned with the flash at 3.84 seconds and a creak aligned with the sign at 4.8 seconds. The thunder tail plays to its natural end, including after the eight-second visual story. Wind lowers during the story and returns afterward.
 
-Global pause freezes current and scheduled sound alongside animation and timers. Replay clears previous effects before rescheduling. Hiding the tab pauses the experience. Audio load failure preserves the usable visual scene and reports missing sound. Sound selection and mix levels remain provisional until Developer listening review.
+Global pause freezes current and scheduled sound alongside animation and timers. Replay clears previous effects before rescheduling. Hiding the tab pauses the experience. Audio load failure preserves the usable visual scene and names the missing sound. The Developer approved the sound selection and mix on a physical smartphone.
+
+### Second story: “The Midnight Magician”
+
+This story becomes available only after “Welcome?” completes. The transition preserves the first story's ending while opening the central composition: after a brief hold, low fog crosses the scarecrow's feet and the scarecrow moves over approximately 2.4 seconds to a smaller persistent position beside the lower-left fence. The camera then pushes past the entrance over approximately two seconds so the central tent fills the visual focus. The scarecrow keeps its sign, faintly glowing eyes and replay target. Reduced motion uses an opacity-only fog cover with immediate scarecrow and camera position changes. Replaying the first story returns the camera and scarecrow to their entrance positions, then restores the usher position and tent view afterward without erasing second-story progress.
+
+Four accessible pennant targets display a crescent moon, star, eye and rabbit. An unnatural gust demonstrates the fixed sequence **eye → moon → star** twice using a distinct flutter, glow and note for each pennant. The User repeats the sequence. Each correct input repeats its audiovisual response and lights one tent bulb to show progress. An incorrect input produces a gentle comic response, clears only this puzzle attempt, and demonstrates the sequence again. The rabbit pennant is not used in the solution. Progressive hints move from noticing the unnatural gust, to recognizing that three flags took turns, to suggesting that the User repeat the wind's trick. The solution never depends on color or sound alone.
+
+Completing the sequence begins an approximately eight-second story:
+
+1. The tent bulbs finish illuminating and the curtains tremble.
+2. The curtains snap open to reveal a tall magician as a backlit shadow.
+3. The figure removes its top hat and spins it around one hand.
+4. The magician bows deeply with the hat near the ground.
+5. A pale spectral bunny hops from the hat. Faint ghostly applause accompanies the reveal, and the magician reacts with surprise.
+6. The magician and curtains retreat while the bunny bounds toward the right fence, disappears into the corn and leaves glowing pawprints leading visually toward the Ferris wheel.
+
+The tent lights remain illuminated afterward. The illuminated tent entrance provides replay access. The bunny and pawprint ending becomes the discovery bridge to the third story; the Ferris wheel itself remains inactive during this story. All shared story rules from the brief still apply, including interaction locking, global pause, replay without reload and reduced-motion treatment.
 
 ## Scope and revisions
 
 Record excluded ideas, the next behavior that must work, and consequential requirement changes with their evidence.
 
-Current scope is one complete cornfield story. Multiple figures and immediate Ferris-wheel movement are excluded from this checkpoint.
+Current implemented scope is one complete cornfield story. The next approved design checkpoint is the second-story transition, pennant puzzle and “Midnight Magician” sequence. Ferris-wheel movement remains reserved for the third story.
 
 ## Saving the transcript
 

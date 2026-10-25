@@ -224,6 +224,27 @@ class SceneAudio {
     source.stop(when + span);
   }
 
+  playTone(frequency, { duration = .24, volume = .08, type = "sine" } = {}) {
+    if (!this.context || !this.master || this.context.state !== "running") return;
+    const oscillator = this.context.createOscillator();
+    const gain = this.context.createGain();
+    const now = this.context.currentTime;
+    oscillator.type = type;
+    oscillator.frequency.value = frequency;
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(volume, now + .015);
+    gain.gain.exponentialRampToValueAtTime(.0001, now + duration);
+    oscillator.connect(gain).connect(this.master);
+    this.effects.add(oscillator);
+    oscillator.onended = () => {
+      this.effects.delete(oscillator);
+      oscillator.disconnect();
+      gain.disconnect();
+    };
+    oscillator.start(now);
+    oscillator.stop(now + duration);
+  }
+
   beginStory() {
     this.stopEffects();
     this.setAmbience(.035);

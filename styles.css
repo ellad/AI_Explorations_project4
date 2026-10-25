@@ -89,13 +89,52 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   box-shadow: 0 0 80px #000;
 }
 
-.sky, .art-layers, .story-layer, .fireflies { position: absolute; inset: 0; }
+.fog-filters { position: absolute; width: 0; height: 0; }
+.sky, .art-layers, .story-layer, .midway-layer, .ground-fog, .fireflies { position: absolute; inset: 0; }
 .art-layers { z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+
+.scene.is-camera-moving .sky,
+.scene.is-camera-moving .art-layers,
+.scene.is-camera-moving .ground-fog,
+.scene.is-camera-moving .fireflies {
+  animation: camera-push 2s cubic-bezier(.3, .68, .25, 1) both;
+}
+.scene.is-midway-zoomed .sky,
+.scene.is-midway-zoomed .art-layers,
+.scene.is-midway-zoomed .ground-fog,
+.scene.is-midway-zoomed .fireflies {
+  transform: scale(1.72);
+  transform-origin: 50% 61%;
+}
 
 .sky { z-index: 2; overflow: hidden; pointer-events: none; }
 .cloud { position: absolute; width: 60%; height: 9%; border-radius: 50%; filter: blur(16px); background: #89708b24; animation: drift 22s linear infinite; }
 .cloud--one { top: 8%; left: -65%; }
 .cloud--two { top: 18%; left: -70%; animation-delay: -11s; animation-duration: 29s; }
+
+.ground-fog { z-index: 4; overflow: hidden; pointer-events: none; filter: url("#ambient-fog-noise"); }
+.ground-fog::after {
+  content: "";
+  position: absolute;
+  inset: 43% -20% -8%;
+  background: linear-gradient(180deg, transparent, #a9a2b026 38%, #c2bbc833 68%, #77717d2b);
+  filter: blur(12px);
+  animation: ground-fog-veil 11s ease-in-out infinite alternate;
+}
+.ground-fog i {
+  position: absolute;
+  left: -40%;
+  top: 39%;
+  width: 100%;
+  height: 27%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #e2dce252 0 20%, #b4acb93d 45%, #81798926 64%, transparent 78%);
+  filter: blur(11px);
+  opacity: .56;
+  animation: ground-fog-drift 8s ease-in-out infinite alternate;
+}
+.ground-fog i:nth-child(2) { left: 28%; top: 51%; width: 110%; height: 25%; opacity: .5; animation-delay: -4s; animation-duration: 11s; }
+.ground-fog i:nth-child(3) { left: -18%; top: 66%; width: 135%; height: 27%; opacity: .43; animation-delay: -8s; animation-duration: 14s; }
 
 .rustle-stalks {
   transform-box: view-box;
@@ -112,8 +151,22 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .fireflies i:nth-child(5) { left: 42%; top: 63%; animation-delay: -4s; }
 .fireflies i:nth-child(6) { left: 91%; top: 46%; animation-delay: -2.5s; }
 
-.story-layer { z-index: 10; pointer-events: none; }
-.scarecrow-character { position: absolute; width: 61%; left: 19%; bottom: 10%; aspect-ratio: 2 / 3; }
+.story-layer { z-index: 10; pointer-events: none; transition: opacity 450ms ease; }
+.scene.is-story-focusing .story-layer {
+  opacity: 0;
+  transition-duration: 900ms;
+}
+.scene.is-story-focused .story-layer { opacity: 0; }
+.scarecrow-character {
+  position: absolute;
+  width: 61%;
+  left: 19%;
+  bottom: 10%;
+  aspect-ratio: 2 / 3;
+  transform-origin: 18% 100%;
+}
+.scene.is-ushered .scarecrow-character { transform: translate(-25%, 8%) scale(.58); }
+.scene.is-usher-transition .scarecrow-character { animation: scarecrow-to-usher 2.4s cubic-bezier(.2, .72, .25, 1) both; }
 .contact-shadow { position: absolute; left: 9%; bottom: 1.4%; width: 68%; height: 3.5%; border-radius: 50%; background: #160d09; filter: blur(4px); opacity: 0; }
 .scarecrow-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .scarecrow, .scarecrow-hand { opacity: 0; }
@@ -145,10 +198,28 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   height: 1.3%;
   animation-delay: -.42s;
 }
-.lightning { position: absolute; z-index: 3; inset: 0; opacity: 0; background: #fff8da; mix-blend-mode: screen; }
+.lightning { position: absolute; z-index: 6; inset: 0; opacity: 0; background: #fff8da; mix-blend-mode: screen; }
+.reveal-fog { position: absolute; z-index: 4; inset: 0; overflow: hidden; pointer-events: none; filter: url("#reveal-fog-noise"); }
+.reveal-fog i {
+  position: absolute;
+  left: -32%;
+  top: 25%;
+  width: 105%;
+  height: 45%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #f4f0f2d8 0 24%, #d2cbd2bd 43%, #99909d92 62%, transparent 80%);
+  filter: blur(12px);
+  opacity: 0;
+  transform: translate3d(-12%, 8%, 0) scale(.8);
+}
+.reveal-fog i:nth-child(2) { left: 18%; top: 32%; width: 115%; transform: translate3d(14%, -4%, 0) scale(.75); }
+.reveal-fog i:nth-child(3) { left: -20%; top: 47%; width: 92%; height: 35%; transform: translate3d(-8%, 3%, 0) scale(.85); }
+.reveal-fog i:nth-child(4) { left: 30%; top: 52%; width: 90%; height: 30%; transform: translate3d(10%, 6%, 0) scale(.8); }
 
 .story-layer.is-playing .eyes { animation: eyes-awaken 8s ease-in-out forwards; }
 .story-layer.is-playing .lightning { animation: flash 8s linear forwards; }
+.story-layer.is-playing .reveal-fog i { animation: reveal-fog-left 8s ease-out forwards; }
+.story-layer.is-playing .reveal-fog i:nth-child(even) { animation-name: reveal-fog-right; }
 .story-layer.is-playing .scarecrow, .story-layer.is-playing .scarecrow-hand { animation: scarecrow-story 8s steps(1, end) forwards; }
 .story-layer.is-playing .welcome-sign { animation: sign-presentation 8s linear forwards; }
 .story-layer.is-playing .contact-shadow { animation: shadow-story 8s steps(1, end) forwards; }
@@ -159,6 +230,211 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-layer.is-revealed .eyes { opacity: .8; filter: brightness(.8); }
 .eye-trigger { position: absolute; left: 35%; top: 9%; width: 23%; height: 17%; min-width: 48px; min-height: 48px; border: 0; background: transparent; pointer-events: auto; cursor: pointer; }
 
+.midway-layer { z-index: 12; pointer-events: none; }
+.magician-story { position: absolute; inset: 0; pointer-events: none; }
+.tent-stage {
+  position: absolute;
+  left: 34%;
+  top: 55%;
+  width: 32%;
+  height: 23%;
+  opacity: 0;
+  overflow: hidden;
+  clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+}
+.stage-interior {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 70%, #261423b8 0 28%, transparent 72%);
+}
+.magician { position: absolute; left: 8%; bottom: -2%; width: 84%; height: 96%; opacity: 0; transform-origin: 50% 96%; }
+.magician-pose { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; }
+.magician-particles, .rabbit-particles { position: absolute; pointer-events: none; }
+.magician-particles { z-index: 2; inset: 3% 13% 0; }
+.magician-particles::before {
+  content: "";
+  position: absolute;
+  inset: 8% 5% 0;
+  opacity: 0;
+  background: radial-gradient(ellipse at 50% 68%, #9e6dbf66 0 18%, #d49a4b38 36%, transparent 70%);
+  filter: blur(5px);
+}
+.magician-particles i, .rabbit-particles i {
+  position: absolute;
+  width: calc(var(--size, 4px) * 1.55);
+  height: calc(var(--size, 4px) * 1.55);
+  border-radius: 50%;
+  opacity: 0;
+  background: var(--color, #e8a94f);
+  box-shadow: 0 0 4px var(--color, #e8a94f), 0 0 9px var(--glow, #9f5fc7a8);
+  mix-blend-mode: screen;
+}
+.magician-particles i {
+  width: calc(var(--size, 4px) * 3);
+  height: calc(var(--size, 4px) * 3);
+  box-shadow: 0 0 7px var(--color, #e8a94f), 0 0 16px var(--glow, #9f5fc7d9);
+}
+.magician-particles i:nth-child(1) { left: 20%; top: 72%; --dx: -18px; --dy: -58px; --size: 3px; }
+.magician-particles i:nth-child(2) { left: 28%; top: 48%; --dx: -23px; --dy: -42px; --color: #aa72d3; }
+.magician-particles i:nth-child(3) { left: 36%; top: 82%; --dx: -8px; --dy: -70px; --size: 2px; }
+.magician-particles i:nth-child(4) { left: 43%; top: 32%; --dx: -12px; --dy: -54px; --color: #b777da; --size: 3px; }
+.magician-particles i:nth-child(5) { left: 50%; top: 64%; --dx: 5px; --dy: -68px; --size: 5px; }
+.magician-particles i:nth-child(6) { left: 56%; top: 19%; --dx: 12px; --dy: -43px; --size: 2px; }
+.magician-particles i:nth-child(7) { left: 63%; top: 78%; --dx: 14px; --dy: -63px; --color: #a86ed0; }
+.magician-particles i:nth-child(8) { left: 70%; top: 44%; --dx: 22px; --dy: -50px; --size: 3px; }
+.magician-particles i:nth-child(9) { left: 77%; top: 67%; --dx: 27px; --dy: -71px; --color: #b776d7; --size: 2px; }
+.magician-particles i:nth-child(10) { left: 32%; top: 62%; --dx: -16px; --dy: -83px; --size: 2px; }
+.magician-particles i:nth-child(11) { left: 60%; top: 53%; --dx: 17px; --dy: -76px; --size: 4px; }
+.magician-particles i:nth-child(12) { left: 48%; top: 89%; --dx: 2px; --dy: -91px; --color: #a66dce; --size: 3px; }
+.spectral-bunny {
+  position: absolute;
+  z-index: 4;
+  left: 48%;
+  top: 57%;
+  width: 24%;
+  height: 18%;
+  opacity: 0;
+  object-fit: contain;
+  filter: brightness(1.08) saturate(.82) drop-shadow(0 0 7px #8b62d7aa);
+}
+.rabbit-particles { z-index: 3; left: 49%; top: 59%; width: 18%; height: 12%; opacity: 0; }
+.rabbit-particles i { --color: #a889d2; --glow: #70529ec2; }
+.rabbit-particles i:nth-child(1) { left: 8%; top: 58%; --tx: -35px; --ty: 12px; --size: 3px; }
+.rabbit-particles i:nth-child(2) { left: 21%; top: 32%; --tx: -43px; --ty: -8px; --size: 2px; }
+.rabbit-particles i:nth-child(3) { left: 34%; top: 72%; --tx: -52px; --ty: 17px; --size: 4px; }
+.rabbit-particles i:nth-child(4) { left: 48%; top: 43%; --tx: -38px; --ty: -16px; --size: 3px; }
+.rabbit-particles i:nth-child(5) { left: 61%; top: 65%; --tx: -59px; --ty: 9px; --size: 2px; }
+.rabbit-particles i:nth-child(6) { left: 73%; top: 25%; --tx: -47px; --ty: -21px; --size: 3px; }
+.rabbit-particles i:nth-child(7) { left: 84%; top: 55%; --tx: -66px; --ty: 14px; --size: 4px; }
+.rabbit-particles i:nth-child(8) { left: 42%; top: 15%; --tx: -54px; --ty: -27px; --size: 2px; }
+.rabbit-particles i:nth-child(9) { left: 91%; top: 77%; --tx: -72px; --ty: 22px; --size: 3px; }
+.bunny-pawprints {
+  position: absolute;
+  z-index: 3;
+  right: 7%;
+  top: 53%;
+  width: 31%;
+  height: 19%;
+  opacity: 0;
+  object-fit: contain;
+  transform: rotate(-18deg);
+  filter: brightness(.8) saturate(.72);
+}
+.magician-replay {
+  position: absolute;
+  z-index: 8;
+  left: 41%;
+  top: 58%;
+  width: 18%;
+  height: 15%;
+  min-width: 48px;
+  min-height: 48px;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.scene.is-magician-playing .tent-stage { animation: stage-story 8s linear both; }
+.scene.is-magician-playing .magician { animation: magician-story 8s ease-in-out both; }
+.scene.is-magician-playing .magician-pose--entrance { animation: magician-entrance-pose 8s linear both; }
+.scene.is-magician-playing .magician-pose--flourish { animation: magician-flourish-pose 8s linear both; }
+.scene.is-magician-playing .magician-pose--bow { animation: magician-bow-pose 8s linear both; }
+.scene.is-magician-playing .magician-particles::before { animation: magician-dust-cloud 8s ease-out both; }
+.scene.is-magician-playing .magician-particles i { animation: magician-mote 8s cubic-bezier(.2, .65, .35, 1) both; }
+.scene.is-magician-playing .spectral-bunny { animation: bunny-escape 8s ease-in-out both; }
+.scene.is-magician-playing .rabbit-particles { animation: rabbit-particle-flight 8s ease-in-out both; }
+.scene.is-magician-playing .rabbit-particles i { animation: rabbit-mote 8s ease-out both; }
+.scene.is-magician-playing .bunny-pawprints { animation: pawprint-story 8s linear both; }
+.scene.is-midway-ready.is-magician-playing .tent-pennant-visuals { opacity: 0; }
+.scene.is-story-focusing .tent-pennant-visuals { animation: pennants-dissolve 1.15s ease-in both; }
+.scene.is-story-focused .tent-pennant-visuals { opacity: 0; }
+.scene.is-magician-complete .bunny-pawprints { opacity: .72; }
+.story-focus-fog {
+  position: absolute;
+  z-index: 15;
+  inset: 35% -25% 4%;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 55%, #d4ccd7d9 0 12%, #8e85958f 34%, transparent 66%),
+    radial-gradient(ellipse at 75% 45%, #ddd5ded1 0 14%, #81788791 36%, transparent 68%);
+  filter: blur(14px);
+  transform: translateY(18%) scale(.88);
+}
+.scene.is-story-focusing .story-focus-fog { animation: story-focus-fog 1.6s ease-in-out both; }
+.scene.is-story-focusing .sky,
+.scene.is-story-focusing .art-layers,
+.scene.is-story-focusing .ground-fog,
+.scene.is-story-focusing .fireflies { animation: story-focus-camera 1.6s cubic-bezier(.32, .7, .28, 1) both; }
+.scene.is-story-focused .sky,
+.scene.is-story-focused .art-layers,
+.scene.is-story-focused .ground-fog,
+.scene.is-story-focused .fireflies {
+  transform: scale(2.45);
+  transform-origin: 50% 68%;
+}
+.scene.is-story-focusing .magician-story { animation: story-layer-focus 1.6s cubic-bezier(.32, .7, .28, 1) both; }
+.scene.is-story-focused .magician-story { transform: scale(1.424); transform-origin: 50% 68%; }
+.usher-fog {
+  position: absolute;
+  left: -16%;
+  bottom: 5%;
+  width: 82%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #d8d1daaa 0 22%, #9b929f78 48%, transparent 74%);
+  filter: blur(13px);
+  opacity: 0;
+  transform: translateX(-35%);
+}
+.scene.is-usher-transition .usher-fog { animation: usher-fog-pass 2.4s ease-in-out both; }
+.tent-pennant-visuals { opacity: 0; transition: opacity 500ms ease; pointer-events: none; }
+.scene.is-midway-ready .tent-pennant-visuals { opacity: 1; }
+.tent-pennant-mark {
+  fill: #f4cf8c;
+  stroke: #321d31;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 7px #f0a83dcc);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 320ms ease, stroke 320ms ease, filter 320ms ease;
+}
+.tent-pennant-mark circle { fill: #4b2745; stroke: none; }
+.tent-pennant-mark--rabbit { stroke-width: 2.5; }
+.scene.is-pennant-intro .tent-pennant-mark { animation: pennant-mark-settle 980ms cubic-bezier(.22, .72, .3, 1) both; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(2) .tent-pennant-mark { animation-delay: 90ms; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(3) .tent-pennant-mark { animation-delay: 180ms; }
+.scene.is-pennant-intro .tent-pennant-visuals > g:nth-child(4) .tent-pennant-mark { animation-delay: 270ms; }
+.tent-pennant-visuals > g.is-cued .tent-pennant-mark { animation: pennant-cue 580ms ease-out both; }
+.tent-pennant-visuals > g.is-selected .tent-pennant-mark {
+  fill: #93dc78;
+  stroke: #18351f;
+  filter: drop-shadow(0 0 5px #d9ffc7) drop-shadow(0 0 13px #45ad5a);
+}
+.scene.is-midway-mistake .tent-pennant-mark { opacity: .38; transform: translateY(5px) rotate(5deg); }
+.pennants { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.scene.is-midway-ready .pennants { opacity: 1; }
+.scene.is-midway-input .pennants { pointer-events: auto; }
+.pennant {
+  position: absolute;
+  width: 48px;
+  height: 52px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  opacity: 1;
+  cursor: pointer;
+}
+.pennant:disabled { opacity: 1; cursor: default; }
+.pennant--eye { left: 19%; top: 53%; }
+.pennant--moon { left: 36%; top: 55%; }
+.pennant--star { right: 36%; top: 55%; }
+.pennant--rabbit { right: 19%; top: 53%; }
 .rustle {
   position: absolute;
   z-index: 10;
@@ -202,16 +478,67 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 
 .is-paused * { animation-play-state: paused !important; }
-.is-paused .rustle, .is-paused .eye-trigger { pointer-events: none; }
-.is-reduced .cloud, .is-reduced .fireflies i, .is-reduced .eyes i { animation: none; }
+.is-paused .rustle, .is-paused .eye-trigger, .is-paused .pennant, .is-paused .magician-replay { pointer-events: none; }
+.is-reduced .cloud, .is-reduced .ground-fog i, .is-reduced .fireflies i, .is-reduced .eyes i { animation: none; }
+.is-reduced .ground-fog::after { animation: none; }
 .is-reduced .rustle-stalks { animation: none; }
 .is-reduced .rustle-stalks.is-active { filter: brightness(1.15); }
 .is-reduced .story-layer.is-playing .welcome-sign { animation-name: sign-presentation-reduced; animation-timing-function: steps(1, end); }
+.is-reduced .story-layer.is-playing .reveal-fog i { animation-name: reveal-fog-reduced; }
+.is-reduced .scene.is-usher-transition .scarecrow-character { animation: none; transform: translate(-25%, 8%) scale(.58); }
+.is-reduced .scene.is-usher-transition .usher-fog { animation-name: usher-fog-reduced; }
+.is-reduced .scene.is-camera-moving .sky,
+.is-reduced .scene.is-camera-moving .art-layers,
+.is-reduced .scene.is-camera-moving .ground-fog,
+.is-reduced .scene.is-camera-moving .fireflies { animation: none; transform: scale(1.72); transform-origin: 50% 61%; }
+.is-reduced .scene.is-pennant-intro .tent-pennant-mark { animation: none; }
+.is-reduced .tent-pennant-visuals > g.is-cued .tent-pennant-mark { animation: pennant-cue-reduced 500ms steps(1, end); }
+.is-reduced .scene.is-magician-playing .magician { animation-name: magician-reduced; }
+.is-reduced .scene.is-magician-playing .magician-pose--entrance { animation-name: magician-entrance-reduced; }
+.is-reduced .scene.is-magician-playing .magician-pose--flourish { animation-name: magician-flourish-reduced; }
+.is-reduced .scene.is-magician-playing .magician-pose--bow { animation-name: magician-bow-reduced; }
+.is-reduced .scene.is-magician-playing .magician-particles { animation: magician-particle-glow 8s steps(1, end) both; }
+.is-reduced .scene.is-magician-playing .magician-particles i { animation: none; }
+.is-reduced .scene.is-magician-playing .spectral-bunny { animation-name: bunny-reduced; }
+.is-reduced .scene.is-magician-playing .rabbit-particles { animation: rabbit-particle-glow 8s steps(1, end) both; }
+.is-reduced .scene.is-magician-playing .rabbit-particles i { animation: none; }
+.is-reduced .scene.is-magician-playing .bunny-pawprints { animation-name: pawprints-reduced; }
+.is-reduced .scene.is-story-focusing .sky,
+.is-reduced .scene.is-story-focusing .art-layers,
+.is-reduced .scene.is-story-focusing .ground-fog,
+.is-reduced .scene.is-story-focusing .fireflies { animation: none; transform: scale(2.45); transform-origin: 50% 68%; }
+.is-reduced .scene.is-story-focusing .magician-story { animation: none; transform: scale(1.424); transform-origin: 50% 68%; }
+.is-reduced .scene.is-story-focusing .tent-pennant-visuals { animation-name: pennants-dissolve-reduced; }
+
+/* WebKit can drop HTML layers that use an inline SVG displacement filter.
+   Preserve the complete moving fog treatment there without the distortion. */
+@supports (-webkit-touch-callout: none) {
+  .ground-fog, .reveal-fog { filter: none; }
+}
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 @keyframes drift { to { transform: translateX(275%); } }
 @keyframes float { to { transform: translate(12px, -22px); opacity: .35; } }
+@keyframes ground-fog-drift { to { transform: translate3d(58%, -9%, 0) scale(1.14); opacity: .32; } }
+@keyframes ground-fog-veil { to { transform: translate3d(22%, -4%, 0) scale(1.08); opacity: .78; } }
+@keyframes reveal-fog-left {
+  0%, 47% { opacity: 0; transform: translate3d(-12%, 8%, 0) scale(.8); }
+  48% { opacity: .88; transform: translate3d(0, 0, 0) scale(1.16); }
+  54% { opacity: .7; }
+  59%, 100% { opacity: 0; transform: translate3d(-38%, -8%, 0) scale(1.38); }
+}
+@keyframes reveal-fog-right {
+  0%, 47% { opacity: 0; transform: translate3d(14%, -4%, 0) scale(.75); }
+  48% { opacity: .86; transform: translate3d(0, 0, 0) scale(1.18); }
+  54% { opacity: .68; }
+  59%, 100% { opacity: 0; transform: translate3d(42%, -10%, 0) scale(1.42); }
+}
+@keyframes reveal-fog-reduced {
+  0%, 47% { opacity: 0; }
+  48% { opacity: .88; }
+  59%, 100% { opacity: 0; }
+}
 @keyframes eyes-awaken {
   0% { opacity: .2; filter: brightness(.25); }
   7% { opacity: .5; filter: brightness(.5); }
@@ -231,6 +558,152 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   0%, 47% { opacity: 0; }
   48% { opacity: 1; }
   69%, 100% { opacity: 1; }
+}
+
+@keyframes usher-fog-pass {
+  0% { opacity: 0; transform: translateX(-35%) scale(.8); }
+  28% { opacity: .78; }
+  62% { opacity: .68; }
+  100% { opacity: 0; transform: translateX(55%) scale(1.12); }
+}
+@keyframes scarecrow-to-usher {
+  0%, 25% { transform: none; }
+  82%, 100% { transform: translate(-25%, 8%) scale(.58); }
+}
+@keyframes usher-fog-reduced {
+  0% { opacity: 0; }
+  28%, 62% { opacity: .68; }
+  100% { opacity: 0; }
+}
+@keyframes camera-push {
+  from { transform: scale(1); transform-origin: 50% 61%; }
+  to { transform: scale(1.72); transform-origin: 50% 61%; }
+}
+@keyframes pennant-mark-settle {
+  0% { opacity: 0; transform: translateY(-8px) rotate(-8deg); }
+  45% { opacity: 1; transform: translateY(2px) rotate(4deg); }
+  72% { transform: translateY(-1px) rotate(-2deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes pennant-cue {
+  0% { filter: drop-shadow(0 0 7px #f0a83dcc); transform: rotate(0) scale(1); }
+  35% { filter: drop-shadow(0 0 15px #ffd77d); transform: rotate(-10deg) scale(1.28); }
+  68% { transform: rotate(7deg) scale(1.12); }
+  100% { filter: drop-shadow(0 0 7px #f0a83dcc); transform: rotate(0) scale(1); }
+}
+@keyframes pennant-cue-reduced {
+  0% { filter: drop-shadow(0 0 7px #f0a83dcc); }
+  1%, 70% { filter: drop-shadow(0 0 18px #ffd77d); }
+  71%, 100% { filter: drop-shadow(0 0 7px #f0a83dcc); }
+}
+@keyframes progress-celebrate {
+  0%, 100% { transform: scale(1.2); }
+  45% { transform: scale(1.65); }
+}
+@keyframes pennants-dissolve {
+  0% { opacity: 1; filter: blur(0); }
+  45% { opacity: .72; filter: blur(1px); }
+  100% { opacity: 0; filter: blur(8px); }
+}
+@keyframes pennants-dissolve-reduced { 0%, 55% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes story-focus-fog {
+  0% { opacity: 0; transform: translateY(18%) scale(.88); }
+  38%, 66% { opacity: .9; transform: translateY(0) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-12%) scale(1.22); }
+}
+@keyframes story-focus-camera {
+  from { transform: scale(1.72); transform-origin: 50% 61%; }
+  to { transform: scale(2.45); transform-origin: 50% 68%; }
+}
+@keyframes story-layer-focus {
+  from { transform: scale(1); transform-origin: 50% 68%; }
+  to { transform: scale(1.424); transform-origin: 50% 68%; }
+}
+@keyframes stage-story {
+  0%, 92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes magician-story {
+  0%, 18% { opacity: 0; transform: translateY(5%) scale(.96); }
+  23%, 72% { opacity: 1; transform: translateY(0) scale(1); }
+  77%, 92% { opacity: 1; transform: translateY(1%) scale(.99); }
+  100% { opacity: 0; }
+}
+@keyframes magician-entrance-pose {
+  0%, 22% { opacity: 0; }
+  23%, 37% { opacity: 1; }
+  37.1%, 100% { opacity: 0; }
+}
+@keyframes magician-flourish-pose {
+  0%, 37% { opacity: 0; }
+  37.1%, 59.9% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+@keyframes magician-bow-pose {
+  0%, 59.9% { opacity: 0; }
+  60%, 76% { opacity: 1; }
+  76.1%, 100% { opacity: 0; }
+}
+@keyframes magician-mote {
+  0%, 14% { opacity: 0; transform: translate(0, 18px) scale(.2); }
+  18% { opacity: .22; }
+  22% { opacity: .9; transform: translate(0, 0) scale(1); }
+  42%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.25); }
+}
+@keyframes magician-dust-cloud {
+  0%, 14% { opacity: 0; transform: scale(.65); }
+  20% { opacity: .7; transform: scale(.9); }
+  32% { opacity: .25; }
+  44%, 100% { opacity: 0; transform: scale(1.25) translateY(-8%); }
+}
+@keyframes bunny-escape {
+  0%, 66% { opacity: 0; transform: translate(0, 0) scale(.45); }
+  70% { opacity: .82; transform: translate(0, 0) scale(.72); }
+  78% { opacity: .9; transform: translate(52%, -20%) scale(.82) rotate(-5deg); }
+  88% { opacity: .76; transform: translate(145%, -70%) scale(.72) rotate(4deg); }
+  96%, 100% { opacity: 0; transform: translate(230%, -115%) scale(.55); }
+}
+@keyframes rabbit-particle-flight {
+  0%, 66% { opacity: 0; transform: translate(0, 0) scale(.55); }
+  70% { opacity: 1; transform: translate(0, 0) scale(.8); }
+  78% { opacity: 1; transform: translate(70%, -24%) scale(.9) rotate(-4deg); }
+  88% { opacity: .88; transform: translate(205%, -82%) scale(.78) rotate(4deg); }
+  97%, 100% { opacity: 0; transform: translate(330%, -135%) scale(.55); }
+}
+@keyframes rabbit-mote {
+  0%, 67% { opacity: 0; transform: translate(0, 0) scale(.2); }
+  71% { opacity: .8; transform: translate(0, 0) scale(1); }
+  87% { opacity: .62; }
+  97%, 100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(.2); }
+}
+@keyframes magician-particle-glow {
+  0%, 18%, 31%, 100% { opacity: 0; }
+  22%, 27% { opacity: .45; box-shadow: inset 0 0 24px #d4a35d70; }
+}
+@keyframes rabbit-particle-glow {
+  0%, 67%, 96%, 100% { opacity: 0; }
+  72%, 90% { opacity: .35; box-shadow: 0 0 18px #8d6bb080; }
+}
+@keyframes pawprint-story {
+  0%, 77% { opacity: 0; }
+  84%, 100% { opacity: .72; }
+}
+@keyframes magician-reduced {
+  0%, 18% { opacity: 0; }
+  19%, 92% { opacity: 1; transform: none; }
+  93%, 100% { opacity: 0; }
+}
+@keyframes magician-entrance-reduced { 0%, 22% { opacity: 0; } 23%, 34% { opacity: 1; } 35%, 100% { opacity: 0; } }
+@keyframes magician-flourish-reduced { 0%, 34% { opacity: 0; } 35%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+@keyframes magician-bow-reduced { 0%, 55% { opacity: 0; } 56%, 76% { opacity: 1; } 77%, 100% { opacity: 0; } }
+@keyframes bunny-reduced {
+  0%, 66% { opacity: 0; }
+  67%, 91% { opacity: .65; transform: translate(145%, -70%) scale(.72); }
+  92%, 100% { opacity: 0; }
+}
+@keyframes pawprints-reduced {
+  0%, 77% { opacity: 0; }
+  78%, 100% { opacity: .72; }
 }
 @keyframes shadow-story {
   0%, 47% { opacity: 0; }
