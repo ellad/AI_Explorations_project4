@@ -300,6 +300,51 @@ class SceneAudio {
     });
   }
 
+  playNoiseBurst({
+    delay = 0,
+    duration = .12,
+    volume = .02,
+    pan = 0,
+    frequency = 1200,
+    q = 1.2,
+  } = {}) {
+    if (!this.context || !this.master || this.context.state !== "running") return;
+    const frameCount = Math.max(1, Math.floor(this.context.sampleRate * duration));
+    const buffer = this.context.createBuffer(1, frameCount, this.context.sampleRate);
+    const samples = buffer.getChannelData(0);
+    let previous = 0;
+    for (let i = 0; i < samples.length; i += 1) {
+      const white = Math.random() * 2 - 1;
+      previous = previous * .58 + white * .42;
+      samples[i] = previous;
+    }
+
+    const source = this.context.createBufferSource();
+    const filter = this.context.createBiquadFilter();
+    const gain = this.context.createGain();
+    const panner = this.context.createStereoPanner();
+    const when = this.context.currentTime + delay;
+    source.buffer = buffer;
+    filter.type = "bandpass";
+    filter.frequency.value = frequency;
+    filter.Q.value = q;
+    panner.pan.value = pan;
+    gain.gain.setValueAtTime(.0001, when);
+    gain.gain.exponentialRampToValueAtTime(volume, when + Math.min(.018, duration * .2));
+    gain.gain.exponentialRampToValueAtTime(.0001, when + duration);
+    source.connect(filter).connect(gain).connect(panner).connect(this.master);
+    this.effects.add(source);
+    source.onended = () => {
+      this.effects.delete(source);
+      source.disconnect();
+      filter.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+    };
+    source.start(when);
+    source.stop(when + duration);
+  }
+
   beginMagicianStory() {
     this.stopEffects();
     this.setAmbience(.055, .35);
@@ -322,6 +367,52 @@ class SceneAudio {
     ];
     [...accompaniment, ...melody].forEach(([delay, frequency, duration, volume, detune, pan]) => {
       this.playCalliopeNote(frequency, { delay, duration, volume, detune, pan });
+    });
+
+    const hatFlourish = [
+      [2.92, 1174.66, -.22], [3.08, 1396.91, -.10], [3.24, 1760.00, .04],
+      [3.40, 2093.00, .18], [3.58, 1760.00, .10], [3.76, 1396.91, -.05],
+    ];
+    hatFlourish.forEach(([delay, frequency, pan], index) => {
+      this.playCalliopeNote(frequency, {
+        delay,
+        duration: .22,
+        volume: .021,
+        detune: index % 2 ? 12 : -10,
+        pan,
+      });
+    });
+
+    // Irregular filtered taps suggest distant, spectral applause without a
+    // literal crowd recording competing with the melody.
+    [
+      [5.50, .11, .014, -.32, 1050], [5.66, .14, .016, .20, 1320],
+      [5.83, .10, .013, -.08, 1580], [5.98, .15, .017, .34, 1180],
+      [6.17, .12, .014, -.24, 1460], [6.34, .13, .013, .12, 980],
+    ].forEach(([delay, duration, volume, pan, frequency]) => {
+      this.playNoiseBurst({ delay, duration, volume, pan, frequency, q: 2.4 });
+    });
+
+    // Three quick, rightward-moving hops separate the rabbit from the final
+    // warped musical cadence.
+    [
+      [6.58, 1567.98, .02], [6.88, 1760.00, .20], [7.18, 1396.91, .38],
+    ].forEach(([delay, frequency, pan], index) => {
+      this.playCalliopeNote(frequency, {
+        delay,
+        duration: .13,
+        volume: .023,
+        detune: index * 7 - 6,
+        pan,
+      });
+      this.playNoiseBurst({
+        delay: delay + .06,
+        duration: .07,
+        volume: .012,
+        pan,
+        frequency: 1850,
+        q: 3,
+      });
     });
   }
 

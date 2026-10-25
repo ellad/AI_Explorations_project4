@@ -33,6 +33,8 @@ The active thunder cue is `thunder-clap.mp3`. It uses a sharp-attack detector to
 
 The “Midnight Magician” story uses an original synthesized D-minor calliope waltz defined in `audio.js`; it does not use or derive from an external recording. Two detuned oscillator voices create its pipe-like timbre. Five three-beat measures provide a steady low “oom” and two answering “pah” notes beneath a repeated two-measure melody. The bow shifts into a darker variation, and the rabbit escape bends the final measure into an unresolved cadence. The music uses the shared AudioContext, effect registry and master compressor, so pause, replay cleanup and tab hiding follow the same rules as the recorded effects.
 
+The same original Web Audio score supplies three synchronized Story 2 effects. A short high calliope spiral follows the hat flourish. Six irregular, filtered noise taps suggest distant spectral applause without imitating a literal crowd recording. Three high pipe chirps with brief noise contacts move from center to right with the escaping rabbit. These generated sounds require no external assets or licenses and remain registered with the shared pause and replay systems.
+
 The app's Enter gesture unlocks audio before playback. Suspending the single AudioContext freezes both playing and future effects. Replay stops old effects before scheduling new ones. Missing/invalid audio is reported and the visual scene remains usable. Hiding the tab pauses the experience; the user resumes with Play.
 
 Sound credits are also accessible on the start screen. Browser checks verified decoding, scheduling and pause behavior, and the Developer approved the final volume and mix on a physical smartphone on October 15, 2026.
