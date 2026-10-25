@@ -13,6 +13,7 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 | `thunder.mp3` | Short_Thunder_Deep.wav — SholeColtis | https://freesound.org/people/SholeColtis/sounds/683420/ |
 | `thunder-clap.mp3` | big thunder clap — seth-m | https://freesound.org/people/seth-m/sounds/458015/ |
 | `creak.mp3` | Objects_WoodCreak_1.wav — SilentStrikeZ | https://freesound.org/people/SilentStrikeZ/sounds/389645/ |
+| `applause.mp3` | Small applause — Breviceps | https://freesound.org/people/Breviceps/sounds/462362/ |
 
 ## Direct preview URLs
 
@@ -22,6 +23,7 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 - https://cdn.freesound.org/previews/683/683420_14670263-hq.mp3
 - https://cdn.freesound.org/previews/458/458015_3366749-hq.mp3
 - https://cdn.freesound.org/previews/389/389645_4103633-hq.mp3
+- https://cdn.freesound.org/previews/462/462362_9159316-hq.mp3
 
 ## Playback adaptations
 
@@ -33,7 +35,7 @@ The active thunder cue is `thunder-clap.mp3`. It uses a sharp-attack detector to
 
 The “Midnight Magician” story uses an original synthesized D-minor calliope waltz defined in `audio.js`; it does not use or derive from an external recording. Two detuned oscillator voices create its pipe-like timbre. Five three-beat measures provide a steady low “oom” and two answering “pah” notes beneath a repeated two-measure melody. The bow shifts into a darker variation, and the rabbit escape bends the final measure into an unresolved cadence. The music uses the shared AudioContext, effect registry and master compressor, so pause, replay cleanup and tab hiding follow the same rules as the recorded effects.
 
-The same original Web Audio score supplies three synchronized Story 2 effects. A short high calliope spiral follows the hat flourish. Six irregular, filtered noise taps suggest distant spectral applause without imitating a literal crowd recording. Three high pipe chirps with brief noise contacts move from center to right with the escaping rabbit. These generated sounds require no external assets or licenses and remain registered with the shared pause and replay systems.
+Story 2 uses a 1.35-second opening excerpt of Breviceps’s CC0 “Small applause” recording at the bunny reveal. The rabbit escape reuses the existing CC0 twig snap three times at progressively higher rates, lower gains and farther-right pan positions to read as quick ground contacts. The earlier synthesized flourish, noise applause and pitched rabbit chirps were removed after listening review found that they blended into the calliope instead of identifying the actions. Both replacement effects remain registered with the shared pause and replay systems.
 
 The app's Enter gesture unlocks audio before playback. Suspending the single AudioContext freezes both playing and future effects. Replay stops old effects before scheduling new ones. Missing/invalid audio is reported and the visual scene remains usable. Hiding the tab pauses the experience; the user resumes with Play.
 
