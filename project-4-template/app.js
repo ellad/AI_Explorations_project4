@@ -11,9 +11,10 @@ const rustleStalks = [...document.querySelectorAll(".rustle-stalks")];
 const eyeTrigger = document.querySelector("#eye-trigger");
 const storyLayer = document.querySelector("#story-layer");
 const midwayLayer = document.querySelector("#midway-layer");
+const magicianStory = document.querySelector("#magician-story");
+const magicianReplay = document.querySelector("#magician-replay");
 const pennantButtons = [...document.querySelectorAll(".pennant")];
 const pennantVisuals = [...document.querySelectorAll(".tent-pennant-visuals > g")];
-const progressLights = [...document.querySelectorAll(".tent-progress i")];
 const hint = document.querySelector("#hint");
 const status = document.querySelector("#status");
 const audioMessage = document.querySelector("#audio-message");
@@ -31,6 +32,7 @@ const state = {
   phase: "entrance-discovery",
   midwayAttempt: 0,
   midwaySolved: false,
+  magicianComplete: false,
 };
 
 const midwaySequence = ["eye", "moon", "star"];
@@ -156,9 +158,12 @@ function playStory() {
   state.storyPlaying = true;
   setPhase("story-one");
   setPennantInput(false);
+  scene.classList.remove("is-magician-complete", "is-magician-playing");
+  magicianStory.setAttribute("aria-hidden", "true");
+  magicianReplay.hidden = true;
   pennantVisuals.forEach((visual) => visual.classList.remove("is-cued"));
   scene.classList.remove("is-midway-mistake");
-  scene.classList.remove("is-ushered", "is-usher-transition", "is-camera-moving", "is-midway-zoomed", "is-midway-ready", "is-pennant-intro");
+  scene.classList.remove("is-ushered", "is-usher-transition", "is-camera-moving", "is-midway-zoomed", "is-midway-ready", "is-pennant-intro", "is-story-focusing", "is-story-focused");
   midwayLayer.setAttribute("aria-hidden", "true");
   rustleStalks.forEach((stalks) => stalks.classList.remove("is-active"));
   eyeTrigger.hidden = true;
@@ -228,10 +233,17 @@ function beginMidwayTransition() {
     if (state.storyPlaying) return;
     scene.classList.remove("is-camera-moving");
     scene.classList.add("is-midway-ready", "is-pennant-intro");
+    alignPennantTargets();
     status.textContent = "Four pennants stir above the central tent.";
     if (state.midwaySolved) {
       showMidwayProgress(3);
       setPhase("midway-solved");
+      if (state.magicianComplete) {
+        scene.classList.add("is-story-focused");
+        scene.classList.add("is-magician-complete");
+        magicianStory.setAttribute("aria-hidden", "false");
+        magicianReplay.hidden = false;
+      }
       schedule(() => scene.classList.remove("is-pennant-intro"), 1350);
     } else {
       schedule(() => {
@@ -247,8 +259,27 @@ function setPennantInput(enabled) {
   pennantButtons.forEach((button) => { button.disabled = !enabled; });
 }
 
+function alignPennantTargets() {
+  if (!scene.classList.contains("is-midway-ready")) return;
+
+  const sceneRect = scene.getBoundingClientRect();
+  pennantButtons.forEach((button) => {
+    const visual = pennantVisuals.find((item) => item.dataset.symbol === button.dataset.symbol);
+    if (!visual) return;
+
+    const visualRect = visual.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    button.style.left = `${visualRect.left - sceneRect.left + (visualRect.width - buttonRect.width) / 2}px`;
+    button.style.top = `${visualRect.top - sceneRect.top + (visualRect.height - buttonRect.height) / 2}px`;
+    button.style.right = "auto";
+  });
+}
+
 function showMidwayProgress(count) {
-  progressLights.forEach((light, index) => light.classList.toggle("is-lit", index < count));
+  pennantVisuals.forEach((visual) => {
+    const completedIndex = midwaySequence.indexOf(visual.dataset.symbol);
+    visual.classList.toggle("is-selected", completedIndex >= 0 && completedIndex < count);
+  });
 }
 
 function cuePennant(symbol, announce = true) {
@@ -279,6 +310,7 @@ function demonstrateMidwaySequence(repetitions = 1) {
 
 function beginMidwayInput() {
   if (state.storyPlaying || state.midwaySolved) return;
+  alignPennantTargets();
   setPhase("midway-input");
   setPennantInput(true);
   showMidwayProgress(state.midwayAttempt);
@@ -321,7 +353,7 @@ function choosePennant(event) {
 
   state.midwayAttempt += 1;
   showMidwayProgress(state.midwayAttempt);
-  status.textContent = `${state.midwayAttempt} of ${midwaySequence.length} tent lights answer.`;
+  status.textContent = `${state.midwayAttempt} of ${midwaySequence.length} pennants answer.`;
   setHint("");
   if (state.midwayAttempt === midwaySequence.length) completeMidwayPuzzle();
 }
@@ -333,8 +365,47 @@ function completeMidwayPuzzle() {
   showMidwayProgress(3);
   scene.classList.add("is-midway-solved");
   audio.playTone(783.99, { duration: .55, volume: .09 });
-  status.textContent = "The tent remembers the wind’s trick.";
-  setHint("The curtains are ready for their performer.");
+  status.textContent = "The three pennants glow green. The curtains answer.";
+  setHint("");
+  scene.classList.add("is-story-focusing");
+  schedule(playMagicianStory, 1600);
+}
+
+function playMagicianStory() {
+  if (state.paused || state.storyPlaying) return;
+  clearTimers();
+  state.storyPlaying = true;
+  setPhase("story-two");
+  setPennantInput(false);
+  eyeTrigger.hidden = true;
+  magicianReplay.hidden = true;
+  magicianStory.setAttribute("aria-hidden", "false");
+  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing");
+  scene.classList.add("is-story-focused");
+  void magicianStory.offsetWidth;
+  scene.classList.add("is-magician-playing");
+  audio.setAmbience(.055, .35);
+  status.textContent = "The tent lights dim.";
+  setHint("");
+  schedule(() => { status.textContent = "A shadowed performer appears."; }, 1300);
+  schedule(() => { status.textContent = "The crooked hat spins."; }, 3000);
+  schedule(() => { status.textContent = "A deep bow—then an escape."; }, 5000);
+  schedule(() => { status.textContent = "The rabbit races toward the wheel."; }, 6500);
+  schedule(finishMagicianStory, 8000);
+}
+
+function finishMagicianStory() {
+  state.storyPlaying = false;
+  state.magicianComplete = true;
+  setPhase("magician-complete");
+  scene.classList.remove("is-magician-playing");
+  scene.classList.add("is-magician-complete");
+  magicianStory.setAttribute("aria-hidden", "false");
+  magicianReplay.hidden = false;
+  eyeTrigger.hidden = false;
+  audio.setAmbience(.24, .6);
+  status.textContent = "Glowing tracks lead toward the Ferris wheel.";
+  setHint("The empty midway is no longer empty.");
 }
 
 async function togglePause() {
@@ -367,7 +438,9 @@ enterButton.addEventListener("click", enterExperience);
 rustle.addEventListener("click", advanceRustle);
 eyeTrigger.addEventListener("click", playStory);
 pennantButtons.forEach((button) => button.addEventListener("click", choosePennant));
+magicianReplay.addEventListener("click", playMagicianStory);
 pauseButton.addEventListener("click", togglePause);
+window.addEventListener("resize", alignPennantTargets);
 
 document.addEventListener("visibilitychange", () => {
   if (document.hidden && state.entered && !state.paused) togglePause();
