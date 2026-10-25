@@ -196,7 +196,15 @@ class SceneAudio {
     gain.linearRampToValueAtTime(value, now + fade);
   }
 
-  play(name, { delay = 0, duration = 1, volume = .5, pan = 0, rate = 1, offset = this.excerpts.get(name) || 0 } = {}) {
+  play(name, {
+    delay = 0,
+    duration = 1,
+    volume = .5,
+    pan = 0,
+    rate = 1,
+    fadeOut = .09,
+    offset = this.excerpts.get(name) || 0,
+  } = {}) {
     const buffer = this.buffers.get(name);
     if (!buffer || !this.context || this.context.state !== "running") return;
     const source = this.context.createBufferSource();
@@ -208,9 +216,10 @@ class SceneAudio {
     const when = this.context.currentTime + delay;
     const span = Math.min(duration, (buffer.duration - offset) / rate);
     if (span <= 0) return;
+    const release = Math.min(fadeOut, span / 2);
     gain.gain.setValueAtTime(0, when);
     gain.gain.linearRampToValueAtTime(volume, when + Math.min(.012, span / 4));
-    gain.gain.setValueAtTime(volume, when + Math.max(.012, span - .09));
+    gain.gain.setValueAtTime(volume, when + Math.max(.012, span - release));
     gain.gain.linearRampToValueAtTime(0, when + span);
     source.connect(gain).connect(panner).connect(this.master);
     this.effects.add(source);
@@ -324,7 +333,7 @@ class SceneAudio {
       this.playCalliopeNote(frequency, { delay, duration, volume, detune, pan });
     });
 
-    this.play("applause", { delay: 5.52, duration: 1.35, volume: .24, offset: 0 });
+    this.play("applause", { delay: 5.52, duration: 1.35, volume: .24, fadeOut: .45, offset: 0 });
     // Reuse the dry twig transient as three quick ground contacts. Increasing
     // rate and rightward pan keep them distinct from the earlier corn clue.
     this.play("snap", { delay: 6.58, duration: .16, volume: .16, pan: .02, rate: 1.45, offset: 0 });
