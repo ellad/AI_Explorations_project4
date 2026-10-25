@@ -245,6 +245,86 @@ class SceneAudio {
     oscillator.stop(now + duration);
   }
 
+  playCalliopeNote(frequency, {
+    delay = 0,
+    duration = .42,
+    volume = .045,
+    detune = 0,
+    pan = 0,
+  } = {}) {
+    if (!this.context || !this.master || this.context.state !== "running") return;
+    const when = this.context.currentTime + delay;
+    const output = this.context.createGain();
+    const panner = this.context.createStereoPanner();
+    const filter = this.context.createBiquadFilter();
+    const voices = [
+      { type: "square", cents: detune - 7, level: .7 },
+      { type: "sine", cents: detune + 9, level: .42 },
+    ].map(({ type, cents, level }) => {
+      const oscillator = this.context.createOscillator();
+      const voiceGain = this.context.createGain();
+      oscillator.type = type;
+      oscillator.frequency.value = frequency;
+      oscillator.detune.value = cents;
+      voiceGain.gain.value = level;
+      oscillator.connect(voiceGain).connect(filter);
+      return { oscillator, voiceGain };
+    });
+
+    filter.type = "lowpass";
+    filter.frequency.value = 1850;
+    filter.Q.value = 3.2;
+    panner.pan.value = pan;
+    output.gain.setValueAtTime(.0001, when);
+    output.gain.exponentialRampToValueAtTime(volume, when + .025);
+    output.gain.setValueAtTime(volume * .72, when + Math.min(.12, duration * .35));
+    output.gain.exponentialRampToValueAtTime(.0001, when + duration);
+    filter.connect(output).connect(panner).connect(this.master);
+
+    let voicesRemaining = voices.length;
+    voices.forEach(({ oscillator, voiceGain }) => {
+      this.effects.add(oscillator);
+      oscillator.onended = () => {
+        this.effects.delete(oscillator);
+        oscillator.disconnect();
+        voiceGain.disconnect();
+        voicesRemaining -= 1;
+        if (!voicesRemaining) {
+          filter.disconnect();
+          output.disconnect();
+          panner.disconnect();
+        }
+      };
+      oscillator.start(when);
+      oscillator.stop(when + duration);
+    });
+  }
+
+  beginMagicianStory() {
+    this.stopEffects();
+    this.setAmbience(.055, .35);
+    // Original crooked calliope phrase: sparse minor intervals become more
+    // unstable through the flourish, then land on a deliberately sour sting.
+    const phrase = [
+      [0.72, 311.13, .52, .038, -5, -.18],
+      [1.30, 233.08, .48, .041, 5, .14],
+      [1.86, 277.18, .58, .043, -12, -.08],
+      [2.53, 207.65, .58, .046, 11, .12],
+      [3.18, 311.13, .40, .049, -18, -.18],
+      [3.57, 329.63, .38, .048, 21, .16],
+      [3.94, 293.66, .52, .047, -25, -.10],
+      [4.55, 220.00, .67, .046, 14, .08],
+      [5.28, 185.00, .72, .048, -9, -.12],
+      [6.08, 207.65, .46, .046, 17, .10],
+      [6.58, 369.99, .34, .052, -31, -.16],
+      [6.91, 277.18, .40, .052, 34, .14],
+      [7.30, 196.00, .58, .055, -22, 0],
+    ];
+    phrase.forEach(([delay, frequency, duration, volume, detune, pan]) => {
+      this.playCalliopeNote(frequency, { delay, duration, volume, detune, pan });
+    });
+  }
+
   beginStory() {
     this.stopEffects();
     this.setAmbience(.035);

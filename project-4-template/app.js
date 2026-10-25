@@ -384,7 +384,7 @@ function playMagicianStory() {
   scene.classList.add("is-story-focused");
   void magicianStory.offsetWidth;
   scene.classList.add("is-magician-playing");
-  audio.setAmbience(.055, .35);
+  audio.beginMagicianStory();
   status.textContent = "The tent lights dim.";
   setHint("");
   schedule(() => { status.textContent = "A shadowed performer appears."; }, 1300);
