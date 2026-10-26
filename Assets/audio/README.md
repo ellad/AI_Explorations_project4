@@ -17,7 +17,7 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 | `light-switch.mp3` | Light Switch (on / off) — Breviceps | https://freesound.org/people/Breviceps/sounds/457037/ |
 | `metal-creak.mp3` | Metal Creak 2.wav — ingudios | https://freesound.org/people/ingudios/sounds/119466/ |
 | `wind-chimes.mp3` | Chime sound — jgreer | https://freesound.org/people/jgreer/sounds/333629/ |
-| `airy-whoosh.mp3` | Whoosh - Weighted string - Airy whistle — Sadiquecat | https://freesound.org/people/Sadiquecat/sounds/855733/ |
+| `airy-whoosh.mp3` | Archived unused experiment: Whoosh - Weighted string - Airy whistle — Sadiquecat | https://freesound.org/people/Sadiquecat/sounds/855733/ |
 
 ## Direct preview URLs
 
@@ -45,7 +45,9 @@ The “Midnight Magician” story uses an original synthesized D-minor calliope 
 
 Story 2 uses a 1.35-second opening excerpt of Breviceps’s CC0 “Small applause” recording at the bunny reveal. The rabbit escape reuses the existing CC0 twig snap three times at progressively higher rates, lower gains and farther-right pan positions to read as quick ground contacts. The earlier synthesized flourish, noise applause and pitched rabbit chirps were removed after listening review found that they blended into the calliope instead of identifying the actions. Both replacement effects remain registered with the shared pause and replay systems.
 
-Story 3 uses four CC0 recordings instead of featured synthesized effects. Light-switch clicks follow the booth-light sequence and punctuate the empty top carriage. Overlapping metal-creak excerpts accompany the wheel's acceleration. A recorded bar chime marks the passenger jumps and travels with the final light ripple. Layered physical airy whooshes accompany the particle transition back to the cornfield. Playback rate, pan, gain and fades adapt the recordings to the scene without replacing their recorded character.
+Story 3 uses three active CC0 recordings instead of featured synthesized effects. Light-switch clicks follow the booth-light sequence and punctuate the empty top carriage. Overlapping metal-creak excerpts accompany the wheel's acceleration. A recorded bar chime marks the passenger jumps and travels with the final light ripple. After playtesters found the layered airy whooshes out of place, the particle transition was simplified to one quiet metal settling sound while the familiar ambient wind returns. Playback rate, pan, gain and fades adapt the recordings without replacing their recorded character.
+
+The corn loop is low-pass filtered at 1.9 kHz and plays at half its previous gain. This playtest-driven change reduces its broad white-noise character while retaining the original recorded stalk movement and left-to-right cue.
 
 The app's Enter gesture unlocks audio before playback. Suspending the single AudioContext freezes both playing and future effects. Replay stops old effects before scheduling new ones. Missing/invalid audio is reported and the visual scene remains usable. Hiding the tab pauses the experience; the user resumes with Play.
 

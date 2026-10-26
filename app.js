@@ -459,6 +459,7 @@ function finishWheelStory() {
   setPhase("wheel-ending");
   scene.classList.remove("is-wheel-story");
   scene.classList.add("is-wheel-ending");
+  audio.setAmbience(.15, 4.2);
   status.textContent = "The lights sweep into darkness.";
   setHint("");
   schedule(returnToCornfield, 4500);
