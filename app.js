@@ -438,6 +438,7 @@ function playWheelStory() {
   if (state.paused || state.storyPlaying) return;
   clearTimers();
   state.storyPlaying = true;
+  audio.beginWheelStory();
   setPhase("story-three");
   scene.classList.remove("is-wheel-story", "is-wheel-story-complete");
   void wheelScene.offsetWidth;
@@ -472,6 +473,8 @@ function returnToCornfield() {
   state.midwayAttempt = 0;
   state.magicianComplete = false;
   state.rustleStep = 0;
+  audio.stopEffects();
+  audio.setAmbience(.24, 1.2);
   setPhase("entrance-discovery");
   document.querySelectorAll('.art-layers use[href="#fairground-art"]').forEach((layer) => {
     layer.setAttribute("href", "#original-art");

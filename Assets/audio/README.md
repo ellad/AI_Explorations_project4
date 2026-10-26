@@ -1,6 +1,6 @@
 # Sound sources and credits
 
-The active recordings and archived original thunder were verified as **CC0 1.0** on their original Freesound pages on October 14, 2026. CC0 permits copying, editing and redistribution, including commercial use. See [CC0 terms](https://creativecommons.org/publicdomain/zero/1.0/).
+The original recordings were verified as **CC0 1.0** on their Freesound pages on October 14 and October 26, 2026. CC0 permits copying, editing and redistribution, including commercial use. See [CC0 terms](https://creativecommons.org/publicdomain/zero/1.0/).
 
 The local files are Freesound's public high-quality MP3 previews, not the original WAV/FLAC downloads. No external audio host is needed during app playback.
 
@@ -14,6 +14,10 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 | `thunder-clap.mp3` | big thunder clap — seth-m | https://freesound.org/people/seth-m/sounds/458015/ |
 | `creak.mp3` | Objects_WoodCreak_1.wav — SilentStrikeZ | https://freesound.org/people/SilentStrikeZ/sounds/389645/ |
 | `applause.mp3` | Small applause — Breviceps | https://freesound.org/people/Breviceps/sounds/462362/ |
+| `light-switch.mp3` | Light Switch (on / off) — Breviceps | https://freesound.org/people/Breviceps/sounds/457037/ |
+| `metal-creak.mp3` | Metal Creak 2.wav — ingudios | https://freesound.org/people/ingudios/sounds/119466/ |
+| `wind-chimes.mp3` | Chime sound — jgreer | https://freesound.org/people/jgreer/sounds/333629/ |
+| `airy-whoosh.mp3` | Whoosh - Weighted string - Airy whistle — Sadiquecat | https://freesound.org/people/Sadiquecat/sounds/855733/ |
 
 ## Direct preview URLs
 
@@ -24,6 +28,10 @@ The local files are Freesound's public high-quality MP3 previews, not the origin
 - https://cdn.freesound.org/previews/458/458015_3366749-hq.mp3
 - https://cdn.freesound.org/previews/389/389645_4103633-hq.mp3
 - https://cdn.freesound.org/previews/462/462362_9159316-hq.mp3
+- https://cdn.freesound.org/previews/457/457037_9159316-hq.mp3
+- https://cdn.freesound.org/previews/119/119466_1819253-hq.mp3
+- https://cdn.freesound.org/previews/333/333629_3421003-hq.mp3
+- https://cdn.freesound.org/previews/855/855733_5287430-hq.mp3
 
 ## Playback adaptations
 
@@ -36,6 +44,8 @@ The active thunder cue is `thunder-clap.mp3`. It uses a sharp-attack detector to
 The “Midnight Magician” story uses an original synthesized D-minor calliope waltz defined in `audio.js`; it does not use or derive from an external recording. Two detuned oscillator voices create its pipe-like timbre. Five three-beat measures provide a steady low “oom” and two answering “pah” notes beneath a repeated two-measure melody. The bow shifts into a darker variation, and the rabbit escape bends the final measure into an unresolved cadence. The music uses the shared AudioContext, effect registry and master compressor, so pause, replay cleanup and tab hiding follow the same rules as the recorded effects.
 
 Story 2 uses a 1.35-second opening excerpt of Breviceps’s CC0 “Small applause” recording at the bunny reveal. The rabbit escape reuses the existing CC0 twig snap three times at progressively higher rates, lower gains and farther-right pan positions to read as quick ground contacts. The earlier synthesized flourish, noise applause and pitched rabbit chirps were removed after listening review found that they blended into the calliope instead of identifying the actions. Both replacement effects remain registered with the shared pause and replay systems.
+
+Story 3 uses four CC0 recordings instead of featured synthesized effects. Light-switch clicks follow the booth-light sequence and punctuate the empty top carriage. Overlapping metal-creak excerpts accompany the wheel's acceleration. A recorded bar chime marks the passenger jumps and travels with the final light ripple. Layered physical airy whooshes accompany the particle transition back to the cornfield. Playback rate, pan, gain and fades adapt the recordings to the scene without replacing their recorded character.
 
 The app's Enter gesture unlocks audio before playback. Suspending the single AudioContext freezes both playing and future effects. Replay stops old effects before scheduling new ones. Missing/invalid audio is reported and the visual scene remains usable. Hiding the tab pauses the experience; the user resumes with Play.
 
