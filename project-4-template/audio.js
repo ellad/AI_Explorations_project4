@@ -8,7 +8,10 @@ class SceneAudio {
     this.rustleVoice = null;
     this.rustleIndex = -1;
     // Fetch before Enter, but do not create a playing audio context yet.
-    this.files = ["wind", "corn", "snap", "thunder", "creak", "applause"].map(async (name) => {
+    this.files = [
+      "wind", "corn", "snap", "thunder", "creak", "applause",
+      "light-switch", "metal-creak", "wind-chimes", "airy-whoosh",
+    ].map(async (name) => {
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timeout = controller ? window.setTimeout(() => controller.abort(), 12000) : 0;
       try {
@@ -339,6 +342,52 @@ class SceneAudio {
     this.play("snap", { delay: 8.18, duration: .16, volume: .16, pan: -.08, rate: 1.45, offset: 0 });
     this.play("snap", { delay: 8.72, duration: .14, volume: .14, pan: .02, rate: 1.65, offset: 0 });
     this.play("snap", { delay: 9.26, duration: .12, volume: .12, pan: .10, rate: 1.85, offset: 0 });
+  }
+
+  beginWheelStory() {
+    this.stopEffects();
+    this.setAmbience(.025, .45);
+
+    // Real switch recordings follow the booth lights into the midway.
+    [0, .35, .7, 1.05, 1.4].forEach((delay, index) => {
+      this.play("light-switch", {
+        delay: .18 + delay, duration: .22, volume: .19, pan: -.72 + index * .36,
+        rate: .96 + index * .02, fadeOut: .025, offset: 0,
+      });
+    });
+
+    // Overlapping metal strain recordings follow the wheel as it gathers motion.
+    [2.7, 4.8, 6.9, 9].forEach((delay, index) => {
+      this.play("metal-creak", {
+        delay, duration: 2.7, volume: .23 - index * .018,
+        pan: index % 2 ? .18 : -.18, rate: .76 + index * .035,
+        fadeOut: .28, offset: 0,
+      });
+    });
+
+    // Natural wind-chime strikes mark the passenger's impossible jumps.
+    [
+      [3.9, -.42, .9], [6.5, .38, 1.02], [8.8, 0, 1.12],
+    ].forEach(([delay, pan, rate]) => {
+      this.play("wind-chimes", { delay, duration: 1.15, volume: .16, pan, rate, fadeOut: .35 });
+    });
+
+    // The empty top carriage gets one isolated, harder switch snap.
+    this.play("light-switch", { delay: 10.18, duration: .42, volume: .4, rate: .82, fadeOut: .06, offset: 0 });
+
+    // Short chime excerpts travel across the stereo field with the light ripple.
+    [[12.2, -.8], [12.65, -.4], [13.1, 0], [13.55, .4], [14, .8]].forEach(([delay, pan], index) => {
+      this.play("wind-chimes", { delay, duration: 1.05, volume: .11, pan, rate: .92 + index * .04, fadeOut: .4 });
+    });
+
+    // Layered physical whooshes carry the particle veil back to the cornfield.
+    [16.05, 16.75, 17.45, 18.15, 18.85, 19.55].forEach((delay, index) => {
+      this.play("airy-whoosh", {
+        delay, duration: .58, volume: .13 + index * .012,
+        pan: index % 2 ? .48 : -.48, rate: .82 + index * .045,
+        fadeOut: .18, offset: 0,
+      });
+    });
   }
 
   beginStory() {
