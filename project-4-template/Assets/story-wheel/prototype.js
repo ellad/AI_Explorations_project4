@@ -54,9 +54,7 @@ function applyMotionPreference() {
   }
 }
 
-async function loadRig() {
-  const response = await fetch("wheel-rig-prototype.svg");
-  rig.innerHTML = await response.text();
+function loadRig() {
   animations = [...rig.getAnimations({ subtree: true })];
   animations.forEach((animation) => animation.pause());
   applyMotionPreference();
@@ -66,4 +64,4 @@ startButton.addEventListener("click", accelerateWheel);
 pauseButton.addEventListener("click", () => pauseWheel());
 reduceCheckbox.addEventListener("change", applyMotionPreference);
 reduceCheckbox.checked = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-loadRig().catch(() => { status.textContent = "The wheel rig could not be loaded."; });
+loadRig();
