@@ -478,7 +478,7 @@ function returnToCornfield() {
     layer.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#original-art");
   });
   activeCornRepair.setAttribute("href", "Assets/opening-scene/corn-repair.png");
-  scene.className = "scene";
+  scene.className = "scene is-corn-return";
   scene.setAttribute("aria-label", "A dark path between cornfields and wooden fences");
   wheelScene.setAttribute("aria-hidden", "true");
   midwayLayer.setAttribute("aria-hidden", "true");
@@ -496,6 +496,7 @@ function returnToCornfield() {
   setHint("Did the corn just move?");
   rustle.focus({ preventScroll: true });
   startHints();
+  schedule(() => scene.classList.remove("is-corn-return"), 1350);
 }
 
 async function togglePause() {

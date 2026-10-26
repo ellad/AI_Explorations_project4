@@ -462,7 +462,8 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .scene.is-wheel-ready:not(.is-wheel-story) #wheel-story-start { pointer-events: auto; }
 .scene.is-wheel-story-complete #wheel-story-start { pointer-events: auto; }
 .scene.is-wheel-transitioning .wheel-scene,
-.scene.is-wheel-ready .wheel-scene { visibility: visible; }
+.scene.is-wheel-ready .wheel-scene,
+.scene.is-corn-return .wheel-scene { visibility: visible; }
 .scene.is-wheel-transitioning .wheel-scene__background { animation: wheel-background-arrive 2.6s ease-in-out both; }
 .scene.is-wheel-transitioning .wheel-scene__fog { animation: wheel-transition-fog 2.6s ease-in-out both; }
 .scene.is-wheel-transitioning .wheel-scene__rabbit { animation: wheel-rabbit-run 2.6s cubic-bezier(.34, .58, .32, 1) both; }
@@ -526,6 +527,16 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .scene.is-wheel-ending .story-wheel__particles::before { animation:particle-field 4.3s cubic-bezier(.16,.68,.2,1) both; }
 .scene.is-wheel-ending .story-wheel__particles::after { animation:particle-field-reverse 4.3s .08s cubic-bezier(.16,.68,.2,1) both; }
 .scene.is-wheel-ending .story-wheel__particles i { animation:particle-burst 4.1s cubic-bezier(.14,.7,.22,1) both; animation-delay:calc(var(--particle,0) * 24ms); }
+.scene.is-corn-return .story-wheel__particles { opacity:1; background-color:#100b18; animation:particle-clear 1.35s ease-in-out both; }
+.scene.is-corn-return .story-wheel__rotor,
+.scene.is-corn-return .story-wheel__support,
+.scene.is-corn-return .story-wheel__foreground,
+.scene.is-corn-return .story-wheel__lights,
+.scene.is-corn-return .wheel-scene__rabbit,
+.scene.is-corn-return .wheel-scene__pawprints,
+.scene.is-corn-return .wheel-scene__replays { opacity:0 !important; }
+.scene.is-corn-return .story-wheel__particles::before,
+.scene.is-corn-return .story-wheel__particles::after { opacity:.35; animation:particle-field-clear 1.35s ease-out both; }
 .scene.is-wheel-ending .story-wheel__particles i:nth-child(1){--particle:1;--x:-160px;--y:-280px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(2){--particle:2;--x:140px;--y:-300px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(3){--particle:3;--x:-120px;--y:260px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(4){--particle:4;--x:170px;--y:250px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(5){--particle:5;--x:-190px;--y:-100px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(6){--particle:6;--x:185px;--y:80px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(7){--particle:7;--x:-70px;--y:-340px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(8){--particle:8;--x:65px;--y:330px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(9){--particle:9;--x:-210px;--y:120px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(10){--particle:10;--x:210px;--y:-140px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(11){--particle:11;--x:-145px;--y:-210px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(12){--particle:12;--x:125px;--y:190px}.scene.is-wheel-ending .story-wheel__particles i:nth-child(n+13){--x:0px;--y:-360px;--particle:6}
 .is-reduced .scene.is-wheel-story .story-wheel__rotor { animation:none; transform:rotate(18deg); }
 .is-reduced .scene.is-wheel-ready .wheel-scene__pawprints { animation:none; opacity:.78; }
@@ -554,6 +565,8 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 @keyframes particle-burst { 0%{opacity:0;transform:translate(-50%,-50%) scale(.15)} 8%{opacity:1} 74%{opacity:.92;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1)} 100%{opacity:.25;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.45)} }
 @keyframes particle-field { 0%{opacity:.1;transform:scale(.68) rotate(-8deg)} 14%{opacity:.95} 72%{opacity:.86;transform:scale(1.18) rotate(13deg)} 100%{opacity:.35;transform:scale(1.42) rotate(21deg)} }
 @keyframes particle-field-reverse { 0%{opacity:.08;transform:scale(.7) rotate(19deg)} 16%{opacity:.9} 74%{opacity:.8;transform:scale(1.2) rotate(-12deg)} 100%{opacity:.3;transform:scale(1.45) rotate(-22deg)} }
+@keyframes particle-clear { 0%{opacity:1;background-color:#100b18} 42%{opacity:.9;background-color:#100b18cc} 100%{opacity:0;background-color:transparent} }
+@keyframes particle-field-clear { 0%{opacity:.38;transform:scale(1)} 100%{opacity:0;transform:scale(1.18)} }
 .usher-fog {
   position: absolute;
   left: -16%;
