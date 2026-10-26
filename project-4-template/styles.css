@@ -474,7 +474,8 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-wheel__support { position:absolute; z-index:2; width:48%; left:26%; top:30%; filter:brightness(.68) saturate(.64) hue-rotate(5deg); }
 .story-wheel__rotor { --turn:0deg; position:absolute; z-index:3; width:76%; aspect-ratio:1; left:12%; top:11.5%; transform:rotate(var(--turn)); transform-origin:50% 50%; }
 .story-wheel__frame { position:absolute; inset:0; width:100%; height:100%; }
-.story-wheel__finale { position:absolute; z-index:1; inset:2.2%; border:4px dotted #ffd58a; border-radius:50%; opacity:0; box-shadow:inset 0 0 14px #f0a54d,0 0 18px #df8c34; pointer-events:none; }
+.story-wheel__finale { position:absolute; z-index:1; inset:0; opacity:0; pointer-events:none; }
+.story-wheel__finale i { position:absolute; left:var(--x); top:var(--y); width:2.1%; aspect-ratio:1; border-radius:50%; background:#ffe4a6; box-shadow:0 0 5px 2px #e99b3e; transform:translate(-50%,-50%); }
 .story-wheel__carriage { position:absolute; inset:0; transform:rotate(calc(var(--slot) * 36deg)); }
 .story-wheel__carriage::after { content:""; position:absolute; z-index:1; left:49.35%; top:3.2%; width:1.3%; height:1.8%; border:1px solid #17131a; border-radius:999px; background:linear-gradient(90deg,#2e2732,#766675 48%,#302833); transform:rotate(calc((var(--slot) * -36deg) - var(--turn))); transform-origin:50% 0; }
 .story-wheel__carriage img { position:absolute; z-index:2; width:17%; left:41.5%; top:2.15%; transform:rotate(calc((var(--slot) * -36deg) - var(--turn))); transform-origin:50% 13.5%; filter:brightness(.68) saturate(.52) hue-rotate(7deg); }
@@ -483,10 +484,6 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-wheel__lights { position:absolute; z-index:5; inset:0; pointer-events:none; }
 .story-wheel__lights i { position:absolute; width:5px; height:5px; border-radius:50%; background:#ffd18a; opacity:0; box-shadow:0 0 5px 2px #d88a38; }
 .story-wheel__lights i:nth-child(1){left:6%;top:48.2%}.story-wheel__lights i:nth-child(2){left:11%;top:49.5%}.story-wheel__lights i:nth-child(3){left:16%;top:51.2%}.story-wheel__lights i:nth-child(4){left:21%;top:53.1%}.story-wheel__lights i:nth-child(5){left:26%;top:55.3%}.story-wheel__lights i:nth-child(6){right:26%;top:55.3%}.story-wheel__lights i:nth-child(7){right:21%;top:53.1%}.story-wheel__lights i:nth-child(8){right:16%;top:51.2%}.story-wheel__lights i:nth-child(9){right:11%;top:49.5%}.story-wheel__lights i:nth-child(10){right:6%;top:48.2%}
-.story-wheel__climbing-prints { position:absolute; z-index:6; left:31%; top:35%; width:18%; height:25%; opacity:0; transform:rotate(8deg); }
-.story-wheel__climbing-prints i { position:absolute; width:7px; height:9px; border-radius:58% 58% 44% 44%; background:#a18bb5; box-shadow:0 0 4px #765692; transform:rotate(-34deg); }
-.story-wheel__climbing-prints i::before { content:""; position:absolute; left:-2px; top:-4px; width:3px; height:3px; border-radius:50%; background:inherit; box-shadow:4px -2px 0 #a18bb5,8px 0 0 #a18bb5; }
-.story-wheel__climbing-prints i:nth-child(1){left:72%;bottom:2%}.story-wheel__climbing-prints i:nth-child(2){left:57%;bottom:24%}.story-wheel__climbing-prints i:nth-child(3){left:42%;bottom:46%}.story-wheel__climbing-prints i:nth-child(4){left:27%;bottom:68%}.story-wheel__climbing-prints i:nth-child(5){left:12%;bottom:88%}
 .story-wheel__passenger { position:absolute; z-index:3; left:47.5%; top:8.4%; width:5%; height:6.2%; opacity:0; filter:drop-shadow(0 0 2px #050309); transform-origin:50% 50%; }
 .story-wheel__passenger::before { content:""; position:absolute; left:31%; top:0; width:38%; aspect-ratio:1; border-radius:50%; background:#09080c; }
 .story-wheel__passenger::after { content:""; position:absolute; left:7%; right:7%; top:22%; bottom:0; background:#0b0910; clip-path:polygon(32% 0,68% 0,100% 24%,78% 34%,74% 100%,26% 100%,22% 34%,0 24%); }
@@ -504,7 +501,6 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .scene.is-wheel-story .wheel-scene__replays { opacity:0; pointer-events:none; }
 .scene.is-wheel-story .story-wheel__lights i { animation:story-wheel-light 12s steps(1,end) both; animation-delay:calc(var(--light,0) * .35s); }
 .scene.is-wheel-story .story-wheel__lights i:nth-child(1),.scene.is-wheel-story .story-wheel__lights i:nth-child(10){--light:0}.scene.is-wheel-story .story-wheel__lights i:nth-child(2),.scene.is-wheel-story .story-wheel__lights i:nth-child(9){--light:1}.scene.is-wheel-story .story-wheel__lights i:nth-child(3),.scene.is-wheel-story .story-wheel__lights i:nth-child(8){--light:2}.scene.is-wheel-story .story-wheel__lights i:nth-child(4),.scene.is-wheel-story .story-wheel__lights i:nth-child(7){--light:3}.scene.is-wheel-story .story-wheel__lights i:nth-child(5),.scene.is-wheel-story .story-wheel__lights i:nth-child(6){--light:4}
-.scene.is-wheel-story .story-wheel__climbing-prints { animation:story-wheel-prints 9s linear both; }
 .scene.is-wheel-story-complete .story-wheel__rotor { transform:rotate(58deg); }
 .scene.is-wheel-story-complete .story-wheel__carriage img,
 .scene.is-wheel-story-complete .story-wheel__carriage::after { transform:rotate(calc((var(--slot) * -36deg) - 58deg)); }
@@ -528,7 +524,6 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 @keyframes wheel-finale { 0%,80%{opacity:0;transform:scale(.96)} 83%{opacity:1;transform:scale(1.02)} 88%{opacity:.45;transform:scale(1)} 92%{opacity:1} 100%{opacity:.5} }
 @keyframes wheel-frame-finale { 0%,80%{filter:none} 83%{filter:brightness(1.42) drop-shadow(0 0 12px #f1b25c)} 90%{filter:brightness(1.08) drop-shadow(0 0 4px #bd7133)} 94%{filter:brightness(1.34) drop-shadow(0 0 10px #f1b25c)} 100%{filter:brightness(1.08) drop-shadow(0 0 5px #bd7133)} }
 @keyframes story-wheel-light { 0%,8%{opacity:0} 9%,80%{opacity:1} 83%{opacity:1;transform:scale(1.8);box-shadow:0 0 13px 5px #ffb64f} 88%,100%{opacity:.78;transform:scale(1)} }
-@keyframes story-wheel-prints { 0%,12%{opacity:0} 18%,100%{opacity:.82} }
 @keyframes passenger-left { 0%,25%{opacity:0} 26%,38%{opacity:.92} 39%,100%{opacity:0} }
 @keyframes passenger-right { 0%,45%{opacity:0} 46%,58%{opacity:.92} 59%,100%{opacity:0} }
 @keyframes passenger-top { 0%,65%{opacity:0} 66%,82%{opacity:.95} 83%,100%{opacity:0} }

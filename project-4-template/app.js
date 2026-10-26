@@ -444,7 +444,7 @@ function playWheelStory() {
   scene.classList.add("is-wheel-story");
   status.textContent = "One booth light wakes, then another.";
   setHint("");
-  schedule(() => { status.textContent = "The tracks climb the wheel’s iron support."; }, 1900);
+  schedule(() => { status.textContent = "The last print fades beneath the iron supports."; }, 1900);
   schedule(() => { status.textContent = "A passenger appears—but the lit carriage is empty."; }, 3900);
   schedule(() => { status.textContent = "The silhouette jumps higher each time the light returns."; }, 6500);
   schedule(() => { status.textContent = "At the top, it raises one hand."; }, 8800);
