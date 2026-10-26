@@ -49,6 +49,8 @@ The approved discovery interaction is an observation-and-memory puzzle rather th
 
 The story, provisionally titled **“The Midnight Magician,”** opens the central tent curtains onto a backlit shadow magician. The figure spins a top hat, bows, and accidentally releases a pale spectral bunny. The surprised magician retreats while the bunny crosses toward the right fence and disappears into the corn, leaving glowing pawprints that direct attention toward the Ferris wheel and the final story. The bunny should not climb toward the elevated wheel literally; the pawprint trail carries the visual direction. The tent lights remain illuminated after completion.
 
+Wheel-handoff revision: phone review showed that the tent-focused camera removed the original Ferris wheel from the frame, so the diagonal pawprints could not communicate their destination. After Story 2, dense fog now dissolves the tent view into a dedicated interior-midway composition with an unlit wheel centered at the end of a clear path. The rabbit travels directly toward it and leaves tracks beneath one carriage. The approved background removes the rejected cornfield setting and all baked-in illumination so Story 3 can control the wheel, booth and string lighting independently. Asset iterations and prompts are recorded in `Assets/story-wheel/README.md`.
+
 ## Revisions
 
 ### First audio checkpoint

@@ -336,9 +336,9 @@ class SceneAudio {
     this.play("applause", { delay: 5.52, duration: 1.35, volume: .24, fadeOut: .45, offset: 0 });
     // Reuse the dry twig transient as three quick ground contacts. Increasing
     // rate and rightward pan keep them distinct from the earlier corn clue.
-    this.play("snap", { delay: 6.58, duration: .16, volume: .16, pan: .02, rate: 1.45, offset: 0 });
-    this.play("snap", { delay: 6.91, duration: .14, volume: .14, pan: .24, rate: 1.65, offset: 0 });
-    this.play("snap", { delay: 7.22, duration: .12, volume: .12, pan: .46, rate: 1.85, offset: 0 });
+    this.play("snap", { delay: 8.18, duration: .16, volume: .16, pan: -.08, rate: 1.45, offset: 0 });
+    this.play("snap", { delay: 8.72, duration: .14, volume: .14, pan: .02, rate: 1.65, offset: 0 });
+    this.play("snap", { delay: 9.26, duration: .12, volume: .12, pan: .10, rate: 1.85, offset: 0 });
   }
 
   beginStory() {

@@ -58,18 +58,19 @@ This story becomes available only after “Welcome?” completes. The transition
 
 Four accessible pennant targets display a crescent moon, star, eye and rabbit. An unnatural gust demonstrates the fixed sequence **eye → moon → star** twice using a distinct flutter, glow and note for each pennant. The User repeats the sequence. Each correct input repeats its audiovisual response and lights one tent bulb to show progress. An incorrect input produces a gentle comic response, clears only this puzzle attempt, and demonstrates the sequence again. The rabbit pennant is not used in the solution. Progressive hints move from noticing the unnatural gust, to recognizing that three flags took turns, to suggesting that the User repeat the wind's trick. The solution never depends on color or sound alone.
 
-Completing the sequence begins an approximately eight-second story:
+Completing the sequence begins an approximately ten-second story:
 
 1. The tent bulbs finish illuminating and the curtains tremble.
 2. The curtains snap open to reveal a tall magician as a backlit shadow.
 3. The figure removes its top hat and spins it around one hand.
 4. The magician bows deeply with the hat near the ground.
 5. A pale spectral bunny hops from the hat. Faint ghostly applause accompanies the reveal, and the magician reacts with surprise.
-6. The magician and curtains retreat while the bunny bounds toward the right fence, disappears into the corn and leaves glowing pawprints leading visually toward the Ferris wheel.
+6. The magician retreats as the bunny escapes into a dense magical fog. Beneath the fog, the tent view dissolves into a new interior-midway composition with a complete, unlit Ferris wheel centered at the end of a clear path.
+7. The bunny continues directly up the path toward the wheel, disappears beneath it and leaves glowing pawprints ending below one dark carriage.
 
 An original synthesized D-minor calliope waltz accompanies the full sequence. Five clear three-beat measures use a low “oom” downbeat with two answering “pah” notes. A recognizable two-measure melody repeats with a darker variation for the bow, then bends into an unresolved final cadence during the rabbit escape. A brief CC0 applause recording marks the bunny reveal. Three shortened, pitch-shifted uses of the existing twig snap pan right with the rabbit as ground contacts. The score remains subordinate to the action, lowers the wind while playing, and uses the shared audio clock so pause, resume, replay and tab hiding preserve its timing.
 
-The tent lights remain illuminated afterward. The illuminated tent entrance provides replay access. The bunny and pawprint ending becomes the discovery bridge to the third story; the Ferris wheel itself remains inactive during this story. All shared story rules from the brief still apply, including interaction locking, global pause, replay without reload and reduced-motion treatment.
+The wheel-centered composition persists afterward and becomes the discovery bridge to the third story; the Ferris wheel itself remains inactive during this checkpoint. Two unobtrusive controls in the final view replay “Welcome?” or “The Midnight Magician.” A replay temporarily returns to that story’s view, then restores the completed wheel composition without erasing progress. Reduced motion uses an opacity-only fog dissolve, an immediate scene replacement and a static rabbit endpoint before the pawprints appear. All shared story rules from the brief still apply, including interaction locking, global pause and replay without reload.
 
 ## Scope and revisions
 

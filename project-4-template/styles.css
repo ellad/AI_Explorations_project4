@@ -375,6 +375,84 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 .scene.is-story-focusing .magician-story { animation: story-layer-focus 1.6s cubic-bezier(.32, .7, .28, 1) both; }
 .scene.is-story-focused .magician-story { transform: scale(1.424); transform-origin: 50% 68%; }
+
+.wheel-scene {
+  position: absolute;
+  z-index: 16;
+  inset: 0;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+}
+.wheel-scene__background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.wheel-scene__rabbit {
+  position: absolute;
+  z-index: 2;
+  left: 31%;
+  top: 73%;
+  width: 34%;
+  opacity: 0;
+  filter: brightness(1.05) saturate(.78) drop-shadow(0 0 7px #7751b99c);
+  transform-origin: 50% 80%;
+}
+.wheel-scene__pawprints {
+  position: absolute;
+  z-index: 1;
+  left: 35%;
+  top: 53%;
+  width: 31%;
+  height: 29%;
+  object-fit: contain;
+  opacity: 0;
+  transform: rotate(-57deg);
+  filter: brightness(.72) saturate(.65);
+}
+.wheel-scene__fog {
+  position: absolute;
+  z-index: 4;
+  inset: 24% -32% -8%;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 24% 58%, #e0d9e4ed 0 16%, #8f8797b8 38%, transparent 68%),
+    radial-gradient(ellipse at 76% 48%, #d7d0dbe8 0 18%, #817987ad 40%, transparent 70%);
+  filter: blur(15px);
+  transform: translateY(18%) scale(.84);
+}
+.wheel-scene__replays {
+  position: absolute;
+  z-index: 5;
+  left: 5%;
+  right: 5%;
+  bottom: max(3%, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  pointer-events: none;
+}
+.wheel-scene__replays button {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px 11px;
+  border: 1px solid #bfae9270;
+  border-radius: 999px;
+  color: #d8cfbf;
+  background: #100d18c7;
+  font: 700 .68rem system-ui;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.scene.is-wheel-transitioning .wheel-scene,
+.scene.is-wheel-ready .wheel-scene { visibility: visible; }
+.scene.is-wheel-transitioning .wheel-scene__background { animation: wheel-background-arrive 2.6s ease-in-out both; }
+.scene.is-wheel-transitioning .wheel-scene__fog { animation: wheel-transition-fog 2.6s ease-in-out both; }
+.scene.is-wheel-transitioning .wheel-scene__rabbit { animation: wheel-rabbit-run 2.6s cubic-bezier(.34, .58, .32, 1) both; }
+.scene.is-wheel-transitioning .wheel-scene__pawprints { animation: wheel-pawprints-arrive 2.6s linear both; }
+.scene.is-wheel-ready .wheel-scene__background { opacity: 1; }
+.scene.is-wheel-ready .wheel-scene__pawprints { opacity: .68; }
+.scene.is-wheel-ready .wheel-scene__replays { opacity: 1; pointer-events: auto; }
+.scene.is-wheel-ready .status { left: 44%; width: 68%; }
+.scene.is-wheel-ready .hint { bottom: max(11%, env(safe-area-inset-bottom)); }
 .usher-fog {
   position: absolute;
   left: -16%;
@@ -478,7 +556,7 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 }
 
 .is-paused * { animation-play-state: paused !important; }
-.is-paused .rustle, .is-paused .eye-trigger, .is-paused .pennant, .is-paused .magician-replay { pointer-events: none; }
+.is-paused .rustle, .is-paused .eye-trigger, .is-paused .pennant, .is-paused .magician-replay, .is-paused .wheel-scene__replays { pointer-events: none; }
 .is-reduced .cloud, .is-reduced .ground-fog i, .is-reduced .fireflies i, .is-reduced .eyes i { animation: none; }
 .is-reduced .ground-fog::after { animation: none; }
 .is-reduced .rustle-stalks { animation: none; }
@@ -509,6 +587,10 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .is-reduced .scene.is-story-focusing .fireflies { animation: none; transform: scale(2.45); transform-origin: 50% 68%; }
 .is-reduced .scene.is-story-focusing .magician-story { animation: none; transform: scale(1.424); transform-origin: 50% 68%; }
 .is-reduced .scene.is-story-focusing .tent-pennant-visuals { animation-name: pennants-dissolve-reduced; }
+.is-reduced .scene.is-wheel-transitioning .wheel-scene__background { animation-name: wheel-background-reduced; }
+.is-reduced .scene.is-wheel-transitioning .wheel-scene__fog { animation-name: wheel-transition-fog-reduced; }
+.is-reduced .scene.is-wheel-transitioning .wheel-scene__rabbit { animation-name: wheel-rabbit-reduced; }
+.is-reduced .scene.is-wheel-transitioning .wheel-scene__pawprints { animation-name: wheel-pawprints-reduced; }
 
 /* WebKit can drop HTML layers that use an inline SVG displacement filter.
    Preserve the complete moving fog treatment there without the distortion. */
@@ -705,6 +787,31 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   0%, 77% { opacity: 0; }
   78%, 100% { opacity: .72; }
 }
+@keyframes wheel-background-arrive {
+  0%, 26% { opacity: 0; }
+  52%, 100% { opacity: 1; }
+}
+@keyframes wheel-transition-fog {
+  0% { opacity: 0; transform: translateY(18%) scale(.84); }
+  25%, 55% { opacity: 1; transform: translateY(0) scale(1.12); }
+  100% { opacity: 0; transform: translateY(-12%) scale(1.3); }
+}
+@keyframes wheel-rabbit-run {
+  0%, 31% { opacity: 0; transform: translate(0, 20%) scale(.8); }
+  40% { opacity: .88; }
+  55% { opacity: .92; transform: translate(8%, -52%) scale(.58) rotate(-3deg); }
+  72% { opacity: .82; transform: translate(19%, -123%) scale(.38) rotate(2deg); }
+  88% { opacity: .65; transform: translate(27%, -185%) scale(.24) rotate(-2deg); }
+  96%, 100% { opacity: 0; transform: translate(30%, -205%) scale(.2); }
+}
+@keyframes wheel-pawprints-arrive { 0%, 72% { opacity: 0; } 92%, 100% { opacity: .68; } }
+@keyframes wheel-background-reduced { 0%, 46% { opacity: 0; } 47%, 100% { opacity: 1; } }
+@keyframes wheel-transition-fog-reduced { 0%, 18%, 78%, 100% { opacity: 0; } 28%, 68% { opacity: 1; transform: none; } }
+@keyframes wheel-rabbit-reduced {
+  0%, 49%, 82%, 100% { opacity: 0; }
+  50%, 81% { opacity: .72; transform: translate(27%, -185%) scale(.24); }
+}
+@keyframes wheel-pawprints-reduced { 0%, 76% { opacity: 0; } 77%, 100% { opacity: .68; } }
 @keyframes shadow-story {
   0%, 47% { opacity: 0; }
   48%, 100% { opacity: .6; }
