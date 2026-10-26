@@ -43,9 +43,20 @@ Main risk: the existing flattened fairground does not contain hidden pixels behi
 - [ ] Source or create appropriately licensed fabric, stage-note, hat-flourish, applause and bunny feedback, then coordinate the mix with existing wind and story audio. Verify failure behavior and physical-phone playback.
 - [ ] Conduct an unprompted phone playtest focused on whether Users notice, remember and reproduce the pennant sequence and understand that the bunny points toward the Ferris wheel. Record observations before choosing revisions or specifying Story 3.
 
+### Next checkpoints: third story
+
+Main risk: the approved wheel view is a flattened painting, while the story requires a rotating wheel, independently upright carriages, sequenced lights, climbing pawprints and an impossible passenger. Prove the wheel rig and clean background plate before integrating narrative effects.
+
+- [x] Prototype a separately layered Ferris wheel over a clean interior-midway plate. At 390 × 844, verify a gradual start, eight upright carriages, pause and reduced motion without changing the main story. Automated browser inspection confirmed nine synchronized animations, a 3.2-second acceleration from 0.06× to 1×, complete pause, and a disabled motion control when reduced motion is selected. Composition screenshots confirm the full wheel is centered and the clean plate remains visible through the transparent rig. Developer visual review remains pending.
+- [ ] Integrate the wheel rig into the Story 2 ending and preserve the approved rabbit handoff and upward-facing pawprint trail. Keep the wheel dormant until Story 3 begins.
+- [ ] Build the Story 3 sequence: booth lights lead toward the wheel; pawprints climb its support; a human silhouette appears only between light sweeps, jumps to successively higher carriages, waves at the top, and vanishes when that carriage is directly illuminated; a light ripple then travels around the wheel and back through the booths. Do not give the passenger rabbit features or imply that the rabbit controls the event.
+- [ ] Verify narrative readability, timing, persistent slow rotation, audio balance, pause/replay and reduced-motion behavior on a physical phone.
+
 ## Evidence and revisions
 
 Record non-identifying playtest observations, separating what Users did or said from your interpretation. Use the findings to choose revision priorities and record what changed and how you verified the improvement.
+
+- Story 3 wheel-motion feasibility: generated a wheel-free version of the approved unlit interior-midway scene and layered the existing eight-carriage SVG rig over it in a standalone prototype. An initial `<object>` implementation exposed an opaque browser artboard, so the prototype now fetches the SVG inline, preserving transparency and direct animation control. A 390 × 844 Chrome run measured nine running animations at the same accelerating rate, then nine paused animations after both Pause and reduced-motion activation; screenshots confirmed upright carriages at rest and during rotation. Main-story integration remains intentionally deferred until Developer review.
 
 - Second-story visual phone review: after the magician composition and story-focus revisions were deployed to GitHub Pages, the Developer confirmed that the complete sequence looks great on the phone screen. This approves the visual composition before Story 2 audio work.
 - Magician calliope checkpoint: added an original eight-second Web Audio phrase rather than an externally licensed song. Two filtered, slightly detuned oscillator voices create an uneasy pipe-organ/calliope color; sparse minor notes follow the entrance, detuning increases through the flourish, the bow moves lower, and the rabbit escape ends on a sour figure. The cue shares effect cleanup, AudioContext suspension, ambience ducking and replay behavior with the established sound system. JavaScript syntax and whitespace checks passed; physical-phone listening and balance review remain pending.

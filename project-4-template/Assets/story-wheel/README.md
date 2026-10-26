@@ -15,3 +15,15 @@ Developer review found that the cornfield in `wheel-focus-v1.png` contradicted t
 ## Unlit revision
 
 Developer review reserved all lighting and glow for Story 3 animation. `wheel-focus-v3-unlit.png` preserves the approved wheel, midway, path, fixtures and object placement while turning off every wheel bulb, string light, booth bulb and lantern. It removes emissive cores, halos, bloom, reflected illumination and warm light spill. Minimal cool ambient sky visibility keeps the dormant scene readable. Versions 1 and 2 remain preserved for provenance but are not intended for integration.
+
+## Layered motion prototype
+
+`wheel-background-clean-v1.png` is a 941 × 1672 RGB edit of `wheel-focus-v3-unlit.png`, generated with OpenAI's built-in image-generation tool on October 25, 2026. It removes the flattened Ferris wheel while preserving the approved interior midway, dormant booths, path, palette and atmospheric lighting. This clean plate allows a separately animated wheel to rotate without exposing a duplicate wheel underneath it.
+
+Generation prompt:
+
+> Edit the supplied portrait abandoned-fair image into a clean background plate for animation. Remove the entire Ferris wheel: every rim, spoke, hub, carriage, hanging bracket, support leg, platform, stair, and wheel-associated structure. Repair the removed area naturally with the same dark clouded night sky and distant interior-fair tents or stalls already present in the image. Preserve the foreground dirt midway, both rows of booths, fences, barrels, bunting, perspective, framing, hand-painted storybook texture, muted burgundy/dusty-orange/charcoal palette, and unlit dormant mood exactly. Do not add any lighting, glow, characters, pawprints, people, rabbit, text, logos, cornfield, or new focal object. The central path should continue toward the distant fair and the repaired sky must remain dark enough for a separately layered Ferris wheel to read clearly. Keep the original 941 × 1672 portrait dimensions and composition.
+
+`wheel-rig-prototype.svg` is a working copy of the existing project Ferris-wheel animation pack. `prototype.html`, `prototype.css`, and `prototype.js` layer that rig over the clean plate without changing the main story. The prototype exposes start, pause and reduced-motion controls. It begins stopped, accelerates all nine SVG animations from 0.06× to 1× over 3.2 seconds, and counter-rotates the eight carriages so they remain upright.
+
+Chrome verification at a 390 × 844 phone viewport confirmed the complete wheel remains centered, the background stays visible through the SVG, all nine animations run at a shared rate, pause freezes all nine, and reduced motion leaves them paused and disables the start control. This is a feasibility checkpoint only; Story 3 lighting, pawprint climbing and the impossible passenger have not yet been integrated.

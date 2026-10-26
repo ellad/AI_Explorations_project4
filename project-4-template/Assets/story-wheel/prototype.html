@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ferris wheel motion prototype</title>
+    <link rel="stylesheet" href="prototype.css" />
+  </head>
+  <body>
+    <main class="prototype">
+      <img class="background" src="wheel-background-clean-v1.png" alt="An unlit abandoned fairground midway" />
+      <div class="wheel-rig" id="wheel-rig" role="img" aria-label="Animated Ferris wheel with upright swinging carriages"></div>
+      <section class="controls" aria-label="Prototype controls">
+        <button id="start" type="button">Start wheel</button>
+        <button id="pause" type="button" disabled>Pause</button>
+        <label><input id="reduce" type="checkbox" /> Reduce motion</label>
+      </section>
+      <p class="status" id="status" role="status">Wheel motion is stopped.</p>
+    </main>
+    <script src="prototype.js"></script>
+  </body>
+</html>
