@@ -455,13 +455,47 @@ function playWheelStory() {
 }
 
 function finishWheelStory() {
+  setPhase("wheel-ending");
+  scene.classList.remove("is-wheel-story");
+  scene.classList.add("is-wheel-ending");
+  status.textContent = "The lights sweep into darkness.";
+  setHint("");
+  schedule(returnToCornfield, 4000);
+}
+
+function returnToCornfield() {
   state.storyPlaying = false;
   state.wheelStoryComplete = true;
-  setPhase("wheel-complete");
-  scene.classList.remove("is-wheel-story");
-  scene.classList.add("is-wheel-story-complete");
-  status.textContent = "Light races around the wheel and back through the midway.";
-  setHint("The wheel keeps turning, though no one is aboard.");
+  state.fairgroundRevealed = false;
+  state.midwayUnlocked = false;
+  state.midwaySolved = false;
+  state.midwayAttempt = 0;
+  state.magicianComplete = false;
+  state.rustleStep = 0;
+  setPhase("entrance-discovery");
+  document.querySelectorAll('.art-layers use[href="#fairground-art"]').forEach((layer) => {
+    layer.setAttribute("href", "#original-art");
+    layer.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#original-art");
+  });
+  activeCornRepair.setAttribute("href", "Assets/opening-scene/corn-repair.png");
+  scene.className = "scene";
+  scene.setAttribute("aria-label", "A dark path between cornfields and wooden fences");
+  wheelScene.setAttribute("aria-hidden", "true");
+  midwayLayer.setAttribute("aria-hidden", "true");
+  magicianStory.setAttribute("aria-hidden", "true");
+  storyLayer.setAttribute("aria-hidden", "true");
+  storyLayer.classList.remove("is-playing", "is-watching", "is-revealed");
+  eyeTrigger.hidden = true;
+  magicianReplay.hidden = true;
+  rustle.disabled = false;
+  rustle.className = "rustle rustle--one";
+  rustle.setAttribute("aria-label", "Rustling corn near the path");
+  rustleStalks.forEach((stalks, index) => stalks.classList.toggle("is-active", index === 0));
+  audio.setAmbience(.24, .6);
+  status.textContent = "The particles clear. The cornfield is waiting again.";
+  setHint("Did the corn just move?");
+  rustle.focus({ preventScroll: true });
+  startHints();
 }
 
 async function togglePause() {
