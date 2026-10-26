@@ -460,7 +460,7 @@ function finishWheelStory() {
   scene.classList.add("is-wheel-ending");
   status.textContent = "The lights sweep into darkness.";
   setHint("");
-  schedule(returnToCornfield, 4000);
+  schedule(returnToCornfield, 4500);
 }
 
 function returnToCornfield() {
