@@ -13,6 +13,9 @@ const storyLayer = document.querySelector("#story-layer");
 const midwayLayer = document.querySelector("#midway-layer");
 const magicianStory = document.querySelector("#magician-story");
 const magicianReplay = document.querySelector("#magician-replay");
+const wheelScene = document.querySelector("#wheel-scene");
+const welcomeReplay = document.querySelector("#welcome-replay");
+const wheelMagicianReplay = document.querySelector("#wheel-magician-replay");
 const pennantButtons = [...document.querySelectorAll(".pennant")];
 const pennantVisuals = [...document.querySelectorAll(".tent-pennant-visuals > g")];
 const hint = document.querySelector("#hint");
@@ -159,6 +162,8 @@ function playStory() {
   setPhase("story-one");
   setPennantInput(false);
   scene.classList.remove("is-magician-complete", "is-magician-playing");
+  scene.classList.remove("is-wheel-transitioning", "is-wheel-ready");
+  wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "true");
   magicianReplay.hidden = true;
   pennantVisuals.forEach((visual) => visual.classList.remove("is-cued"));
@@ -239,10 +244,7 @@ function beginMidwayTransition() {
       showMidwayProgress(3);
       setPhase("midway-solved");
       if (state.magicianComplete) {
-        scene.classList.add("is-story-focused");
-        scene.classList.add("is-magician-complete");
-        magicianStory.setAttribute("aria-hidden", "false");
-        magicianReplay.hidden = false;
+        schedule(restoreWheelView, 650);
       }
       schedule(() => scene.classList.remove("is-pennant-intro"), 1350);
     } else {
@@ -379,8 +381,9 @@ function playMagicianStory() {
   setPennantInput(false);
   eyeTrigger.hidden = true;
   magicianReplay.hidden = true;
+  wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "false");
-  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing");
+  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing", "is-wheel-transitioning", "is-wheel-ready");
   scene.classList.add("is-story-focused");
   void magicianStory.offsetWidth;
   scene.classList.add("is-magician-playing");
@@ -390,22 +393,43 @@ function playMagicianStory() {
   schedule(() => { status.textContent = "A shadowed performer appears."; }, 1300);
   schedule(() => { status.textContent = "The crooked hat spins."; }, 3000);
   schedule(() => { status.textContent = "A deep bow—then an escape."; }, 5000);
-  schedule(() => { status.textContent = "The rabbit races toward the wheel."; }, 6500);
-  schedule(finishMagicianStory, 8000);
+  schedule(() => { status.textContent = "The rabbit escapes into the fog."; }, 6500);
+  schedule(beginWheelTransition, 7400);
+  schedule(() => { status.textContent = "The rabbit races down the midway toward the wheel."; }, 8300);
+  schedule(finishMagicianStory, 10000);
+}
+
+function beginWheelTransition() {
+  wheelScene.setAttribute("aria-hidden", "false");
+  scene.classList.add("is-wheel-transitioning");
 }
 
 function finishMagicianStory() {
   state.storyPlaying = false;
   state.magicianComplete = true;
   setPhase("magician-complete");
-  scene.classList.remove("is-magician-playing");
-  scene.classList.add("is-magician-complete");
-  magicianStory.setAttribute("aria-hidden", "false");
-  magicianReplay.hidden = false;
-  eyeTrigger.hidden = false;
+  scene.classList.remove("is-magician-playing", "is-wheel-transitioning");
+  scene.classList.add("is-magician-complete", "is-wheel-ready");
+  magicianStory.setAttribute("aria-hidden", "true");
+  wheelScene.setAttribute("aria-hidden", "false");
+  magicianReplay.hidden = true;
+  eyeTrigger.hidden = true;
   audio.setAmbience(.24, .6);
-  status.textContent = "Glowing tracks lead toward the Ferris wheel.";
-  setHint("The empty midway is no longer empty.");
+  status.textContent = "The rabbit vanishes beneath the silent Ferris wheel.";
+  setHint("Its tracks stop beneath one dark carriage.");
+  wheelMagicianReplay.focus({ preventScroll: true });
+}
+
+function restoreWheelView() {
+  scene.classList.remove("is-magician-complete");
+  scene.classList.add("is-wheel-ready");
+  magicianStory.setAttribute("aria-hidden", "true");
+  magicianReplay.hidden = true;
+  eyeTrigger.hidden = true;
+  wheelScene.setAttribute("aria-hidden", "false");
+  setPhase("magician-complete");
+  status.textContent = "The silent Ferris wheel waits at the end of the midway.";
+  setHint("The rabbit’s tracks stop beneath one dark carriage.");
 }
 
 async function togglePause() {
@@ -439,6 +463,8 @@ rustle.addEventListener("click", advanceRustle);
 eyeTrigger.addEventListener("click", playStory);
 pennantButtons.forEach((button) => button.addEventListener("click", choosePennant));
 magicianReplay.addEventListener("click", playMagicianStory);
+welcomeReplay.addEventListener("click", playStory);
+wheelMagicianReplay.addEventListener("click", playMagicianStory);
 pauseButton.addEventListener("click", togglePause);
 window.addEventListener("resize", alignPennantTargets);
 
