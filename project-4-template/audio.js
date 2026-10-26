@@ -10,7 +10,7 @@ class SceneAudio {
     // Fetch before Enter, but do not create a playing audio context yet.
     this.files = [
       "wind", "corn", "snap", "thunder", "creak", "applause",
-      "light-switch", "metal-creak", "wind-chimes", "airy-whoosh",
+      "light-switch", "metal-creak", "wind-chimes",
     ].map(async (name) => {
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timeout = controller ? window.setTimeout(() => controller.abort(), 12000) : 0;
@@ -162,13 +162,17 @@ class SceneAudio {
       this.rustleBuffer ||= this.createLoop("corn", 3, .18, Math.max(0, this.excerpts.get("corn") - .3));
       const source = this.context.createBufferSource();
       const gain = this.context.createGain();
+      const filter = this.context.createBiquadFilter();
       const panner = this.context.createStereoPanner();
       source.buffer = this.rustleBuffer;
       source.loop = true;
+      filter.type = "lowpass";
+      filter.frequency.value = 1900;
+      filter.Q.value = .55;
       gain.gain.setValueAtTime(0, this.context.currentTime);
-      gain.gain.linearRampToValueAtTime(.48, this.context.currentTime + .12);
-      source.connect(gain).connect(panner).connect(this.master);
-      this.rustleVoice = { source, gain, panner };
+      gain.gain.linearRampToValueAtTime(.24, this.context.currentTime + .12);
+      source.connect(filter).connect(gain).connect(panner).connect(this.master);
+      this.rustleVoice = { source, filter, gain, panner };
       source.start();
     }
     this.rustleIndex = index;
@@ -185,7 +189,7 @@ class SceneAudio {
     voice.gain.gain.setValueAtTime(voice.gain.gain.value, now);
     voice.gain.gain.linearRampToValueAtTime(0, now + .7);
     voice.source.onended = () => {
-      voice.source.disconnect(); voice.gain.disconnect(); voice.panner.disconnect();
+      voice.source.disconnect(); voice.filter.disconnect(); voice.gain.disconnect(); voice.panner.disconnect();
     };
     voice.source.stop(now + .7);
   }
@@ -380,13 +384,11 @@ class SceneAudio {
       this.play("wind-chimes", { delay, duration: 1.05, volume: .11, pan, rate: .92 + index * .04, fadeOut: .4 });
     });
 
-    // Layered physical whooshes carry the particle veil back to the cornfield.
-    [16.05, 16.75, 17.45, 18.15, 18.85, 19.55].forEach((delay, index) => {
-      this.play("airy-whoosh", {
-        delay, duration: .58, volume: .13 + index * .012,
-        pan: index % 2 ? .48 : -.48, rate: .82 + index * .045,
-        fadeOut: .18, offset: 0,
-      });
+    // One quiet settling strain closes the wheel; the familiar wind returns
+    // through the particle veil instead of introducing a new transition sound.
+    this.play("metal-creak", {
+      delay: 16.12, duration: 2, volume: .075, pan: 0,
+      rate: .88, fadeOut: .5, offset: 0,
     });
   }
 

@@ -78,7 +78,7 @@ Record excluded ideas, the next behavior that must work, and consequential requi
 
 The first story is complete. The second-story transition, puzzle and visual sequence are implemented and approved on a physical phone; its original calliope cue is implemented pending listening review. Additional Story 2 effects and an unprompted discovery playtest remain before Story 3 is specified. Ferris-wheel movement remains reserved for the third story.
 
-Story 3 intentionally uses a longer 16-second main sequence plus a 4.5-second particle return so its escalating wheel motion and light reveals do not feel rushed. Its sound treatment uses local CC0 recordings: real light-switch clicks, metal strain, a recorded bar chime and a physical airy whoosh. These follow the booth lights, wheel acceleration, passenger jumps, top-carriage reveal, final light ripple and return to the cornfield. Wind ducks during the sequence and returns afterward. All cues share the global audio clock so pause, replay and tab hiding preserve synchronization.
+Story 3 intentionally uses a longer 16-second main sequence plus a 4.5-second particle return so its escalating wheel motion and light reveals do not feel rushed. Its sound treatment uses local CC0 recordings: real light-switch clicks, metal strain and a recorded bar chime. These follow the booth lights, wheel acceleration, passenger jumps, top-carriage reveal and final light ripple. The ending uses one quiet metal settling cue while the established ambient wind fades back through the particle return; playtesting rejected a separate layered whoosh as out of place. All cues share the global audio clock so pause, replay and tab hiding preserve synchronization.
 
 ## Saving the transcript
 
