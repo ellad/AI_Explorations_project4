@@ -16,6 +16,7 @@ const magicianReplay = document.querySelector("#magician-replay");
 const wheelScene = document.querySelector("#wheel-scene");
 const welcomeReplay = document.querySelector("#welcome-replay");
 const wheelMagicianReplay = document.querySelector("#wheel-magician-replay");
+const wheelStoryStart = document.querySelector("#wheel-story-start");
 const pennantButtons = [...document.querySelectorAll(".pennant")];
 const pennantVisuals = [...document.querySelectorAll(".tent-pennant-visuals > g")];
 const hint = document.querySelector("#hint");
@@ -36,6 +37,7 @@ const state = {
   midwayAttempt: 0,
   midwaySolved: false,
   magicianComplete: false,
+  wheelStoryComplete: false,
 };
 
 const midwaySequence = ["eye", "moon", "star"];
@@ -162,7 +164,7 @@ function playStory() {
   setPhase("story-one");
   setPennantInput(false);
   scene.classList.remove("is-magician-complete", "is-magician-playing");
-  scene.classList.remove("is-wheel-transitioning", "is-wheel-ready");
+  scene.classList.remove("is-wheel-transitioning", "is-wheel-ready", "is-wheel-story", "is-wheel-story-complete");
   wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "true");
   magicianReplay.hidden = true;
@@ -383,7 +385,7 @@ function playMagicianStory() {
   magicianReplay.hidden = true;
   wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "false");
-  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing", "is-wheel-transitioning", "is-wheel-ready");
+  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing", "is-wheel-transitioning", "is-wheel-ready", "is-wheel-story", "is-wheel-story-complete");
   scene.classList.add("is-story-focused");
   void magicianStory.offsetWidth;
   scene.classList.add("is-magician-playing");
@@ -417,7 +419,7 @@ function finishMagicianStory() {
   audio.setAmbience(.24, .6);
   status.textContent = "The rabbit vanishes beneath the silent Ferris wheel.";
   setHint("Its tracks stop beneath one dark carriage.");
-  wheelMagicianReplay.focus({ preventScroll: true });
+  wheelStoryStart.focus({ preventScroll: true });
 }
 
 function restoreWheelView() {
@@ -430,6 +432,71 @@ function restoreWheelView() {
   setPhase("magician-complete");
   status.textContent = "The silent Ferris wheel waits at the end of the midway.";
   setHint("The rabbit’s tracks stop beneath one dark carriage.");
+}
+
+function playWheelStory() {
+  if (state.paused || state.storyPlaying) return;
+  clearTimers();
+  state.storyPlaying = true;
+  setPhase("story-three");
+  scene.classList.remove("is-wheel-story", "is-wheel-story-complete");
+  void wheelScene.offsetWidth;
+  scene.classList.add("is-wheel-story");
+  status.textContent = "One booth light wakes, then another.";
+  setHint("");
+  schedule(() => { status.textContent = "The last print fades beneath the iron supports."; }, 1900);
+  schedule(() => { status.textContent = "A passenger appears—but the lit carriage is empty."; }, 3900);
+  schedule(() => { status.textContent = "The silhouette jumps higher each time the light returns."; }, 6500);
+  schedule(() => { status.textContent = "At the top, it raises one hand."; }, 8800);
+  schedule(() => { status.textContent = "The bulb snaps on. The carriage is empty."; }, 10200);
+  schedule(() => { status.textContent = "Light circles the wheel, then answers from both sides of the midway."; }, 12200);
+  schedule(() => { status.textContent = "The pulses soften, but the wheel stays awake."; }, 14500);
+  schedule(finishWheelStory, 16000);
+}
+
+function finishWheelStory() {
+  setPhase("wheel-ending");
+  scene.classList.remove("is-wheel-story");
+  scene.classList.add("is-wheel-ending");
+  status.textContent = "The lights sweep into darkness.";
+  setHint("");
+  schedule(returnToCornfield, 4500);
+}
+
+function returnToCornfield() {
+  state.storyPlaying = false;
+  state.wheelStoryComplete = true;
+  state.fairgroundRevealed = false;
+  state.midwayUnlocked = false;
+  state.midwaySolved = false;
+  state.midwayAttempt = 0;
+  state.magicianComplete = false;
+  state.rustleStep = 0;
+  setPhase("entrance-discovery");
+  document.querySelectorAll('.art-layers use[href="#fairground-art"]').forEach((layer) => {
+    layer.setAttribute("href", "#original-art");
+    layer.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#original-art");
+  });
+  activeCornRepair.setAttribute("href", "Assets/opening-scene/corn-repair.png");
+  scene.className = "scene is-corn-return";
+  scene.setAttribute("aria-label", "A dark path between cornfields and wooden fences");
+  wheelScene.setAttribute("aria-hidden", "true");
+  midwayLayer.setAttribute("aria-hidden", "true");
+  magicianStory.setAttribute("aria-hidden", "true");
+  storyLayer.setAttribute("aria-hidden", "true");
+  storyLayer.classList.remove("is-playing", "is-watching", "is-revealed");
+  eyeTrigger.hidden = true;
+  magicianReplay.hidden = true;
+  rustle.disabled = false;
+  rustle.className = "rustle rustle--one";
+  rustle.setAttribute("aria-label", "Rustling corn near the path");
+  rustleStalks.forEach((stalks, index) => stalks.classList.toggle("is-active", index === 0));
+  audio.setAmbience(.24, .6);
+  status.textContent = "The particles clear. The cornfield is waiting again.";
+  setHint("Did the corn just move?");
+  rustle.focus({ preventScroll: true });
+  startHints();
+  schedule(() => scene.classList.remove("is-corn-return"), 1350);
 }
 
 async function togglePause() {
@@ -465,6 +532,7 @@ pennantButtons.forEach((button) => button.addEventListener("click", choosePennan
 magicianReplay.addEventListener("click", playMagicianStory);
 welcomeReplay.addEventListener("click", playStory);
 wheelMagicianReplay.addEventListener("click", playMagicianStory);
+wheelStoryStart.addEventListener("click", playWheelStory);
 pauseButton.addEventListener("click", togglePause);
 window.addEventListener("resize", alignPennantTargets);
 
