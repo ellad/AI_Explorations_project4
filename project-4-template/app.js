@@ -16,6 +16,7 @@ const magicianReplay = document.querySelector("#magician-replay");
 const wheelScene = document.querySelector("#wheel-scene");
 const welcomeReplay = document.querySelector("#welcome-replay");
 const wheelMagicianReplay = document.querySelector("#wheel-magician-replay");
+const wheelStoryStart = document.querySelector("#wheel-story-start");
 const pennantButtons = [...document.querySelectorAll(".pennant")];
 const pennantVisuals = [...document.querySelectorAll(".tent-pennant-visuals > g")];
 const hint = document.querySelector("#hint");
@@ -36,6 +37,7 @@ const state = {
   midwayAttempt: 0,
   midwaySolved: false,
   magicianComplete: false,
+  wheelStoryComplete: false,
 };
 
 const midwaySequence = ["eye", "moon", "star"];
@@ -162,7 +164,7 @@ function playStory() {
   setPhase("story-one");
   setPennantInput(false);
   scene.classList.remove("is-magician-complete", "is-magician-playing");
-  scene.classList.remove("is-wheel-transitioning", "is-wheel-ready");
+  scene.classList.remove("is-wheel-transitioning", "is-wheel-ready", "is-wheel-story", "is-wheel-story-complete");
   wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "true");
   magicianReplay.hidden = true;
@@ -383,7 +385,7 @@ function playMagicianStory() {
   magicianReplay.hidden = true;
   wheelScene.setAttribute("aria-hidden", "true");
   magicianStory.setAttribute("aria-hidden", "false");
-  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing", "is-wheel-transitioning", "is-wheel-ready");
+  scene.classList.remove("is-magician-complete", "is-magician-playing", "is-story-focusing", "is-wheel-transitioning", "is-wheel-ready", "is-wheel-story", "is-wheel-story-complete");
   scene.classList.add("is-story-focused");
   void magicianStory.offsetWidth;
   scene.classList.add("is-magician-playing");
@@ -432,6 +434,34 @@ function restoreWheelView() {
   setHint("The rabbit’s tracks stop beneath one dark carriage.");
 }
 
+function playWheelStory() {
+  if (state.paused || state.storyPlaying) return;
+  clearTimers();
+  state.storyPlaying = true;
+  setPhase("story-three");
+  scene.classList.remove("is-wheel-story", "is-wheel-story-complete");
+  void wheelScene.offsetWidth;
+  scene.classList.add("is-wheel-story");
+  status.textContent = "One booth light wakes, then another.";
+  setHint("");
+  schedule(() => { status.textContent = "The tracks climb the wheel’s iron support."; }, 1900);
+  schedule(() => { status.textContent = "A passenger appears—but the lit carriage is empty."; }, 3900);
+  schedule(() => { status.textContent = "The silhouette jumps higher each time the light returns."; }, 6500);
+  schedule(() => { status.textContent = "At the top, it raises one hand."; }, 8800);
+  schedule(() => { status.textContent = "The bulb snaps on. The carriage is empty."; }, 10200);
+  schedule(finishWheelStory, 12000);
+}
+
+function finishWheelStory() {
+  state.storyPlaying = false;
+  state.wheelStoryComplete = true;
+  setPhase("wheel-complete");
+  scene.classList.remove("is-wheel-story");
+  scene.classList.add("is-wheel-story-complete");
+  status.textContent = "Light races around the wheel and back through the midway.";
+  setHint("The wheel keeps turning, though no one is aboard.");
+}
+
 async function togglePause() {
   if (!state.entered || pauseButton.disabled) return;
   pauseButton.disabled = true;
@@ -465,6 +495,7 @@ pennantButtons.forEach((button) => button.addEventListener("click", choosePennan
 magicianReplay.addEventListener("click", playMagicianStory);
 welcomeReplay.addEventListener("click", playStory);
 wheelMagicianReplay.addEventListener("click", playMagicianStory);
+wheelStoryStart.addEventListener("click", playWheelStory);
 pauseButton.addEventListener("click", togglePause);
 window.addEventListener("resize", alignPennantTargets);
 
