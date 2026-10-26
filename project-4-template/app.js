@@ -449,7 +449,9 @@ function playWheelStory() {
   schedule(() => { status.textContent = "The silhouette jumps higher each time the light returns."; }, 6500);
   schedule(() => { status.textContent = "At the top, it raises one hand."; }, 8800);
   schedule(() => { status.textContent = "The bulb snaps on. The carriage is empty."; }, 10200);
-  schedule(finishWheelStory, 12000);
+  schedule(() => { status.textContent = "Light circles the wheel, then answers from both sides of the midway."; }, 12200);
+  schedule(() => { status.textContent = "The pulses soften, but the wheel stays awake."; }, 14500);
+  schedule(finishWheelStory, 16000);
 }
 
 function finishWheelStory() {
