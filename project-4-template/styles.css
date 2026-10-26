@@ -474,10 +474,12 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-wheel__support { position:absolute; z-index:2; width:48%; left:26%; top:30%; filter:brightness(.68) saturate(.64) hue-rotate(5deg); }
 .story-wheel__rotor { --turn:0deg; position:absolute; z-index:3; width:76%; aspect-ratio:1; left:12%; top:11.5%; transform:rotate(var(--turn)); transform-origin:50% 50%; }
 .story-wheel__frame { position:absolute; inset:0; width:100%; height:100%; }
+.story-wheel__finale { position:absolute; z-index:1; inset:2.2%; border:4px dotted #ffd58a; border-radius:50%; opacity:0; box-shadow:inset 0 0 14px #f0a54d,0 0 18px #df8c34; pointer-events:none; }
 .story-wheel__carriage { position:absolute; inset:0; transform:rotate(calc(var(--slot) * 36deg)); }
 .story-wheel__carriage::after { content:""; position:absolute; z-index:1; left:49.35%; top:3.2%; width:1.3%; height:1.8%; border:1px solid #17131a; border-radius:999px; background:linear-gradient(90deg,#2e2732,#766675 48%,#302833); transform:rotate(calc((var(--slot) * -36deg) - var(--turn))); transform-origin:50% 0; }
 .story-wheel__carriage img { position:absolute; z-index:2; width:17%; left:41.5%; top:2.15%; transform:rotate(calc((var(--slot) * -36deg) - var(--turn))); transform-origin:50% 13.5%; filter:brightness(.68) saturate(.52) hue-rotate(7deg); }
 .story-wheel__foreground { position:absolute; z-index:4; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; }
+.story-wheel__searchlight { position:absolute; z-index:6; left:29%; top:16%; width:8%; aspect-ratio:1; border-radius:50%; opacity:0; background:radial-gradient(circle,#fff2bf 0 8%,#e7ac59b8 18%,#bd71334f 42%,transparent 72%); filter:blur(.4px); pointer-events:none; }
 .story-wheel__lights { position:absolute; z-index:5; inset:0; pointer-events:none; }
 .story-wheel__lights i { position:absolute; width:5px; height:5px; border-radius:50%; background:#ffd18a; opacity:0; box-shadow:0 0 5px 2px #d88a38; }
 .story-wheel__lights i:nth-child(1){left:6%;top:48.2%}.story-wheel__lights i:nth-child(2){left:11%;top:49.5%}.story-wheel__lights i:nth-child(3){left:16%;top:51.2%}.story-wheel__lights i:nth-child(4){left:21%;top:53.1%}.story-wheel__lights i:nth-child(5){left:26%;top:55.3%}.story-wheel__lights i:nth-child(6){right:26%;top:55.3%}.story-wheel__lights i:nth-child(7){right:21%;top:53.1%}.story-wheel__lights i:nth-child(8){right:16%;top:51.2%}.story-wheel__lights i:nth-child(9){right:11%;top:49.5%}.story-wheel__lights i:nth-child(10){right:6%;top:48.2%}
@@ -489,6 +491,10 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-wheel__passenger::before { content:""; position:absolute; left:31%; top:0; width:38%; aspect-ratio:1; border-radius:50%; background:#09080c; }
 .story-wheel__passenger::after { content:""; position:absolute; left:7%; right:7%; top:22%; bottom:0; background:#0b0910; clip-path:polygon(32% 0,68% 0,100% 24%,78% 34%,74% 100%,26% 100%,22% 34%,0 24%); }
 .scene.is-wheel-story .story-wheel__rotor { animation:story-wheel-turn 16s cubic-bezier(.42,0,.32,1) both; }
+.scene.is-wheel-ready:not(.is-wheel-story):not(.is-wheel-story-complete) .wheel-scene__pawprints { animation:track-invitation 1.8s ease-in-out infinite; }
+.scene.is-wheel-story .story-wheel__searchlight { animation:searchlight-jump 12s steps(1,end) both; }
+.scene.is-wheel-story .story-wheel__finale { animation:wheel-finale 12s ease-out both; }
+.scene.is-wheel-story .story-wheel__frame { animation:wheel-frame-finale 12s ease-out both; }
 .scene.is-wheel-story .story-wheel__carriage img,
 .scene.is-wheel-story .story-wheel__carriage::after { animation:story-carriage-upright 16s cubic-bezier(.42,0,.32,1) both; }
 .scene.is-wheel-story .story-wheel__passenger { animation:story-passenger-upright 16s cubic-bezier(.42,0,.32,1) both; }
@@ -496,7 +502,7 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .scene.is-wheel-story .story-wheel__passenger--right { animation-name:story-passenger-upright,passenger-right; animation-duration:16s,12s; animation-timing-function:cubic-bezier(.42,0,.32,1),steps(1,end); }
 .scene.is-wheel-story .story-wheel__passenger--top { animation-name:story-passenger-upright,passenger-top; animation-duration:16s,12s; animation-timing-function:cubic-bezier(.42,0,.32,1),steps(1,end); }
 .scene.is-wheel-story .wheel-scene__replays { opacity:0; pointer-events:none; }
-.scene.is-wheel-story .story-wheel__lights i { animation:story-wheel-light 9s steps(1,end) both; animation-delay:calc(var(--light,0) * .35s); }
+.scene.is-wheel-story .story-wheel__lights i { animation:story-wheel-light 12s steps(1,end) both; animation-delay:calc(var(--light,0) * .35s); }
 .scene.is-wheel-story .story-wheel__lights i:nth-child(1),.scene.is-wheel-story .story-wheel__lights i:nth-child(10){--light:0}.scene.is-wheel-story .story-wheel__lights i:nth-child(2),.scene.is-wheel-story .story-wheel__lights i:nth-child(9){--light:1}.scene.is-wheel-story .story-wheel__lights i:nth-child(3),.scene.is-wheel-story .story-wheel__lights i:nth-child(8){--light:2}.scene.is-wheel-story .story-wheel__lights i:nth-child(4),.scene.is-wheel-story .story-wheel__lights i:nth-child(7){--light:3}.scene.is-wheel-story .story-wheel__lights i:nth-child(5),.scene.is-wheel-story .story-wheel__lights i:nth-child(6){--light:4}
 .scene.is-wheel-story .story-wheel__climbing-prints { animation:story-wheel-prints 9s linear both; }
 .scene.is-wheel-story-complete .story-wheel__rotor { transform:rotate(58deg); }
@@ -504,14 +510,24 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .scene.is-wheel-story-complete .story-wheel__carriage::after { transform:rotate(calc((var(--slot) * -36deg) - 58deg)); }
 .scene.is-wheel-story-complete .story-wheel__passenger { opacity:0; transform:rotate(calc((var(--slot) * -36deg) - 58deg)); }
 .scene.is-wheel-story-complete .story-wheel__lights i { opacity:.62; }
+.scene.is-wheel-story-complete .story-wheel__finale { opacity:.5; }
+.scene.is-wheel-story-complete .story-wheel__frame { filter:brightness(1.08) drop-shadow(0 0 5px #bd7133); }
 .is-reduced .scene.is-wheel-story .story-wheel__rotor { animation:none; transform:rotate(18deg); }
+.is-reduced .scene.is-wheel-ready .wheel-scene__pawprints { animation:none; opacity:.78; }
+.is-reduced .scene.is-wheel-story .story-wheel__searchlight { animation:none; opacity:.65; left:46%; top:7%; }
+.is-reduced .scene.is-wheel-story .story-wheel__finale { animation:none; opacity:.5; }
+.is-reduced .scene.is-wheel-story .story-wheel__frame { animation:none; filter:brightness(1.08) drop-shadow(0 0 5px #bd7133); }
 .is-reduced .scene.is-wheel-story .story-wheel__carriage img,
 .is-reduced .scene.is-wheel-story .story-wheel__carriage::after { animation:none; transform:rotate(calc((var(--slot) * -36deg) - 18deg)); }
 .is-reduced .scene.is-wheel-story .story-wheel__passenger { animation:none; transform:rotate(calc(var(--slot) * -36deg)); }
 @keyframes story-wheel-turn { 0%,18%{transform:rotate(0)} 100%{transform:rotate(58deg)} }
 @keyframes story-carriage-upright { 0%,18%{transform:rotate(calc(var(--slot) * -36deg))} 100%{transform:rotate(calc((var(--slot) * -36deg) - 58deg))} }
 @keyframes story-passenger-upright { 0%,18%{transform:rotate(calc(var(--slot) * -36deg))} 100%{transform:rotate(calc((var(--slot) * -36deg) - 58deg))} }
-@keyframes story-wheel-light { 0%,10%{opacity:0} 11%,82%{opacity:1} 83%,100%{opacity:.62} }
+@keyframes track-invitation { 0%,100%{opacity:.54;filter:brightness(.72) saturate(.65)} 50%{opacity:.9;filter:brightness(1.08) saturate(.85) drop-shadow(0 0 5px #9271ad)} }
+@keyframes searchlight-jump { 0%,25%{opacity:0;left:27%;top:14%} 26%,35%{opacity:.82;left:27%;top:14%} 36%,45%{opacity:0} 46%,55%{opacity:.82;left:66%;top:14%} 56%,65%{opacity:0} 66%,78%{opacity:.9;left:46%;top:7%} 79%,82%{opacity:1;left:46%;top:7%;transform:scale(1.45)} 83%,100%{opacity:0;transform:scale(2.2)} }
+@keyframes wheel-finale { 0%,80%{opacity:0;transform:scale(.96)} 83%{opacity:1;transform:scale(1.02)} 88%{opacity:.45;transform:scale(1)} 92%{opacity:1} 100%{opacity:.5} }
+@keyframes wheel-frame-finale { 0%,80%{filter:none} 83%{filter:brightness(1.42) drop-shadow(0 0 12px #f1b25c)} 90%{filter:brightness(1.08) drop-shadow(0 0 4px #bd7133)} 94%{filter:brightness(1.34) drop-shadow(0 0 10px #f1b25c)} 100%{filter:brightness(1.08) drop-shadow(0 0 5px #bd7133)} }
+@keyframes story-wheel-light { 0%,8%{opacity:0} 9%,80%{opacity:1} 83%{opacity:1;transform:scale(1.8);box-shadow:0 0 13px 5px #ffb64f} 88%,100%{opacity:.78;transform:scale(1)} }
 @keyframes story-wheel-prints { 0%,12%{opacity:0} 18%,100%{opacity:.82} }
 @keyframes passenger-left { 0%,25%{opacity:0} 26%,38%{opacity:.92} 39%,100%{opacity:0} }
 @keyframes passenger-right { 0%,45%{opacity:0} 46%,58%{opacity:.92} 59%,100%{opacity:0} }
