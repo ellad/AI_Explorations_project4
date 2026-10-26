@@ -442,6 +442,24 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   letter-spacing: .04em;
   cursor: pointer;
 }
+#wheel-story-start {
+  position: absolute;
+  z-index: 8;
+  left: 34%;
+  top: 52%;
+  width: 32%;
+  height: 30%;
+  min-width: 48px;
+  min-height: 72px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  pointer-events: none;
+}
+#wheel-story-start:focus-visible { outline: 2px solid #d7b078; outline-offset: 4px; border-radius: 45%; }
+.scene.is-wheel-ready:not(.is-wheel-story) #wheel-story-start { pointer-events: auto; }
+.scene.is-wheel-story-complete #wheel-story-start { pointer-events: auto; }
 .scene.is-wheel-transitioning .wheel-scene,
 .scene.is-wheel-ready .wheel-scene { visibility: visible; }
 .scene.is-wheel-transitioning .wheel-scene__background { animation: wheel-background-arrive 2.6s ease-in-out both; }
@@ -467,31 +485,37 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
 .story-wheel__climbing-prints i { position:absolute; width:7px; height:9px; border-radius:58% 58% 44% 44%; background:#a18bb5; box-shadow:0 0 4px #765692; transform:rotate(-34deg); }
 .story-wheel__climbing-prints i::before { content:""; position:absolute; left:-2px; top:-4px; width:3px; height:3px; border-radius:50%; background:inherit; box-shadow:4px -2px 0 #a18bb5,8px 0 0 #a18bb5; }
 .story-wheel__climbing-prints i:nth-child(1){left:72%;bottom:2%}.story-wheel__climbing-prints i:nth-child(2){left:57%;bottom:24%}.story-wheel__climbing-prints i:nth-child(3){left:42%;bottom:46%}.story-wheel__climbing-prints i:nth-child(4){left:27%;bottom:68%}.story-wheel__climbing-prints i:nth-child(5){left:12%;bottom:88%}
-.story-wheel__passenger { position:absolute; z-index:7; left:48%; top:9%; width:4%; height:5.5%; opacity:0; filter:drop-shadow(0 0 2px #050309); transform-origin:50% 100%; }
+.story-wheel__passenger { position:absolute; z-index:3; left:47.5%; top:8.4%; width:5%; height:6.2%; opacity:0; filter:drop-shadow(0 0 2px #050309); transform-origin:50% 50%; }
 .story-wheel__passenger::before { content:""; position:absolute; left:31%; top:0; width:38%; aspect-ratio:1; border-radius:50%; background:#09080c; }
 .story-wheel__passenger::after { content:""; position:absolute; left:7%; right:7%; top:22%; bottom:0; background:#0b0910; clip-path:polygon(32% 0,68% 0,100% 24%,78% 34%,74% 100%,26% 100%,22% 34%,0 24%); }
 .scene.is-wheel-story .story-wheel__rotor { animation:story-wheel-turn 16s cubic-bezier(.42,0,.32,1) both; }
 .scene.is-wheel-story .story-wheel__carriage img,
 .scene.is-wheel-story .story-wheel__carriage::after { animation:story-carriage-upright 16s cubic-bezier(.42,0,.32,1) both; }
+.scene.is-wheel-story .story-wheel__passenger { animation:story-passenger-upright 16s cubic-bezier(.42,0,.32,1) both; }
+.scene.is-wheel-story .story-wheel__passenger--left { animation-name:story-passenger-upright,passenger-left; animation-duration:16s,12s; animation-timing-function:cubic-bezier(.42,0,.32,1),steps(1,end); }
+.scene.is-wheel-story .story-wheel__passenger--right { animation-name:story-passenger-upright,passenger-right; animation-duration:16s,12s; animation-timing-function:cubic-bezier(.42,0,.32,1),steps(1,end); }
+.scene.is-wheel-story .story-wheel__passenger--top { animation-name:story-passenger-upright,passenger-top; animation-duration:16s,12s; animation-timing-function:cubic-bezier(.42,0,.32,1),steps(1,end); }
 .scene.is-wheel-story .wheel-scene__replays { opacity:0; pointer-events:none; }
 .scene.is-wheel-story .story-wheel__lights i { animation:story-wheel-light 9s steps(1,end) both; animation-delay:calc(var(--light,0) * .35s); }
-.scene.is-wheel-story .story-wheel__lights i:nth-child(1){--light:0}.scene.is-wheel-story .story-wheel__lights i:nth-child(2){--light:1}.scene.is-wheel-story .story-wheel__lights i:nth-child(3){--light:2}.scene.is-wheel-story .story-wheel__lights i:nth-child(4){--light:3}.scene.is-wheel-story .story-wheel__lights i:nth-child(5){--light:4}.scene.is-wheel-story .story-wheel__lights i:nth-child(6){--light:5}.scene.is-wheel-story .story-wheel__lights i:nth-child(7){--light:6}.scene.is-wheel-story .story-wheel__lights i:nth-child(8){--light:7}.scene.is-wheel-story .story-wheel__lights i:nth-child(9){--light:8}.scene.is-wheel-story .story-wheel__lights i:nth-child(10){--light:9}
+.scene.is-wheel-story .story-wheel__lights i:nth-child(1),.scene.is-wheel-story .story-wheel__lights i:nth-child(10){--light:0}.scene.is-wheel-story .story-wheel__lights i:nth-child(2),.scene.is-wheel-story .story-wheel__lights i:nth-child(9){--light:1}.scene.is-wheel-story .story-wheel__lights i:nth-child(3),.scene.is-wheel-story .story-wheel__lights i:nth-child(8){--light:2}.scene.is-wheel-story .story-wheel__lights i:nth-child(4),.scene.is-wheel-story .story-wheel__lights i:nth-child(7){--light:3}.scene.is-wheel-story .story-wheel__lights i:nth-child(5),.scene.is-wheel-story .story-wheel__lights i:nth-child(6){--light:4}
 .scene.is-wheel-story .story-wheel__climbing-prints { animation:story-wheel-prints 9s linear both; }
-.scene.is-wheel-story .story-wheel__passenger { animation:impossible-passenger 12s steps(1,end) both; }
 .scene.is-wheel-story-complete .story-wheel__rotor { transform:rotate(58deg); }
 .scene.is-wheel-story-complete .story-wheel__carriage img,
 .scene.is-wheel-story-complete .story-wheel__carriage::after { transform:rotate(calc((var(--slot) * -36deg) - 58deg)); }
+.scene.is-wheel-story-complete .story-wheel__passenger { opacity:0; transform:rotate(calc((var(--slot) * -36deg) - 58deg)); }
 .scene.is-wheel-story-complete .story-wheel__lights i { opacity:.62; }
 .is-reduced .scene.is-wheel-story .story-wheel__rotor { animation:none; transform:rotate(18deg); }
 .is-reduced .scene.is-wheel-story .story-wheel__carriage img,
 .is-reduced .scene.is-wheel-story .story-wheel__carriage::after { animation:none; transform:rotate(calc((var(--slot) * -36deg) - 18deg)); }
-.is-reduced .scene.is-wheel-story .story-wheel__passenger { animation-name:impossible-passenger-reduced; }
+.is-reduced .scene.is-wheel-story .story-wheel__passenger { animation:none; transform:rotate(calc(var(--slot) * -36deg)); }
 @keyframes story-wheel-turn { 0%,18%{transform:rotate(0)} 100%{transform:rotate(58deg)} }
 @keyframes story-carriage-upright { 0%,18%{transform:rotate(calc(var(--slot) * -36deg))} 100%{transform:rotate(calc((var(--slot) * -36deg) - 58deg))} }
+@keyframes story-passenger-upright { 0%,18%{transform:rotate(calc(var(--slot) * -36deg))} 100%{transform:rotate(calc((var(--slot) * -36deg) - 58deg))} }
 @keyframes story-wheel-light { 0%,10%{opacity:0} 11%,82%{opacity:1} 83%,100%{opacity:.62} }
 @keyframes story-wheel-prints { 0%,12%{opacity:0} 18%,100%{opacity:.82} }
-@keyframes impossible-passenger { 0%,25%{opacity:0;left:29%;top:16%} 26%,38%{opacity:.92;left:29%;top:16%} 39%,45%{opacity:0} 46%,58%{opacity:.92;left:67%;top:16%} 59%,65%{opacity:0} 66%,82%{opacity:.95;left:48%;top:9%} 83%,100%{opacity:0;transform:scale(.6)} }
-@keyframes impossible-passenger-reduced { 0%,28%{opacity:0} 29%,62%{opacity:.92;left:48%;top:9%} 63%,100%{opacity:0} }
+@keyframes passenger-left { 0%,25%{opacity:0} 26%,38%{opacity:.92} 39%,100%{opacity:0} }
+@keyframes passenger-right { 0%,45%{opacity:0} 46%,58%{opacity:.92} 59%,100%{opacity:0} }
+@keyframes passenger-top { 0%,65%{opacity:0} 66%,82%{opacity:.95} 83%,100%{opacity:0} }
 .usher-fog {
   position: absolute;
   left: -16%;

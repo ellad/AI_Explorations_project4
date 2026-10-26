@@ -419,7 +419,7 @@ function finishMagicianStory() {
   audio.setAmbience(.24, .6);
   status.textContent = "The rabbit vanishes beneath the silent Ferris wheel.";
   setHint("Its tracks stop beneath one dark carriage.");
-  wheelMagicianReplay.focus({ preventScroll: true });
+  wheelStoryStart.focus({ preventScroll: true });
 }
 
 function restoreWheelView() {
