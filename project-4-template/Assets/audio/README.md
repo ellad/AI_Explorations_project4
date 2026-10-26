@@ -51,4 +51,4 @@ The corn loop is low-pass filtered at 1.9 kHz and plays at gain 0.10, reduced fr
 
 The app's Enter gesture unlocks audio before playback. Suspending the single AudioContext freezes both playing and future effects. Replay stops old effects before scheduling new ones. Missing/invalid audio is reported and the visual scene remains usable. Hiding the tab pauses the experience; the user resumes with Play.
 
-Sound credits are also accessible on the start screen. Browser checks verified decoding, scheduling and pause behavior, and the Developer approved the final volume and mix on a physical smartphone on October 15, 2026.
+Sound credits are also accessible on the start screen. Browser checks verified decoding, scheduling and pause behavior, and the Developer approved the complete three-story volume and mix on a physical smartphone on October 26, 2026.

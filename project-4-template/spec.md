@@ -76,9 +76,11 @@ The wheel-centered composition persists afterward and becomes the discovery brid
 
 Record excluded ideas, the next behavior that must work, and consequential requirement changes with their evidence.
 
-The first story is complete. The second-story transition, puzzle and visual sequence are implemented and approved on a physical phone; its original calliope cue is implemented pending listening review. Additional Story 2 effects and an unprompted discovery playtest remain before Story 3 is specified. Ferris-wheel movement remains reserved for the third story.
+All three stories, their discovery interactions, audiovisual treatments, shared pause behavior, replay/reset paths and reduced-motion alternatives are implemented. An unprompted full-experience playtest informed the final corn and ending-audio revisions. The Developer approved the completed experience on a physical smartphone on October 26, 2026.
 
 Story 3 intentionally uses a longer 16-second main sequence plus a 4.5-second particle return so its escalating wheel motion and light reveals do not feel rushed. Its sound treatment uses local CC0 recordings: real light-switch clicks, metal strain and a recorded bar chime. These follow the booth lights, wheel acceleration, passenger jumps, top-carriage reveal and final light ripple. The ending uses one quiet metal settling cue while the established ambient wind fades back through the particle return; playtesting rejected a separate layered whoosh as out of place. All cues share the global audio clock so pause, replay and tab hiding preserve synchronization.
+
+This approved Story 3 timing is a documented exception to the brief's fixed requirement that each story last 5–10 seconds. Final acceptance therefore requires either approval of the exception or a timing revision; the audit must not treat the specification alone as overriding that fixed requirement.
 
 ## Saving the transcript
 

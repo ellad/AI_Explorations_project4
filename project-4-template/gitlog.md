@@ -1,8 +1,12 @@
 # Git Log
 
-Generated October 25, 2026 from the `main` branch.
+Generated October 26, 2026 from the `main` branch.
 
 ```text
+4ca3633 | 2026-10-26 13:30:53 -0500 | Ella Gault | Lower corn rustle volume
+a1e42b6 | 2026-10-26 13:23:16 -0500 | Ella Gault | Refine playtest audio mix
+5ca1201 | 2026-10-26 13:16:04 -0500 | Ella Gault | Add realistic audio to Ferris wheel story
+bb1d925 | 2026-10-25 21:45:21 -0500 | Ella Gault | Add git log and build transcripts
 c5d72c0 | 2026-10-25 21:30:59 -0500 | Ella Gault | Smooth particle fade into cornfield
 7c68469 | 2026-10-25 21:26:43 -0500 | Ella Gault | Densify ending particle swarm
 d8fa8bd | 2026-10-25 21:20:30 -0500 | Ella Gault | Loop third story back to cornfield

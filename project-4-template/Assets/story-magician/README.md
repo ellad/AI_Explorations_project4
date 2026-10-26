@@ -1,6 +1,6 @@
-# Midnight Magician draft assets
+# Midnight Magician assets
 
-These are AI-generated draft assets for the second story. They are integrated non-destructively as cropped SVG image layers so the silent sequence can be reviewed in context. The Developer must still approve the visual direction, composition and motion before these drafts are treated as final artwork.
+These are AI-generated assets and preserved drafts for the second story. The runtime uses the approved standalone performer poses, rabbit and pawprints listed below. The Developer approved the visual direction, composition and motion on a physical phone.
 
 Generated with the built-in image-generation tool on October 24, 2026. The existing `composite_reference.png` fairground artwork was supplied as a style, palette and lighting reference. No external copyrighted asset was added.
 
