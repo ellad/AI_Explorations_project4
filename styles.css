@@ -404,7 +404,7 @@ h1 { margin: 10px 0 8px; color: var(--ink); font-size: clamp(2.5rem, 12vw, 4.2re
   height: 29%;
   object-fit: contain;
   opacity: 0;
-  transform: rotate(-57deg);
+  transform: rotate(123deg);
   filter: brightness(.72) saturate(.65);
 }
 .wheel-scene__fog {
