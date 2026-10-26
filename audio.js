@@ -170,7 +170,7 @@ class SceneAudio {
       filter.frequency.value = 1900;
       filter.Q.value = .55;
       gain.gain.setValueAtTime(0, this.context.currentTime);
-      gain.gain.linearRampToValueAtTime(.24, this.context.currentTime + .12);
+      gain.gain.linearRampToValueAtTime(.10, this.context.currentTime + .12);
       source.connect(filter).connect(gain).connect(panner).connect(this.master);
       this.rustleVoice = { source, filter, gain, panner };
       source.start();
